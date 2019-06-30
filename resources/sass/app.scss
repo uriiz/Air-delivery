@@ -3,6 +3,10 @@
 
 // Variables
 @import 'variables';
+@import 'style';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+nav.navbar.navbar-expand-md.navbar-light.bg-white.shadow-sm{
+  display: none;
+}

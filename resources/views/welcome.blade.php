@@ -65,6 +65,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -80,6 +81,7 @@
             @endif
 
             <div class="content">
+
                 <div class="title m-b-md">
                     Laravel
                 </div>
@@ -92,6 +94,7 @@
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+
                 </div>
             </div>
         </div>
