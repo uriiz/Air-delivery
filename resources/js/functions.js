@@ -1,5 +1,22 @@
 $(document).ready(function() {
 
+
+    $(window).scroll(function(){
+        var top = jQuery(this).scrollTop();
+
+            var elementAbout1 = jQuery('.airplain-par').first();
+            var ractAbout1 = elementAbout1[0].getBoundingClientRect();
+            var animationOffsetAbout1 = ractAbout1.top - top;
+            var animationAbout1Revers = animationOffsetAbout1 * -1;
+             // $('.airplain-par').css({'margin-top': animationOffsetAbout1 / 7+ 'px'});
+             // $('.cloud-par').css({'margin-top': animationOffsetAbout1  + 'px'});
+
+
+
+    });
+
+
+
     // Check for click events on the navbar burger icon
     $(".navbar-burger").click(function() {
 
@@ -98,6 +115,7 @@ $(document).ready(function() {
                         "opacity": 1
                     }
                 },
+
                 "bubble": {
                     "distance": 400,
                     "size": 40,

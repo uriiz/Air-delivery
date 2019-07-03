@@ -117,7 +117,8 @@
     </nav>
         <div class="banner-top">
             <div id="particles-js"></div>
-           
+            <img class="airplain-par" src="/images/plain.png" alt="">
+            <img class="cloud-par" src="/images/cloud.png" alt="">
         </div>
     </div>
 </template>

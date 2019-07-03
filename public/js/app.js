@@ -1822,6 +1822,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2100,6 +2101,41 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53841,7 +53877,17 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "banner-top" }, [
-      _c("div", { attrs: { id: "particles-js" } })
+      _c("div", { attrs: { id: "particles-js" } }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "airplain-par",
+        attrs: { src: "/images/plain.png", alt: "" }
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "cloud-par",
+        attrs: { src: "/images/cloud.png", alt: "" }
+      })
     ])
   }
 ]
@@ -54347,13 +54393,120 @@ var render = function() {
             _vm._v(" "),
             _c(
               "b-field",
-              { attrs: { label: "Subject" } },
+              {
+                attrs: {
+                  label: "Password",
+                  type: "is-warning",
+                  message: [
+                    "Password is too short",
+                    "Password must have at least 8 characters"
+                  ]
+                }
+              },
               [
-                _c("b-select", { attrs: { placeholder: "Select a subject" } }, [
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("Option 1")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "2" } }, [_vm._v("Option 2")])
-                ])
+                _c("b-input", {
+                  attrs: { value: "123", type: "password", maxlength: "30" }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-field",
+              {
+                attrs: {
+                  label: "Password",
+                  type: "is-warning",
+                  message: [
+                    "Password is too short",
+                    "Password must have at least 8 characters"
+                  ]
+                }
+              },
+              [
+                _c("b-input", {
+                  attrs: { value: "123", type: "password", maxlength: "30" }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-field",
+              {
+                attrs: {
+                  label: "Password",
+                  type: "is-warning",
+                  message: [
+                    "Password is too short",
+                    "Password must have at least 8 characters"
+                  ]
+                }
+              },
+              [
+                _c("b-input", {
+                  attrs: { value: "123", type: "password", maxlength: "30" }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-field",
+              {
+                attrs: {
+                  label: "Password",
+                  type: "is-warning",
+                  message: [
+                    "Password is too short",
+                    "Password must have at least 8 characters"
+                  ]
+                }
+              },
+              [
+                _c("b-input", {
+                  attrs: { value: "123", type: "password", maxlength: "30" }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-field",
+              {
+                attrs: {
+                  label: "Password",
+                  type: "is-warning",
+                  message: [
+                    "Password is too short",
+                    "Password must have at least 8 characters"
+                  ]
+                }
+              },
+              [
+                _c("b-input", {
+                  attrs: { value: "123", type: "password", maxlength: "30" }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-field",
+              {
+                attrs: {
+                  label: "Password",
+                  type: "is-warning",
+                  message: [
+                    "Password is too short",
+                    "Password must have at least 8 characters"
+                  ]
+                }
+              },
+              [
+                _c("b-input", {
+                  attrs: { value: "123", type: "password", maxlength: "30" }
+                })
               ],
               1
             )
@@ -54361,10 +54514,26 @@ var render = function() {
           1
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "parralax-section",
+        staticStyle: { "background-image": "url(/images/par.jpg)" }
+      },
+      [_c("div", { staticClass: "triancle" })]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -69526,7 +69695,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-  // Check for click events on the navbar burger icon
+  $(window).scroll(function () {
+    var top = jQuery(this).scrollTop();
+    var elementAbout1 = jQuery('.airplain-par').first();
+    var ractAbout1 = elementAbout1[0].getBoundingClientRect();
+    var animationOffsetAbout1 = ractAbout1.top - top;
+    var animationAbout1Revers = animationOffsetAbout1 * -1; // $('.airplain-par').css({'margin-top': animationOffsetAbout1 / 7+ 'px'});
+    // $('.cloud-par').css({'margin-top': animationOffsetAbout1  + 'px'});
+  }); // Check for click events on the navbar burger icon
+
   $(".navbar-burger").click(function () {
     // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
     $(".navbar-burger").toggleClass("is-active");
