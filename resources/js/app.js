@@ -1,5 +1,6 @@
 
 require('./bootstrap');
+require('./particiles');
 require('./functions');
 window.Vue = require('vue');
 import VueRouter from 'vue-router'

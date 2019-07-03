@@ -1,5 +1,7 @@
 <template>
+    <div>
     <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="small-triancle"></div>
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
                 <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -59,6 +61,9 @@
             </div>
             <div v-else>
                 <section>
+                    <div class="welcome-name show-in-desktop">
+                        Logged as &nbsp; <b> {{currentUserName}} </b>
+                    </div>
                     <b-dropdown
                             v-model="navigation"
                             position="is-bottom-left"
@@ -71,10 +76,10 @@
                             <b-icon icon="menu-down"></b-icon>
                         </a>
 
-                        <b-dropdown-item custom aria-role="menuitem">
+                        <b-dropdown-item class="show-in-mobile" custom aria-role="menuitem">
                             Logged as <b>Rafael Beraldo</b>
                         </b-dropdown-item>
-                        <hr class="dropdown-divider">
+                        <hr class="dropdown-divider show-in-mobile">
                         <b-dropdown-item has-link aria-role="menuitem">
                             <a href="https://google.com" target="_blank">
                                 <b-icon icon="link"></b-icon>
@@ -107,7 +112,14 @@
                 </section>
             </div>
         </div>
+
+
     </nav>
+        <div class="banner-top">
+            <div id="particles-js"></div>
+           
+        </div>
+    </div>
 </template>
 <script>
     import Login from './Login'
@@ -134,6 +146,7 @@
         data() {
             return {
                 currentUserId:$("#details-helper").data('id'),
+                currentUserName:$("#details-helper").data('name'),
                 navigation: 'home'
             }
         },

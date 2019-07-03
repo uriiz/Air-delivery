@@ -24,10 +24,14 @@
     <div id="app">
         @guest
         @else
-            <div id="details-helper" data-avatar="{{Auth::user()->avatar}}" data-id="{{Auth::user()->id}}" style="display: none"></div>
+            <div id="details-helper"
+                 data-avatar="{{Auth::user()->avatar}}"
+                 data-id="{{Auth::user()->id}}"
+                 data-name="{{Auth::user()->name}}"
+                 style="display: none"></div>
         @endguest
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container3">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -77,9 +81,9 @@
             </div>
         </nav>
 
-        <main class="py-4">
+
             @yield('content')
-        </main>
+
     </div>
 </body>
 </html>

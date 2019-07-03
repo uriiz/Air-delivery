@@ -80,11 +80,13 @@
                     this.loader = false;
                     return;
                 }
+
                 window.axios.post(
                     '/register',
                     {
                         'email':this.email,
                         'name':this.name,
+                        'company':this.isSwitchedCustom,
                         'password':this.password,
                         'password_confirmation':this.password_confirmation,
                         'remember':this.remember,
