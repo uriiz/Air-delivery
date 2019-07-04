@@ -16,5 +16,5 @@
 //});
 
 Auth::routes();
-Route::get('/{any}', 'homeController@index')->where('any', '.*');
+Route::get('/{any}', 'HomeController@index')->where('any', '.*');
 //Route::get('/', 'HomeController@index')->name('home');

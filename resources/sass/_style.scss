@@ -31,7 +31,7 @@ body{
 #particles-js{
   width: 100%;
   height: 100%;
-  background-color:#85C1E9;
+  background-color:#00d1b2;
   position: absolute;
   top:0;
   left:0;
@@ -46,7 +46,25 @@ body{
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  .banner-top-right{
+    width: 50%;
+    height: 100%;
+    background: #7957d5;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .banner-top-left{
+    width: 50%;
+    height: 100%;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
+
 .buttons .button {
 
 }
@@ -94,22 +112,44 @@ body{
   border-color: #00d1b2 transparent transparent transparent
 }
 .parralax-section{
-  height: 400px;
+  height: 600px;
   width: 100%;
   position: relative;
   background-attachment: fixed;
   background-size: cover;
   margin-bottom: 200px;
 }
+.airplain-par-text{
+  font-size: 60px;
+  line-height: 65px;
+  color:#fff;
+  strong{
+    color:#fff;
+  }
+}
 img.airplain-par{
-  position: absolute;
+  position: relative;
   max-width: 750px;
-  top: 150px;
   z-index: 9;
+  right: 0;
+}
+.counters {
+  width: 48%;
+  display: flex;
+  justify-content: space-between;
+  .field{
+    width: 30% !important;
+    .field{
+      width: 100% !important;
+    }
+  }
 }
 .cloud-par{
   position: absolute;
   bottom: -260px;
-
+  display: none ;
   /* max-width: 500px; */
+}
+.parralax-section{
+  display: none;
 }

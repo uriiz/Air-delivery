@@ -1,7 +1,7 @@
 <template>
     <div>
     <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="small-triancle"></div>
+
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
                 <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -117,8 +117,16 @@
     </nav>
         <div class="banner-top">
             <div id="particles-js"></div>
-            <img class="airplain-par" src="/images/plain.png" alt="">
-            <img class="cloud-par" src="/images/cloud.png" alt="">
+            <div class="banner-top-right">
+                <div class="airplain-par-text">
+                    <p>lorem impsum dolor</p>
+                    <p> <strong>content</strong> a long established</p>
+                    <p> opposed <strong> to using</strong></p>
+                </div>
+            </div>
+            <div class="banner-top-left">
+                <img class="airplain-par" src="/images/plain2.png" alt="">
+            </div>
         </div>
     </div>
 </template>
