@@ -50,7 +50,7 @@ body{
     width: 50%;
     height: 100%;
     background: #7957d5;
-    z-index: 900;
+    z-index: 6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +58,7 @@ body{
   .banner-top-left{
     width: 50%;
     height: 100%;
-    z-index: 900;
+    z-index: 6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,10 +123,13 @@ body{
   font-size: 60px;
   line-height: 65px;
   color:#fff;
+    width:85%;
+
   strong{
     color:#fff;
   }
 }
+
 img.airplain-par{
   position: relative;
   max-width: 750px;
@@ -152,4 +155,7 @@ img.airplain-par{
 }
 .parralax-section{
   display: none;
+}
+.navbar{
+    z-index: 8 !important;
 }

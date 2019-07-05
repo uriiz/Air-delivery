@@ -73,7 +73,7 @@ body {
   width: 50%;
   height: 100%;
   background: #7957d5;
-  z-index: 900;
+  z-index: 6;
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
@@ -85,7 +85,7 @@ body {
 .banner-top .banner-top-left {
   width: 50%;
   height: 100%;
-  z-index: 900;
+  z-index: 6;
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
@@ -153,6 +153,7 @@ body {
   font-size: 60px;
   line-height: 65px;
   color: #fff;
+  width: 85%;
 }
 
 .airplain-par-text strong {
@@ -191,6 +192,10 @@ img.airplain-par {
 
 .parralax-section {
   display: none;
+}
+
+.navbar {
+  z-index: 8 !important;
 }
 
 nav.navbar.navbar-expand-md.navbar-light.bg-white.shadow-sm {
