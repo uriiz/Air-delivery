@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="{{$body_class}}">
     <div id="app">
         @guest
         @else

@@ -16,5 +16,6 @@
 //});
 
 Auth::routes();
-Route::get('/{any}', 'HomeController@index')->where('any', '.*');
+Route::get('/', 'HomeController@index');
+Route::post('/log-out', 'HomeController@logOut');
 //Route::get('/', 'HomeController@index')->name('home');

@@ -103,7 +103,7 @@
                             <b-icon icon="settings"></b-icon>
                             Settings
                         </b-dropdown-item>
-                        <b-dropdown-item value="logout" aria-role="menuitem">
+                        <b-dropdown-item value="logout" @click="logOut" aria-role="menuitem">
                             <b-icon icon="logout"></b-icon>
                             Logout
                         </b-dropdown-item>
@@ -116,17 +116,22 @@
 
     </nav>
         <div class="banner-top">
-            <div id="particles-js"></div>
-            <div class="banner-top-right">
-                <div class="airplain-par-text">
-                    <p>lorem impsum dolor</p>
-                    <p> <strong>content</strong> a long established</p>
-                    <p> opposed <strong> to using</strong></p>
-                </div>
-            </div>
-            <div class="banner-top-left">
-                <img class="airplain-par" src="/images/plain2.png" alt="">
-            </div>
+            <video autoplay muted loop id="main-video">
+                <source src="http://haifa-port.s89.upress.link/wp-content/uploads/2019/05/MAERSK-HAMBURG-Short.mp4" type="video/mp4">
+                <source src="http://haifa-port.s89.upress.link/wp-content/uploads/2019/05/MAERSK-HAMBURG-Short.mp4" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+            <!--<div id="particles-js"></div>-->
+            <!--<div class="banner-top-right">-->
+                <!--<div class="airplain-par-text">-->
+                    <!--<p>lorem impsum dolor</p>-->
+                    <!--<p> <strong>content</strong> a long established</p>-->
+                    <!--<p> opposed <strong> to using</strong></p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="banner-top-left">-->
+                <!--<img class="airplain-par" src="/images/plain2.png" alt="">-->
+            <!--</div>-->
         </div>
     </div>
 </template>
@@ -136,7 +141,16 @@
 
     export default {
         methods: {
+            logOut(){
 
+                window.axios.post(
+                    '/log-out',
+                ).then((res) => {
+                    window.location = "/";
+                }).catch((res) => {
+
+                });
+            },
             cardModal() {
                 this.$modal.open({
                     parent: this,

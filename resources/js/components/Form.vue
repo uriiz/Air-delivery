@@ -108,6 +108,12 @@
     export default {
 
         mounted() {
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href>Why do I have this issue?</a>'
+            })
             // this.address.geometry.location.lat(),this.address.geometry.location.lng()
         },
 

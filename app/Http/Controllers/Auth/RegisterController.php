@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -63,14 +64,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = 'client';
-        if($data['company'] == 'Company'){
-            $role = 'company';
+
+
+        if(!$data['confirm_term']){
+           return;
         }
+        $now = Carbon::now();
+        if(!$data['confirm_mail']){
+            $now = null;
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'role' => $role,
+            'job_title' => $data['job_title'],
+            'company_name' => $data['company_name'],
+            'lat' => $data['lat'],
+            'lng' => $data['lng'],
+            'address' => $data['address'],
+            'zip_code' => $data['zip_code'],
+            'phone' => $data['phone'],
+            'confirm_term' => Carbon::now(),
+            'confirm_mail' => $now,
             'password' => Hash::make($data['password']),
         ]);
     }

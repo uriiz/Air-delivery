@@ -4,7 +4,7 @@ require('./particiles');
 require('./functions');
 window.Vue = require('vue');
 import VueRouter from 'vue-router'
-
+import Multiselect from 'vue-multiselect'
 Vue.use(VueRouter);
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
@@ -32,6 +32,7 @@ import Form from './components/Form'
 Vue.component('header-top', HeaderTop);
 Vue.component('main-form', Form);
 Vue.component('header-login', Login);
+Vue.component('multi-select', Multiselect);
 
 const router = new VueRouter({
     mode: 'history',

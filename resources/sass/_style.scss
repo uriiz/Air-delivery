@@ -159,3 +159,43 @@ img.airplain-par{
 .navbar{
     z-index: 8 !important;
 }
+
+.modal-card-register{
+  min-width: 600px;
+}
+.b-steps .steps .step-items .step-item .step-details .step-title{
+  font-size: 1rem !important;
+}
+.button.next-level{
+  opacity: 0.3;
+  pointer-events: none;
+  &.active{
+    opacity: 1;
+    cursor: pointer;
+    pointer-events:auto ;
+  }
+}
+.b-checkbox.checkbox + .checkbox{
+  margin-left: 0 !important;
+}
+.long-check{
+  max-width: 400px;
+}
+.next-level.is-success{
+  span{
+    display: flex;
+  }
+}
+#main-video{
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(50%) translateY(-50%);
+}
