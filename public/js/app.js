@@ -1803,30 +1803,122 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var today = new Date();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-      type: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!',
-      footer: '<a href>Why do I have this issue?</a>'
-    }); // this.address.geometry.location.lat(),this.address.geometry.location.lng()
+    this.loadUserInfo();
   },
   data: function data() {
     return {
+      currentUserId: $("#details-helper").data('id'),
       lat: 0,
       lng: 0,
+      isFromMe: 'from me',
       date: new Date(),
       minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-      maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)
+      maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
+      fromFullName: '',
+      fromCompanyName: '',
+      fromSelectedAddress: '',
+      fromZipCode: '',
+      toFullName: '',
+      toCompanyName: '',
+      toSelectedAddress: '',
+      toZipCode: '',
+      FullName: '',
+      CompanyName: '',
+      SelectedAddress: '',
+      ZipCode: ''
     };
   },
   methods: {
+    switchFromTo: function switchFromTo() {
+      if (this.isFromMe == 'from me') {
+        this.fromFullName = this.FullName;
+        this.fromCompanyName = this.CompanyName;
+        this.fromSelectedAddress = this.SelectedAddress;
+        this.fromZipCode = this.ZipCode;
+        this.toFullName = '';
+        this.toCompanyName = '';
+        this.toSelectedAddress = '';
+        this.toZipCode = '';
+      } else {
+        this.toFullName = this.FullName;
+        this.toCompanyName = this.CompanyName;
+        this.toSelectedAddress = this.SelectedAddress;
+        this.toZipCode = this.ZipCode;
+        this.fromFullName = '';
+        this.fromCompanyName = '';
+        this.fromSelectedAddress = '';
+        this.fromZipCode = '';
+      }
+    },
+    loadUserInfo: function loadUserInfo() {
+      var _this = this;
+
+      window.axios.post('/get-user').then(function (res) {
+        if (res.data) {
+          _this.fromFullName = res.data.name;
+          _this.fromCompanyName = res.data.company_name;
+          _this.fromSelectedAddress = res.data.address;
+          _this.fromZipCode = res.data.zip_code;
+          _this.FullName = res.data.name;
+          _this.CompanyName = res.data.company_name;
+          _this.SelectedAddress = res.data.address;
+          _this.ZipCode = res.data.zip_code;
+        }
+      })["catch"](function (res) {});
+    },
+    checkUser: function checkUser() {
+      if (!this.currentUserId) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'You need to be logged in!',
+          footer: '<a href="#">Not yet registered?</a>'
+        });
+        return;
+      }
+    },
     getAddressData: function getAddressData(addressData) {
       this.lat = addressData.geometry.location.lat();
       this.lng = addressData.geometry.location.lng();
+      console.log(addressData);
     },
     submit: function submit() {
       sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Good job!', 'You clicked the button!', 'success');
@@ -52535,69 +52627,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "main-form" },
-    [
-      _c("div", { staticClass: "triancle" }),
+  return _c("div", { staticClass: "main-form" }, [
+    _c("div", { staticClass: "triancle" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-title" }, [
+      _c("div", { staticClass: "title" }, [
+        _vm._v("\n           From:\n       ")
+      ]),
       _vm._v(" "),
+      _c("div", [
+        _c(
+          "div",
+          { staticClass: "field" },
+          [
+            _c(
+              "b-switch",
+              {
+                attrs: { "true-value": "from me", "false-value": "to me" },
+                on: { input: _vm.switchFromTo },
+                model: {
+                  value: _vm.isFromMe,
+                  callback: function($$v) {
+                    _vm.isFromMe = $$v
+                  },
+                  expression: "isFromMe"
+                }
+              },
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.isFromMe) +
+                    "\n                "
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-top" }, [
       _c(
         "section",
         [
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label" }, [
-              _vm._v("Place Of Discharge")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "control is-clearfix" },
-              [
-                _c("GmapAutocomplete", {
-                  staticClass: "input",
-                  attrs: {
-                    id: "map",
-                    "append-icon": "search",
-                    placeholder: "Place Of Loading"
-                  },
-                  on: { place_changed: _vm.getAddressData }
-                })
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label" }, [_vm._v("Place Of Loaing")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "control is-clearfix" },
-              [
-                _c("GmapAutocomplete", {
-                  staticClass: "input",
-                  attrs: {
-                    id: "map2",
-                    "append-icon": "search",
-                    placeholder: "Place Of Loading"
-                  },
-                  on: { place_changed: _vm.getAddressData }
-                })
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
           _c(
             "b-field",
-            { attrs: { label: "Loading Date" } },
+            { attrs: { label: "Full Name *" } },
             [
-              _c("b-datepicker", {
+              _c("b-input", {
                 attrs: {
-                  "mobile-native": false,
-                  "min-date": _vm.minDate,
-                  placeholder: "Loading Date",
-                  icon: "calendar-today"
+                  type: "text",
+                  icon: "account",
+                  placeholder: "Full Name",
+                  required: ""
+                },
+                on: { input: _vm.checkUser },
+                model: {
+                  value: _vm.fromFullName,
+                  callback: function($$v) {
+                    _vm.fromFullName = $$v
+                  },
+                  expression: "fromFullName"
                 }
               })
             ],
@@ -52606,10 +52697,104 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-field",
-            { attrs: { label: "Discharge Date" } },
+            { attrs: { label: "Company Name" } },
             [
-              _c("b-datepicker", {
-                attrs: { placeholder: "Loading Date", icon: "calendar-today" }
+              _c("b-input", {
+                attrs: {
+                  type: "text",
+                  icon: "worker",
+                  placeholder: "Company Name"
+                },
+                on: { input: _vm.checkUser },
+                model: {
+                  value: _vm.fromCompanyName,
+                  callback: function($$v) {
+                    _vm.fromCompanyName = $$v
+                  },
+                  expression: "fromCompanyName"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "field" }, [
+            _c("label", { staticClass: "label" }, [_vm._v("Full Address *")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "control has-icons-left is-clearfix" },
+              [
+                _c("GmapAutocomplete", {
+                  ref: "address",
+                  staticClass: "input",
+                  attrs: {
+                    id: "map",
+                    required: "",
+                    value: _vm.fromSelectedAddress,
+                    placeholder: "Full Address"
+                  },
+                  on: { place_changed: _vm.getAddressData }
+                }),
+                _vm._v(" "),
+                _vm._m(0)
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-field",
+            { attrs: { label: "Zip Code" } },
+            [
+              _c("b-input", {
+                attrs: {
+                  type: "text",
+                  icon: "meteor",
+                  placeholder: "Zip Code"
+                },
+                on: { input: _vm.checkUser },
+                model: {
+                  value: _vm.fromZipCode,
+                  callback: function($$v) {
+                    _vm.fromZipCode = $$v
+                  },
+                  expression: "fromZipCode"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-top" }, [
+      _c(
+        "section",
+        [
+          _c(
+            "b-field",
+            { attrs: { label: "Full Name *" } },
+            [
+              _c("b-input", {
+                attrs: {
+                  type: "text",
+                  icon: "account",
+                  placeholder: "Full Name",
+                  required: ""
+                },
+                on: { input: _vm.checkUser },
+                model: {
+                  value: _vm.toFullName,
+                  callback: function($$v) {
+                    _vm.toFullName = $$v
+                  },
+                  expression: "toFullName"
+                }
               })
             ],
             1
@@ -52617,119 +52802,110 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-field",
-            { attrs: { label: "Place Of Loading" } },
-            [_c("b-input", { attrs: { icon: "account", value: "" } })],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Place Of Discharge" } },
-            [_c("b-input", { attrs: { icon: "account", value: "" } })],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "counters" },
+            { attrs: { label: "Company Name" } },
             [
-              _c(
-                "b-field",
-                { attrs: { label: "Weight" } },
-                [
-                  _c("b-numberinput", {
-                    attrs: {
-                      "controls-position": "compact",
-                      "controls-rounded": ""
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-field",
-                { attrs: { label: "lang" } },
-                [
-                  _c("b-numberinput", {
-                    attrs: {
-                      "controls-position": "compact",
-                      "controls-rounded": ""
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-field",
-                { attrs: { label: "lang" } },
-                [
-                  _c("b-numberinput", {
-                    attrs: {
-                      "controls-position": "compact",
-                      "controls-rounded": ""
-                    }
-                  })
-                ],
-                1
-              )
+              _c("b-input", {
+                attrs: {
+                  type: "text",
+                  icon: "worker",
+                  placeholder: "Company Name"
+                },
+                on: { input: _vm.checkUser },
+                model: {
+                  value: _vm.toCompanyName,
+                  callback: function($$v) {
+                    _vm.toCompanyName = $$v
+                  },
+                  expression: "toCompanyName"
+                }
+              })
             ],
             1
           ),
           _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Place Of Loading" } },
-            [_c("b-input", { attrs: { icon: "account", value: "" } })],
-            1
-          ),
+          _c("div", { staticClass: "field" }, [
+            _c("label", { staticClass: "label" }, [_vm._v("Full Address *")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "control has-icons-left is-clearfix" },
+              [
+                _c("GmapAutocomplete", {
+                  ref: "address",
+                  staticClass: "input",
+                  attrs: {
+                    id: "map2",
+                    required: "",
+                    value: _vm.toSelectedAddress,
+                    placeholder: "Full Address"
+                  },
+                  on: { place_changed: _vm.getAddressData }
+                }),
+                _vm._v(" "),
+                _vm._m(2)
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
           _c(
             "b-field",
-            { attrs: { label: "Place Of Discharge" } },
-            [_c("b-input", { attrs: { icon: "account", value: "" } })],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Place Of Loading" } },
-            [_c("b-input", { attrs: { icon: "account", value: "" } })],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Place Of Discharge" } },
-            [_c("b-input", { attrs: { icon: "account", value: "" } })],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Place Of Loading" } },
-            [_c("b-input", { attrs: { icon: "account", value: "" } })],
+            { attrs: { label: "Zip Code" } },
+            [
+              _c("b-input", {
+                attrs: {
+                  type: "text",
+                  icon: "meteor",
+                  placeholder: "Zip Code"
+                },
+                on: { input: _vm.checkUser },
+                model: {
+                  value: _vm.toZipCode,
+                  callback: function($$v) {
+                    _vm.toZipCode = $$v
+                  },
+                  expression: "toZipCode"
+                }
+              })
+            ],
             1
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c(
-        "b-button",
-        {
-          staticStyle: { "margin-top": "20px" },
-          attrs: { type: "is-primary" },
-          on: { click: _vm.submit }
-        },
-        [_vm._v("\n        Send\n    ")]
       )
-    ],
-    1
-  )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-left" }, [
+      _c("i", { staticClass: "mdi mdi-earth mdi-24px" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-title" }, [
+      _c("div", { staticClass: "title" }, [
+        _vm._v("\n            To:\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-left" }, [
+      _c("i", { staticClass: "mdi mdi-earth mdi-24px" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -71677,156 +71853,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-  $(window).scroll(function () {
-    var top = jQuery(this).scrollTop();
-    var elementAbout1 = jQuery('.airplain-par').first();
-    var ractAbout1 = elementAbout1[0].getBoundingClientRect();
-    var animationOffsetAbout1 = ractAbout1.top - top;
-    var animationAbout1Revers = animationOffsetAbout1 * -1; // $('.airplain-par').css({'margin-top': animationOffsetAbout1 / 7+ 'px'});
-    // $('.cloud-par').css({'margin-top': animationOffsetAbout1  + 'px'});
-  }); // Check for click events on the navbar burger icon
-
-  $(".navbar-burger").click(function () {
-    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-    $(".navbar-burger").toggleClass("is-active");
-    $(".navbar-menu").toggleClass("is-active");
-  });
-  particlesJS("particles-js", {
-    "particles": {
-      "number": {
-        "value": 200,
-        "density": {
-          "enable": true,
-          "value_area": 1000
-        }
-      },
-      "color": {
-        "value": "#ffffff"
-      },
-      "shape": {
-        "type": "circle",
-        "stroke": {
-          "width": 0,
-          "color": "#000000"
-        },
-        "polygon": {
-          "nb_sides": 5
-        },
-        "image": {
-          "src": "img/github.svg",
-          "width": 100,
-          "height": 100
-        }
-      },
-      "opacity": {
-        "value": 0.5,
-        "random": false,
-        "anim": {
-          "enable": false,
-          "speed": 1,
-          "opacity_min": 0.1,
-          "sync": false
-        }
-      },
-      "size": {
-        "value": 3,
-        "random": true,
-        "anim": {
-          "enable": false,
-          "speed": 40,
-          "size_min": 0.1,
-          "sync": false
-        }
-      },
-      "line_linked": {
-        "enable": true,
-        "distance": 150,
-        "color": "#ffffff",
-        "opacity": 0.4,
-        "width": 1
-      },
-      "move": {
-        "enable": true,
-        "speed": 6,
-        "direction": "none",
-        "random": false,
-        "straight": false,
-        "out_mode": "out",
-        "bounce": false,
-        "attract": {
-          "enable": false,
-          "rotateX": 600,
-          "rotateY": 1200
-        }
-      }
-    },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": {
-        "onhover": {
-          "enable": true,
-          "mode": "grab"
-        },
-        "onclick": {
-          "enable": true,
-          "mode": "push"
-        },
-        "resize": true
-      },
-      "modes": {
-        "grab": {
-          "distance": 140,
-          "line_linked": {
-            "opacity": 1
-          }
-        },
-        "bubble": {
-          "distance": 400,
-          "size": 40,
-          "duration": 2,
-          "opacity": 8,
-          "speed": 3
-        },
-        "repulse": {
-          "distance": 200,
-          "duration": 0.4
-        },
-        "push": {
-          "particles_nb": 4
-        },
-        "remove": {
-          "particles_nb": 2
-        }
-      }
-    },
-    "retina_detect": true
-  });
-  /* ---- stats.js config ---- */
-
-  var count_particles, stats, _update;
-
-  stats = new Stats();
-  stats.setMode(0);
-  stats.domElement.style.position = 'absolute';
-  stats.domElement.style.left = '0px';
-  stats.domElement.style.top = '0px';
-  document.body.appendChild(stats.domElement);
-  count_particles = document.querySelector('.js-count-particles');
-
-  _update = function update() {
-    stats.begin();
-    stats.end();
-
-    if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-      count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-    }
-
-    requestAnimationFrame(_update);
-  };
-
-  requestAnimationFrame(_update);
-});
+$(document).ready(function () {});
 
 /***/ }),
 

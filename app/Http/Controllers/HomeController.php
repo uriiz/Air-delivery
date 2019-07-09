@@ -17,6 +17,15 @@ class HomeController extends Controller
 //        $this->middleware('auth');
     }
 
+    public function getUser()
+    {
+        if(Auth::user()){
+            return Auth::user();
+        }else{
+            return 0;
+        }
+    }
+
     public function logOut()
     {
 

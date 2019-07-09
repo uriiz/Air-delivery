@@ -99,14 +99,14 @@ body {
 }
 
 .main-form {
-  padding: 80px 170px;
+  padding: 30px 170px 80px 170px;
   margin: 80px 0 80px 0;
   background: #f5f5f5;
   position: relative;
   box-shadow: 7px 8px 48px -6px rgba(0, 0, 0, 0.15);
 }
 
-.main-form > section {
+.main-form section {
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
@@ -114,7 +114,7 @@ body {
           justify-content: space-between;
 }
 
-.main-form > section .field {
+.main-form section .field {
   width: 48%;
 }
 
@@ -241,6 +241,21 @@ img.airplain-par {
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(50%) translateY(-50%);
+}
+
+.form-title {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 30px;
+  -webkit-box-align: center;
+          align-items: center;
+  margin-top: 70px;
+}
+
+.title {
+  margin: 0 !important;
 }
 
 nav.navbar.navbar-expand-md.navbar-light.bg-white.shadow-sm {

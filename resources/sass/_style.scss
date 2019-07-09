@@ -75,14 +75,14 @@ body{
 }
 
 .main-form {
-  padding: 80px 170px;
+  padding: 30px 170px 80px 170px;
   margin: 80px 0 80px 0;
   background: #f5f5f5;
   position: relative;
   -webkit-box-shadow: 7px 8px 48px -6px rgba(0,0,0,0.15);
   -moz-box-shadow: 7px 8px 48px -6px rgba(0,0,0,0.15);
   box-shadow: 7px 8px 48px -6px rgba(0,0,0,0.15);
-  >section{
+  section{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -198,4 +198,18 @@ img.airplain-par{
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(50%) translateY(-50%);
+}
+
+.form-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  align-items: center;
+  margin-top: 70px;
+}
+.title{
+  margin: 0 !important;
+}
+.form-title{
+
 }
