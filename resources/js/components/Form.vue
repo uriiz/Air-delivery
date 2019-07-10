@@ -71,8 +71,6 @@
             </b-field>
         </section>
         </div>
-
-
         <div class="form-title">
             <div class="title">
                 <img src="/images/profile_icon.png">
@@ -136,6 +134,37 @@
             </section>
         </div>
 
+        <div class="form-title">
+            <div class="title">
+                <img src="/images/profile_icon.png">
+                <div> Pick Up Dates:</div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <section>
+        <b-field label="Pickup Date">
+            <b-datepicker
+                    v-model="fromDate"
+                    :min-date="minDate"
+                    @input="filterDateFrom"
+                    :mobile-native="false"
+                    placeholder="Click to select..."
+                    icon="calendar-today">
+            </b-datepicker>
+        </b-field>
+        <b-field label="Deliver Date">
+            <b-datepicker
+                    :min-date=fromDate
+                    v-model="toDate"
+                    @input="filterDateTo"
+                    :mobile-native="false"
+                    placeholder="Click to select..."
+                    icon="calendar-today">
+            </b-datepicker>
+        </b-field>
+        </section>
     </div>
 </template>
 
@@ -171,11 +200,17 @@
                 CompanyName: '',
                 SelectedAddress: '',
                 ZipCode: '',
-
+                fromDate:new Date(today.getFullYear(), today.getMonth(), today.getDate() ),
+                toDate:new Date(today.getFullYear(), today.getMonth(), today.getDate() ),
             }
         },
         methods: {
+            filterDateFrom(){
+                this.toDate = this.fromDate
+            },
+            filterDateTo(){
 
+            },
             switchFromTo(){
 
                 if(this.isFromMe == 'from me'){
@@ -238,7 +273,7 @@
             getAddressData: function (addressData) {
                 this.lat = addressData.geometry.location.lat();
                 this.lng = addressData.geometry.location.lng();
-                console.log(addressData)
+
             },
             submit(){
                 Swal.fire(

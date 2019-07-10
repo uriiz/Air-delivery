@@ -226,7 +226,7 @@ img.airplain-par{
   border-bottom: 4px solid #8fb301;
 }
 .navbar-item, .navbar-link{
-  color: #96bb01 !important;
+  color: #fff !important;
 }
 a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active{
   color: #fff !important;
@@ -328,4 +328,17 @@ body{
   .link{
     background: #660066 !important;
   }
+}
+.datepicker {
+  .dropdown-content{
+    background: #fff !important;
+  }
+}
+.datepicker-header{
+   .field{
+    width: auto !important;
+  }
+}
+.datepicker .datepicker-table .datepicker-body .datepicker-cell.is-selected{
+
 }

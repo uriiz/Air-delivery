@@ -273,7 +273,7 @@ img.airplain-par {
 
 .navbar-item,
 .navbar-link {
-  color: #96bb01 !important;
+  color: #fff !important;
 }
 
 a.navbar-item:focus,
@@ -418,6 +418,14 @@ body {
 
 .btns-wrap .link {
   background: #660066 !important;
+}
+
+.datepicker .dropdown-content {
+  background: #fff !important;
+}
+
+.datepicker-header .field {
+  width: auto !important;
 }
 
 nav.navbar.navbar-expand-md.navbar-light.bg-white.shadow-sm {

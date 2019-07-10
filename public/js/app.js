@@ -1840,6 +1840,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var today = new Date();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1866,10 +1895,16 @@ var today = new Date();
       FullName: '',
       CompanyName: '',
       SelectedAddress: '',
-      ZipCode: ''
+      ZipCode: '',
+      fromDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+      toDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
     };
   },
   methods: {
+    filterDateFrom: function filterDateFrom() {
+      this.toDate = this.fromDate;
+    },
+    filterDateTo: function filterDateTo() {},
     switchFromTo: function switchFromTo() {
       if (this.isFromMe == 'from me') {
         this.fromFullName = this.FullName;
@@ -1921,7 +1956,6 @@ var today = new Date();
     getAddressData: function getAddressData(addressData) {
       this.lat = addressData.geometry.location.lat();
       this.lng = addressData.geometry.location.lng();
-      console.log(addressData);
     },
     submit: function submit() {
       sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Good job!', 'You clicked the button!', 'success');
@@ -52877,7 +52911,63 @@ var render = function() {
         ],
         1
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _c(
+      "section",
+      [
+        _c(
+          "b-field",
+          { attrs: { label: "Pickup Date" } },
+          [
+            _c("b-datepicker", {
+              attrs: {
+                "min-date": _vm.minDate,
+                "mobile-native": false,
+                placeholder: "Click to select...",
+                icon: "calendar-today"
+              },
+              on: { input: _vm.filterDateFrom },
+              model: {
+                value: _vm.fromDate,
+                callback: function($$v) {
+                  _vm.fromDate = $$v
+                },
+                expression: "fromDate"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "b-field",
+          { attrs: { label: "Deliver Date" } },
+          [
+            _c("b-datepicker", {
+              attrs: {
+                "min-date": _vm.fromDate,
+                "mobile-native": false,
+                placeholder: "Click to select...",
+                icon: "calendar-today"
+              },
+              on: { input: _vm.filterDateTo },
+              model: {
+                value: _vm.toDate,
+                callback: function($$v) {
+                  _vm.toDate = $$v
+                },
+                expression: "toDate"
+              }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -52919,6 +53009,20 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "icon is-left" }, [
       _c("i", { staticClass: "mdi mdi-earth mdi-24px" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-title" }, [
+      _c("div", { staticClass: "title" }, [
+        _c("img", { attrs: { src: "/images/profile_icon.png" } }),
+        _vm._v(" "),
+        _c("div", [_vm._v(" Pick Up Dates:")])
+      ]),
+      _vm._v(" "),
+      _c("div")
     ])
   }
 ]
