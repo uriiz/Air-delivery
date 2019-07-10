@@ -46,6 +46,7 @@ body{
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  display: none;
   .banner-top-right{
     width: 50%;
     height: 100%;
@@ -75,13 +76,15 @@ body{
 }
 
 .main-form {
-  padding: 30px 170px 80px 170px;
-  margin: 80px 0 80px 0;
-  background: #f5f5f5;
+  padding:1px 90px 80px 90px;
+  background: #fff;
   position: relative;
   -webkit-box-shadow: 7px 8px 48px -6px rgba(0,0,0,0.15);
   -moz-box-shadow: 7px 8px 48px -6px rgba(0,0,0,0.15);
   box-shadow: 7px 8px 48px -6px rgba(0,0,0,0.15);
+  border-radius: 15px;
+  max-width: 90%;
+  margin: 80px  auto;
   section{
     display: flex;
     flex-wrap: wrap;
@@ -106,10 +109,11 @@ body{
   top:0;
   left:0;
   width: 0;
+  display: none;
   height: 0;
   border-style: solid;
   border-width: 80px 80px 0 0;
-  border-color: #00d1b2 transparent transparent transparent
+  border-color: #111b23 transparent transparent transparent
 }
 .parralax-section{
   height: 600px;
@@ -206,10 +210,122 @@ img.airplain-par{
   margin-bottom: 30px;
   align-items: center;
   margin-top: 70px;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
 }
 .title{
   margin: 0 !important;
+  font-size: 21px !important;
 }
 .form-title{
 
+}
+.navbar{
+  background-color: #111b23 !important;
+  color:#fff !important;
+  border-bottom: 4px solid #8fb301;
+}
+.navbar-item, .navbar-link{
+  color: #96bb01 !important;
+}
+a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active{
+  color: #fff !important;
+  background: transparent !important;
+}
+.navbar-dropdown{
+  background-color: #111b23 !important;
+}
+.navbar-link:not(.is-arrowless)::after{
+  border-color: #96bb01 !important;
+}
+.dropdown.is-bottom-left .dropdown-menu{
+  background-color: #111b23 !important;
+  a{
+    color: #96bb01 !important;
+  }
+}
+.dropdown-content{
+  background-color: #111b23 !important;
+}
+body{
+  background: #f1f3f6 !important;
+}
+.form-title{
+  .title{
+    display: flex;
+    align-items: center;
+    img{
+      margin-right: 10px;
+    }
+  }
+}
+.navbar-brand{
+  a{
+    color:#fff !important;
+    font-size: 30px;
+  }
+}
+.button.is-primary{
+  background: #96bb01 !important;
+}
+.button.is-light{
+  background: #fff !important;
+}
+.testt{
+  background: #ff7800;
+}
+.main-form-welcome{
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 50px;
+  .welcome-title{
+    padding: 20px 0;
+    h1{
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}
+
+.switch input[type=checkbox]:checked + .check.is-danger{
+  background: #111b23 !important;
+}
+.switch input[type=checkbox]:focus + .check{
+  background: #111b23 !important;
+}
+.switch input[type=checkbox] + .check:before{
+  background: #8fb301 !important;
+}
+.switch input[type=checkbox] + .check{
+  background: #111b23 !important;
+}
+
+.switch input[type=checkbox]:focus:checked + .check.is-danger{
+  box-shadow: none !important;
+}
+.form-title{
+  .switch .control-label{
+    min-width: 80px;
+  }
+}
+.input:focus, .taginput .taginput-container.is-focusable:focus, .textarea:focus, .select select:focus, .is-focused.input, .taginput .is-focused.taginput-container.is-focusable, .is-focused.textarea, .select select.is-focused, .input:active, .taginput .taginput-container.is-focusable:active, .textarea:active, .select select:active, .is-active.input, .taginput .is-active.taginput-container.is-focusable, .is-active.textarea, .select select.is-active{
+  border-color: #111b23 !important;
+  -webkit-box-shadow: 0 0 0 0.125em rgba(17, 27, 35, 0.25) !important;
+  box-shadow: 0 0 0 0.125em rgba(17, 27, 35, 0.25)  !important;
+}
+.b-steps .steps .step-items .step-item.is-active .step-marker{
+  border-color: #8fb301 !important;
+  color: #8fb301 !important;
+}
+.b-steps .steps .step-items .step-item.is-completed .step-marker{
+  background:#8fb301 !important ;
+}
+.btns-wrap{
+  margin-top: 20px;
+  .orange{
+    background:#ff7800 !important ;
+  }
+  .link{
+    background: #660066 !important;
+  }
 }

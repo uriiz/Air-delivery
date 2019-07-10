@@ -3,11 +3,13 @@
         <div class="triancle"></div>
         <div class="form-title">
            <div class="title">
-               From:
+               <img src="/images/profile_icon.png">
+              <div> From:</div>
            </div>
             <div>
                 <div class="field">
                     <b-switch v-model="isFromMe"
+                              type="is-danger"
                               @input="switchFromTo"
                               true-value="from me"
                               false-value="to me">
@@ -73,7 +75,8 @@
 
         <div class="form-title">
             <div class="title">
-                To:
+                <img src="/images/profile_icon.png">
+                <div> To:</div>
             </div>
             <div>
 

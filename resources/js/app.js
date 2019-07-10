@@ -6,6 +6,7 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 import Multiselect from 'vue-multiselect'
 Vue.use(VueRouter);
+
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import * as VueGoogleMaps from 'vue2-google-maps';
@@ -26,12 +27,14 @@ import Home from './views/Home'
 import HeaderTop from './components/HeaderTopMenu'
 import Login from './components/Login'
 import Form from './components/Form'
+import Welcome from './components/Welcome'
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Vue.component('header', require('./components/Header'));
 Vue.component('header-top', HeaderTop);
 Vue.component('main-form', Form);
 Vue.component('header-login', Login);
+Vue.component('welcome', Welcome);
 Vue.component('multi-select', Multiselect);
 
 const router = new VueRouter({
