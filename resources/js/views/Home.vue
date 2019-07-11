@@ -4,9 +4,7 @@
         <welcome></welcome>
         <main-form></main-form>
     </div>
-    <div class="parralax-section" >
-        <div class="triancle-line"></div>
-    </div>
+    <div style="padding-bottom: 50px"></div>
 </div>
 </template>
 

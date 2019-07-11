@@ -76,7 +76,7 @@ body{
 }
 
 .main-form {
-  padding:1px 90px 80px 90px;
+  padding:1px 60px 80px 60px;
   background: #fff;
   position: relative;
   -webkit-box-shadow: 7px 8px 48px -6px rgba(0,0,0,0.15);
@@ -341,4 +341,52 @@ body{
 }
 .datepicker .datepicker-table .datepicker-body .datepicker-cell.is-selected{
 
+}
+.range-tab{
+  .control{
+    margin: 0 !important;
+  }
+  .button.is-primary{
+    background: #111b23 !important;
+    color:#8fb301 !important;
+  }
+  .button,.b-numberinput input[type=number]{
+    border-radius: 0 !important;
+  }
+}
+.add-package{
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  .add-package-circle{
+    margin-right: 10px;
+  }
+  .add-package-circle-bg{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f1c30c;
+    text-align: center;
+    line-height: 15px;
+    color: #fff;
+  }
+}
+.wrap-del-index{
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  .delete-tab{
+    display: flex;
+    margin-right: 6px;
+  }
+}
+.has-err{
+  input{
+    border: 2px solid red;
+  }
+}
+.submit-form{
+  .button span{
+    display: flex;
+  }
 }

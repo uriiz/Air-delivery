@@ -100,7 +100,7 @@ body {
 }
 
 .main-form {
-  padding: 1px 90px 80px 90px;
+  padding: 1px 60px 80px 60px;
   background: #fff;
   position: relative;
   box-shadow: 7px 8px 48px -6px rgba(0, 0, 0, 0.15);
@@ -426,6 +426,65 @@ body {
 
 .datepicker-header .field {
   width: auto !important;
+}
+
+.range-tab .control {
+  margin: 0 !important;
+}
+
+.range-tab .button.is-primary {
+  background: #111b23 !important;
+  color: #8fb301 !important;
+}
+
+.range-tab .button,
+.range-tab .b-numberinput input[type=number] {
+  border-radius: 0 !important;
+}
+
+.add-package {
+  display: -webkit-box;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.add-package .add-package-circle {
+  margin-right: 10px;
+}
+
+.add-package .add-package-circle-bg {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f1c30c;
+  text-align: center;
+  line-height: 15px;
+  color: #fff;
+}
+
+.wrap-del-index {
+  display: -webkit-box;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.wrap-del-index .delete-tab {
+  display: -webkit-box;
+  display: flex;
+  margin-right: 6px;
+}
+
+.has-err input {
+  border: 2px solid red;
+}
+
+.submit-form .button span {
+  display: -webkit-box;
+  display: flex;
 }
 
 nav.navbar.navbar-expand-md.navbar-light.bg-white.shadow-sm {

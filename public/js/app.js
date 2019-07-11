@@ -1869,17 +1869,168 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var today = new Date();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.loadUserInfo();
+    this.addRow();
   },
   data: function data() {
     return {
       currentUserId: $("#details-helper").data('id'),
-      lat: 0,
-      lng: 0,
+      fromLat: 0,
+      fromLng: 0,
+      toLat: 0,
+      toLng: 0,
       isFromMe: 'from me',
       date: new Date(),
       minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
@@ -1897,10 +2048,167 @@ var today = new Date();
       SelectedAddress: '',
       ZipCode: '',
       fromDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-      toDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+      toDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+      data: [],
+      hasErrorFromFullName: false,
+      hasErrorFromLat: false,
+      hasErrorToFullName: false,
+      hasErrorToLat: false,
+      hasErrorPack: false,
+      loaderSub: false,
+      loaderDraft: false,
+      submitAction: false
     };
   },
   methods: {
+    validate: function validate() {
+      var err = false;
+
+      for (var i = 0; i < this.data.length; i++) {
+        console.log(this.data[i].package_name);
+
+        if (!this.data[i].package_name) {
+          $('.description' + i).addClass('has-err');
+          this.hasErrorPack = true;
+          err = true;
+        } else {
+          this.hasErrorPack = false;
+          $('.description' + i).removeClass('has-err');
+        }
+      }
+
+      if (!this.fromFullName) {
+        this.hasErrorFromFullName = true;
+        err = true;
+      } else {
+        this.hasErrorFromFullName = false;
+      }
+
+      if (!this.fromLat) {
+        this.hasErrorFromLat = true;
+        err = true;
+      } else {
+        this.hasErrorFromLat = false;
+      }
+
+      if (!this.toFullName) {
+        this.hasErrorToFullName = true;
+        err = true;
+      } else {
+        this.hasErrorToFullName = false;
+      }
+
+      if (!this.toLat) {
+        this.hasErrorToLat = true;
+        err = true;
+      } else {
+        this.hasErrorToLat = false;
+      }
+
+      if (err) {
+        return false;
+      }
+
+      return true;
+    },
+    submit: function submit(type) {
+      if (type == 'submit') {
+        this.loaderSub = true;
+        this.submitAction = true;
+      } else {
+        this.loaderDraft = true;
+      }
+
+      if (this.validate()) {
+        window.axios.post('/save-offer', {
+          'submitAction': this.submitAction,
+          'name': this.name,
+          'password': this.password,
+          'password_confirmation': this.password,
+          'remember': this.remember,
+          'job_title': this.jobTitle,
+          'company_name': this.companyName,
+          'lat': this.lat,
+          'lng': this.lng,
+          'address': this.address,
+          'zip_code': this.zipCode,
+          'phone': this.phone,
+          'confirm_term': this.terms,
+          'confirm_mail': this.termsMail
+        }).then(function (res) {})["catch"](function (res) {});
+        this.loaderSub = false;
+        this.loaderDraft = false;
+      } else {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Please fill all required fields',
+          footer: ''
+        });
+        this.loaderSub = false;
+        this.loaderDraft = false;
+        return;
+      }
+    },
+    deleteRow: function deleteRow(id) {
+      var _this = this;
+
+      if (this.data.length == 1) {
+        return;
+      }
+
+      var swalWithBootstrapButtons = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      });
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          _this.data = _this.data.filter(function (x) {
+            return x.id !== id;
+          });
+        } else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          return;
+        }
+      });
+    },
+    addRow: function addRow() {
+      this.data.push({
+        'id': Math.floor(Math.random() * Number(new Date())),
+        'package_name': '',
+        'package_quantity': 1,
+        'package_width': 1,
+        'package_height': 1,
+        'package_length': 1,
+        'package_weight': 1,
+        'package_type': [{
+          "id": 1,
+          "name": 'GENERAL CARGO'
+        }, {
+          "id": 2,
+          "name": 'Cooling'
+        }, {
+          "id": 3,
+          "name": 'Radioactive'
+        }, {
+          "id": 4,
+          "name": 'Food'
+        }, {
+          "id": 5,
+          "name": 'Medicines'
+        }]
+      });
+    },
     filterDateFrom: function filterDateFrom() {
       this.toDate = this.fromDate;
     },
@@ -1927,18 +2235,18 @@ var today = new Date();
       }
     },
     loadUserInfo: function loadUserInfo() {
-      var _this = this;
+      var _this2 = this;
 
       window.axios.post('/get-user').then(function (res) {
         if (res.data) {
-          _this.fromFullName = res.data.name;
-          _this.fromCompanyName = res.data.company_name;
-          _this.fromSelectedAddress = res.data.address;
-          _this.fromZipCode = res.data.zip_code;
-          _this.FullName = res.data.name;
-          _this.CompanyName = res.data.company_name;
-          _this.SelectedAddress = res.data.address;
-          _this.ZipCode = res.data.zip_code;
+          _this2.fromFullName = res.data.name;
+          _this2.fromCompanyName = res.data.company_name;
+          _this2.fromSelectedAddress = '';
+          _this2.fromZipCode = res.data.zip_code;
+          _this2.FullName = res.data.name;
+          _this2.CompanyName = res.data.company_name;
+          _this2.SelectedAddress = '';
+          _this2.ZipCode = res.data.zip_code;
         }
       })["catch"](function (res) {});
     },
@@ -1953,12 +2261,13 @@ var today = new Date();
         return;
       }
     },
-    getAddressData: function getAddressData(addressData) {
-      this.lat = addressData.geometry.location.lat();
-      this.lng = addressData.geometry.location.lng();
+    getFromAddressData: function getFromAddressData(addressData) {
+      this.fromLat = addressData.geometry.location.lat();
+      this.toLat = addressData.geometry.location.lng();
     },
-    submit: function submit() {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Good job!', 'You clicked the button!', 'success');
+    getToAddressData: function getToAddressData(addressData) {
+      this.latTo = addressData.geometry.location.lat();
+      this.lngTo = addressData.geometry.location.lng();
     }
   }
 });
@@ -2592,8 +2901,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -52711,7 +53018,13 @@ var render = function() {
         [
           _c(
             "b-field",
-            { attrs: { label: "Full Name *" } },
+            {
+              attrs: {
+                label: "Full Name *",
+                type: { "is-danger": _vm.hasErrorFromFullName },
+                message: { "this field is required": _vm.hasErrorFromFullName }
+              }
+            },
             [
               _c("b-input", {
                 attrs: {
@@ -52761,19 +53074,41 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "control has-icons-left is-clearfix" },
+              {
+                staticClass: "control has-icons-left is-clearfix",
+                class: { "has-icons-right": _vm.hasErrorFromLat }
+              },
               [
                 _c("GmapAutocomplete", {
                   ref: "address",
                   staticClass: "input",
+                  class: { "is-danger": _vm.hasErrorFromLat },
                   attrs: {
                     id: "map",
                     required: "",
-                    value: _vm.fromSelectedAddress,
+                    autocomplete: "off",
                     placeholder: "Full Address"
                   },
-                  on: { place_changed: _vm.getAddressData }
+                  on: { place_changed: _vm.getFromAddressData }
                 }),
+                _vm._v(" "),
+                _vm.hasErrorFromLat
+                  ? _c("p", { staticClass: "help is-danger" }, [
+                      _vm._v("this field is required")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.hasErrorFromLat
+                  ? _c(
+                      "span",
+                      { staticClass: "icon is-right has-text-danger" },
+                      [
+                        _c("i", {
+                          staticClass: "mdi mdi-alert-circle mdi-24px"
+                        })
+                      ]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
                 _vm._m(1)
               ],
@@ -52816,7 +53151,13 @@ var render = function() {
         [
           _c(
             "b-field",
-            { attrs: { label: "Full Name *" } },
+            {
+              attrs: {
+                type: { "is-danger": _vm.hasErrorToFullName },
+                message: { "this field is required": _vm.hasErrorToFullName },
+                label: "Full Name *"
+              }
+            },
             [
               _c("b-input", {
                 attrs: {
@@ -52866,19 +53207,41 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "control has-icons-left is-clearfix" },
+              {
+                staticClass: "control has-icons-left is-clearfix",
+                class: { "has-icons-right": _vm.hasErrorToLat }
+              },
               [
                 _c("GmapAutocomplete", {
                   ref: "address",
                   staticClass: "input",
+                  class: { "is-danger": _vm.hasErrorToLat },
                   attrs: {
                     id: "map2",
+                    autocomplete: "off",
                     required: "",
-                    value: _vm.toSelectedAddress,
                     placeholder: "Full Address"
                   },
-                  on: { place_changed: _vm.getAddressData }
+                  on: { place_changed: _vm.getToAddressData }
                 }),
+                _vm._v(" "),
+                _vm.hasErrorToLat
+                  ? _c("p", { staticClass: "help is-danger" }, [
+                      _vm._v("this field is required")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.hasErrorToLat
+                  ? _c(
+                      "span",
+                      { staticClass: "icon is-right has-text-danger" },
+                      [
+                        _c("i", {
+                          staticClass: "mdi mdi-alert-circle mdi-24px"
+                        })
+                      ]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
                 _vm._m(3)
               ],
@@ -52914,6 +53277,325 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm._m(4),
+    _vm._v(" "),
+    _c(
+      "div",
+      [
+        _c("b-table", {
+          attrs: { data: _vm.data },
+          scopedSlots: _vm._u([
+            {
+              key: "default",
+              fn: function(props) {
+                return [
+                  _c("b-table-column", { attrs: { label: "" } }, [
+                    _c("div", { staticClass: "wrap-del-index" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "delete-tab",
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteRow(props.row.id)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                width: "25",
+                                height: "25",
+                                viewBox: "0 0 25 25"
+                              }
+                            },
+                            [
+                              _c(
+                                "g",
+                                {
+                                  attrs: {
+                                    fill: "none",
+                                    "fill-rule": "evenodd"
+                                  }
+                                },
+                                [
+                                  _c("circle", {
+                                    attrs: {
+                                      cx: "12.5",
+                                      cy: "12.5",
+                                      r: "12.5",
+                                      fill: "#FE004C",
+                                      "fill-rule": "nonzero"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("path", {
+                                    attrs: {
+                                      fill: "#FFF",
+                                      stroke: "#FFF",
+                                      d:
+                                        "M18.636 7.74l-.74-.74-5.078 5.078L7.74 7 7 7.74l5.078 5.078L7 17.896l.74.74 5.078-5.077 5.078 5.077.74-.74-5.077-5.078z"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(props.index + 1) +
+                            "\n                        "
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "b-table-column",
+                    {
+                      class: "description" + props.index,
+                      attrs: { field: "package_name", label: "Name" }
+                    },
+                    [
+                      _c(
+                        "b-field",
+                        [
+                          _c("b-input", {
+                            model: {
+                              value: props.row.package_name,
+                              callback: function($$v) {
+                                _vm.$set(props.row, "package_name", $$v)
+                              },
+                              expression: "props.row.package_name"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-table-column",
+                    {
+                      attrs: {
+                        centered: "",
+                        width: "150",
+                        field: "package_quantity",
+                        label: "Quantity (cm)"
+                      }
+                    },
+                    [
+                      _c("b-field", [
+                        _c(
+                          "div",
+                          { staticClass: "range-tab" },
+                          [
+                            _c("b-numberinput", {
+                              attrs: { min: "0" },
+                              model: {
+                                value: props.row.package_quantity,
+                                callback: function($$v) {
+                                  _vm.$set(props.row, "package_quantity", $$v)
+                                },
+                                expression: "props.row.package_quantity"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-table-column",
+                    {
+                      attrs: {
+                        centered: "",
+                        width: "150",
+                        field: "package_width",
+                        label: "Width (cm)"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "range-tab" },
+                        [
+                          _c("b-numberinput", {
+                            attrs: { min: "0" },
+                            model: {
+                              value: props.row.package_width,
+                              callback: function($$v) {
+                                _vm.$set(props.row, "package_width", $$v)
+                              },
+                              expression: "props.row.package_width"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-table-column",
+                    {
+                      attrs: {
+                        centered: "",
+                        width: "150",
+                        field: "package_height",
+                        label: "Height (cm)"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "range-tab" },
+                        [
+                          _c("b-numberinput", {
+                            attrs: { min: "0" },
+                            model: {
+                              value: props.row.package_height,
+                              callback: function($$v) {
+                                _vm.$set(props.row, "package_height", $$v)
+                              },
+                              expression: "props.row.package_height"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-table-column",
+                    {
+                      attrs: {
+                        centered: "",
+                        width: "150",
+                        field: "package_length",
+                        label: "Length (cm)"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "range-tab" },
+                        [
+                          _c("b-numberinput", {
+                            attrs: { min: "0" },
+                            model: {
+                              value: props.row.package_length,
+                              callback: function($$v) {
+                                _vm.$set(props.row, "package_length", $$v)
+                              },
+                              expression: "props.row.package_length"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-table-column",
+                    {
+                      attrs: {
+                        centered: "",
+                        width: "150",
+                        field: "package_weight",
+                        label: "Weight (kg)"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "range-tab" },
+                        [
+                          _c("b-numberinput", {
+                            attrs: { min: "0" },
+                            model: {
+                              value: props.row.package_weight,
+                              callback: function($$v) {
+                                _vm.$set(props.row, "package_weight", $$v)
+                              },
+                              expression: "props.row.package_weight"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-table-column",
+                    {
+                      attrs: {
+                        width: "100",
+                        field: "package_type",
+                        label: "Type"
+                      }
+                    },
+                    [
+                      _c(
+                        "b-field",
+                        [
+                          _c(
+                            "b-select",
+                            { attrs: { placeholder: "Type", value: "1" } },
+                            _vm._l(props.row.package_type, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(option.name) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ]
+              }
+            }
+          ])
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "add-package", on: { click: _vm.addRow } }, [
+          _vm._m(5),
+          _vm._v(" "),
+          _c("div", [_vm._v("\n                Add Package\n            ")])
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm._m(6),
     _vm._v(" "),
     _c(
       "section",
@@ -52967,7 +53649,88 @@ var render = function() {
         )
       ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _vm._m(7),
+    _vm._v(" "),
+    _c(
+      "section",
+      [
+        _c(
+          "b-field",
+          { attrs: { label: "Notes" } },
+          [_c("b-input", { attrs: { maxlength: "600", type: "textarea" } })],
+          1
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm.currentUserId
+      ? _c(
+          "div",
+          { staticClass: "submit-form" },
+          [
+            _c(
+              "b-button",
+              {
+                attrs: { type: "is-success" },
+                on: {
+                  click: function($event) {
+                    return _vm.submit("submit")
+                  }
+                }
+              },
+              [
+                _c("div", [_vm._v("Submit Offer")]),
+                _vm._v(" "),
+                _vm.loaderSub
+                  ? _c("img", {
+                      staticStyle: { width: "25px" },
+                      attrs: { src: "/images/loader.gif", alt: "" }
+                    })
+                  : _vm._e()
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "b-button",
+              {
+                attrs: { type: "is-warning" },
+                on: {
+                  click: function($event) {
+                    return _vm.submit("draft")
+                  }
+                }
+              },
+              [
+                _c("div", [_vm._v("Save Draft")]),
+                _vm._v(" "),
+                _vm.loaderDraft
+                  ? _c("img", {
+                      staticStyle: { width: "25px" },
+                      attrs: { src: "/images/loader.gif", alt: "" }
+                    })
+                  : _vm._e()
+              ]
+            )
+          ],
+          1
+        )
+      : _c(
+          "div",
+          { staticClass: "submit-form" },
+          [
+            _c("b-button", { attrs: { disabled: "", type: "is-success" } }, [
+              _vm._v("Submit Offer")
+            ]),
+            _vm._v(" "),
+            _c("b-button", { attrs: { disabled: "", type: "is-warning" } }, [
+              _vm._v("Save Draft")
+            ])
+          ],
+          1
+        )
   ])
 }
 var staticRenderFns = [
@@ -53019,7 +53782,45 @@ var staticRenderFns = [
       _c("div", { staticClass: "title" }, [
         _c("img", { attrs: { src: "/images/profile_icon.png" } }),
         _vm._v(" "),
+        _c("div", [_vm._v(" Shipment Information:")])
+      ]),
+      _vm._v(" "),
+      _c("div")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "add-package-circle" }, [
+      _c("div", { staticClass: "add-package-circle-bg" }, [
+        _vm._v("\n                    +\n                ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-title" }, [
+      _c("div", { staticClass: "title" }, [
+        _c("img", { attrs: { src: "/images/profile_icon.png" } }),
+        _vm._v(" "),
         _c("div", [_vm._v(" Pick Up Dates:")])
+      ]),
+      _vm._v(" "),
+      _c("div")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-title" }, [
+      _c("div", { staticClass: "title" }, [
+        _c("img", { attrs: { src: "/images/profile_icon.png" } }),
+        _vm._v(" "),
+        _c("div", [_vm._v(" Notes:")])
       ]),
       _vm._v(" "),
       _c("div")
@@ -54218,19 +55019,10 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm._m(0)
+    _c("div", { staticStyle: { "padding-bottom": "50px" } })
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "parralax-section" }, [
-      _c("div", { staticClass: "triancle-line" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
