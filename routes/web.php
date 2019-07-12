@@ -20,3 +20,9 @@ Route::get('/', 'HomeController@index');
 Route::post('/log-out', 'HomeController@logOut');
 Route::post('/get-user', 'HomeController@getUser');
 //Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'],function() {
+
+    Route::post('/save-offer', 'OfferController@getUser');
+
+});

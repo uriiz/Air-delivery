@@ -2013,11 +2013,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 var today = new Date();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2032,6 +2027,10 @@ var today = new Date();
       fromLng: 0,
       toLat: 0,
       toLng: 0,
+      fromAddressName: '',
+      toAddressName: '',
+      fromAddressId: '',
+      toAddressId: '',
       isFromMe: 'from me',
       date: new Date(),
       minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
@@ -2058,25 +2057,23 @@ var today = new Date();
       hasErrorPack: false,
       loaderSub: false,
       loaderDraft: false,
-      submitAction: false
+      submitAction: false,
+      notes: ''
     };
   },
   methods: {
     validate: function validate() {
-      var err = false;
-
-      for (var i = 0; i < this.data.length; i++) {
-        console.log(this.data[i].package_name);
-
-        if (!this.data[i].package_name) {
-          $('.description' + i).addClass('has-err');
-          this.hasErrorPack = true;
-          err = true;
-        } else {
-          this.hasErrorPack = false;
-          $('.description' + i).removeClass('has-err');
-        }
-      }
+      var err = false; // for(let i = 0;i < this.data.length ; i++){
+      //     console.log(this.data[i].package_name)
+      //     if(! this.data[i].package_name){
+      //         $('.description'+i).addClass('has-err');
+      //         this.hasErrorPack = true;
+      //         err = true
+      //     }else{
+      //         this.hasErrorPack = false
+      //         $('.description'+i).removeClass('has-err')
+      //     }
+      // }
 
       if (!this.fromFullName) {
         this.hasErrorFromFullName = true;
@@ -2121,21 +2118,27 @@ var today = new Date();
       }
 
       if (this.validate()) {
+        console.log(this.data);
         window.axios.post('/save-offer', {
-          'submitAction': this.submitAction,
-          'from_name': this.name,
-          'from_company_name': this.password,
-          'from_lat': this.password,
-          'from_lng': this.remember,
-          'from_zip_code': this.zipCode,
-          'to_name': this.jobTitle,
-          'to_company_name': this.companyName,
-          'to_lat': this.lat,
-          'to_lng': this.lng,
-          'to_zip_code': this.address,
-          'phone': this.phone,
-          'confirm_term': this.terms,
-          'confirm_mail': this.termsMail
+          'submit_action': this.submitAction,
+          'from_name': this.fromFullName,
+          'from_company_name': this.fromCompanyName,
+          'from_lat': this.fromLat,
+          'from_lng': this.fromLng,
+          'from_address_name': this.fromAddressName,
+          'from_address_id': this.fromAddressId,
+          'from_zip_code': this.fromZipCode,
+          'to_name': this.toFullName,
+          'to_company_name': this.toCompanyName,
+          'to_lat': this.toLat,
+          'to_lng': this.toLng,
+          'to_address_name': this.toAddressName,
+          'to_address_id': this.toAddressId,
+          'to_zip_code': this.toZipCode,
+          'pack': this.data,
+          'from_date': this.fromDate,
+          'to_date': this.toDate,
+          'note': this.note
         }).then(function (res) {})["catch"](function (res) {});
         this.loaderSub = false;
         this.loaderDraft = false;
@@ -2186,7 +2189,6 @@ var today = new Date();
     addRow: function addRow() {
       this.data.push({
         'id': Math.floor(Math.random() * Number(new Date())),
-        'package_name': '',
         'package_quantity': 1,
         'package_width': 1,
         'package_height': 1,
@@ -2262,13 +2264,18 @@ var today = new Date();
         return;
       }
     },
-    getFromAddressData: function getFromAddressData(addressData) {
+    getFromAddressData: function getFromAddressData(addressData, placeResultData, id) {
+      console.log(placeResultData);
       this.fromLat = addressData.geometry.location.lat();
       this.toLat = addressData.geometry.location.lng();
+      this.fromAddressName = addressData.formatted_address;
+      this.fromAddressId = addressData.place_id;
     },
     getToAddressData: function getToAddressData(addressData) {
       this.latTo = addressData.geometry.location.lat();
       this.lngTo = addressData.geometry.location.lng();
+      this.toAddressName = addressData.formatted_address;
+      this.toAddressId = addressData.place_id;
     }
   }
 });
@@ -53289,7 +53296,7 @@ var render = function() {
               key: "default",
               fn: function(props) {
                 return [
-                  _c("b-table-column", { attrs: { label: "" } }, [
+                  _c("b-table-column", { attrs: { label: "", width: "40" } }, [
                     _c("div", { staticClass: "wrap-del-index" }, [
                       _c(
                         "div",
@@ -53356,32 +53363,6 @@ var render = function() {
                       ])
                     ])
                   ]),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      class: "description" + props.index,
-                      attrs: { field: "package_name", label: "Name" }
-                    },
-                    [
-                      _c(
-                        "b-field",
-                        [
-                          _c("b-input", {
-                            model: {
-                              value: props.row.package_name,
-                              callback: function($$v) {
-                                _vm.$set(props.row, "package_name", $$v)
-                              },
-                              expression: "props.row.package_name"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
                   _vm._v(" "),
                   _c(
                     "b-table-column",
@@ -53660,7 +53641,18 @@ var render = function() {
         _c(
           "b-field",
           { attrs: { label: "Notes" } },
-          [_c("b-input", { attrs: { maxlength: "600", type: "textarea" } })],
+          [
+            _c("b-input", {
+              attrs: { maxlength: "600", type: "textarea" },
+              model: {
+                value: _vm.notes,
+                callback: function($$v) {
+                  _vm.notes = $$v
+                },
+                expression: "notes"
+              }
+            })
+          ],
           1
         )
       ],

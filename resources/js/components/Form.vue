@@ -162,7 +162,7 @@
                     >
                 <template slot-scope="props">
 
-                    <b-table-column label="" >
+                    <b-table-column label="" width="40">
                         <div class="wrap-del-index">
 
                             <div class="delete-tab" @click="deleteRow( props.row.id )">
@@ -179,11 +179,6 @@
                         </div>
                     </b-table-column>
 
-                    <b-table-column :class="'description'+props.index" field="package_name" label="Name">
-                        <b-field>
-                            <b-input v-model="props.row.package_name"></b-input>
-                        </b-field>
-                    </b-table-column>
 
                     <b-table-column centered width="150" field="package_quantity" label="Quantity (cm)">
                         <b-field>
@@ -294,7 +289,7 @@
         <section>
             <b-field label="Notes">
 
-                <b-input maxlength="600" type="textarea"></b-input>
+                <b-input maxlength="600" type="textarea" v-model="notes"></b-input>
             </b-field>
         </section>
 
@@ -335,6 +330,10 @@
                 fromLng:0,
                 toLat:0,
                 toLng:0,
+                fromAddressName:'',
+                toAddressName:'',
+                fromAddressId:'',
+                toAddressId:'',
                 isFromMe:'from me',
                 date: new Date(),
                 minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() ),
@@ -362,6 +361,7 @@
                 loaderSub:false,
                 loaderDraft:false,
                 submitAction:false,
+                notes:'',
             }
         },
         methods: {
@@ -370,17 +370,17 @@
 
                 let err = false
 
-                for(let i = 0;i < this.data.length ; i++){
-                    console.log(this.data[i].package_name)
-                    if(! this.data[i].package_name){
-                        $('.description'+i).addClass('has-err');
-                        this.hasErrorPack = true;
-                        err = true
-                    }else{
-                        this.hasErrorPack = false
-                        $('.description'+i).removeClass('has-err')
-                    }
-                }
+                // for(let i = 0;i < this.data.length ; i++){
+                //     console.log(this.data[i].package_name)
+                //     if(! this.data[i].package_name){
+                //         $('.description'+i).addClass('has-err');
+                //         this.hasErrorPack = true;
+                //         err = true
+                //     }else{
+                //         this.hasErrorPack = false
+                //         $('.description'+i).removeClass('has-err')
+                //     }
+                // }
 
                 if(!this.fromFullName){
                     this.hasErrorFromFullName = true
@@ -423,24 +423,31 @@
                 }
 
                 if(this.validate()){
-
+                    console.log(this.data)
                     window.axios.post(
                         '/save-offer',
                         {
-                            'submitAction':this.submitAction,
-                            'from_name':this.name,
-                            'from_company_name':this.password,
-                            'from_lat':this.password,
-                            'from_lng':this.remember,
-                            'from_zip_code':this.zipCode,
-                            'to_name':this.jobTitle,
-                            'to_company_name':this.companyName,
-                            'to_lat':this.lat,
-                            'to_lng':this.lng,
-                            'to_zip_code':this.address,
-                            'phone':this.phone,
-                            'confirm_term':this.terms,
-                            'confirm_mail':this.termsMail,
+                            'submit_action':this.submitAction,
+                            'from_name':this.fromFullName,
+                            'from_company_name':this.fromCompanyName,
+                            'from_lat':this.fromLat,
+                            'from_lng':this.fromLng,
+                            'from_address_name':this.fromAddressName,
+                            'from_address_id':this.fromAddressId,
+                            'from_zip_code':this.fromZipCode,
+                            'to_name':this.toFullName,
+                            'to_company_name':this.toCompanyName,
+                            'to_lat':this.toLat,
+                            'to_lng':this.toLng,
+                            'to_address_name':this.toAddressName,
+                            'to_address_id':this.toAddressId,
+                            'to_zip_code':this.toZipCode,
+                            'pack':this.data,
+                            'from_date':this.fromDate,
+                            'to_date':this.toDate,
+                            'note':this.note,
+
+
                         }
                     ).then((res) => {
 
@@ -498,7 +505,6 @@
             addRow(){
                 this.data.push({
                     'id': Math.floor(Math.random() * Number(new Date())),
-                    'package_name':'',
                     'package_quantity':1,
                     'package_width':1,
                     'package_height':1,
@@ -578,14 +584,20 @@
                     return;
                 }
             },
-            getFromAddressData: function (addressData) {
+            getFromAddressData: function (addressData, placeResultData, id) {
+                console.log(placeResultData)
                 this.fromLat = addressData.geometry.location.lat();
                 this.toLat = addressData.geometry.location.lng();
+                this.fromAddressName = addressData.formatted_address;
+                this.fromAddressId = addressData.place_id
 
             },
             getToAddressData: function (addressData) {
+
                 this.latTo = addressData.geometry.location.lat();
                 this.lngTo = addressData.geometry.location.lng();
+                this.toAddressName = addressData.formatted_address;
+                this.toAddressId = addressData.place_id
             },
 
         }
