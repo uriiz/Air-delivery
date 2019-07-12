@@ -3,7 +3,7 @@
         <div class="triancle"></div>
         <div class="form-title">
            <div class="title">
-               <img src="/images/profile_icon.png">
+               <img style="width:30px" src="/images/user.svg">
               <div> From:</div>
            </div>
             <div>
@@ -80,7 +80,7 @@
         </div>
         <div class="form-title">
             <div class="title">
-                <img src="/images/profile_icon.png">
+                <img style="width:30px" src="/images/user2.svg">
                 <div> To:</div>
             </div>
             <div>
@@ -149,7 +149,7 @@
 
         <div class="form-title">
             <div class="title">
-                <img src="/images/profile_icon.png">
+                <img style="width:30px" src="/images/tracking.svg">
                 <div> Shipment Information:</div>
             </div>
             <div>
@@ -205,6 +205,7 @@
                         <div class="range-tab">
                             <b-numberinput v-model="props.row.package_height" min="0">
                             </b-numberinput>
+                            
                         </div>
                     </b-table-column>
 
@@ -251,7 +252,7 @@
 
         <div class="form-title">
             <div class="title">
-                <img src="/images/profile_icon.png">
+                <img style="width: 30px" src="/images/calendar.svg">
                 <div> Pick Up Dates:</div>
             </div>
             <div>
@@ -283,7 +284,7 @@
 
         <div class="form-title">
             <div class="title">
-                <img src="/images/profile_icon.png">
+                <img style="width:30px;" src="/images/notepad.svg">
                 <div> Notes:</div>
             </div>
             <div>
@@ -291,8 +292,8 @@
             </div>
         </div>
         <section>
-            <b-field label="Notes"
-                     >
+            <b-field label="Notes">
+
                 <b-input maxlength="600" type="textarea"></b-input>
             </b-field>
         </section>
@@ -427,16 +428,16 @@
                         '/save-offer',
                         {
                             'submitAction':this.submitAction,
-                            'name':this.name,
-                            'password':this.password,
-                            'password_confirmation':this.password,
-                            'remember':this.remember,
-                            'job_title':this.jobTitle,
-                            'company_name':this.companyName,
-                            'lat':this.lat,
-                            'lng':this.lng,
-                            'address':this.address,
-                            'zip_code':this.zipCode,
+                            'from_name':this.name,
+                            'from_company_name':this.password,
+                            'from_lat':this.password,
+                            'from_lng':this.remember,
+                            'from_zip_code':this.zipCode,
+                            'to_name':this.jobTitle,
+                            'to_company_name':this.companyName,
+                            'to_lat':this.lat,
+                            'to_lng':this.lng,
+                            'to_zip_code':this.address,
                             'phone':this.phone,
                             'confirm_term':this.terms,
                             'confirm_mail':this.termsMail,

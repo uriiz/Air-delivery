@@ -2017,6 +2017,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var today = new Date();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2122,16 +2123,16 @@ var today = new Date();
       if (this.validate()) {
         window.axios.post('/save-offer', {
           'submitAction': this.submitAction,
-          'name': this.name,
-          'password': this.password,
-          'password_confirmation': this.password,
-          'remember': this.remember,
-          'job_title': this.jobTitle,
-          'company_name': this.companyName,
-          'lat': this.lat,
-          'lng': this.lng,
-          'address': this.address,
-          'zip_code': this.zipCode,
+          'from_name': this.name,
+          'from_company_name': this.password,
+          'from_lat': this.password,
+          'from_lng': this.remember,
+          'from_zip_code': this.zipCode,
+          'to_name': this.jobTitle,
+          'to_company_name': this.companyName,
+          'to_lat': this.lat,
+          'to_lng': this.lng,
+          'to_zip_code': this.address,
           'phone': this.phone,
           'confirm_term': this.terms,
           'confirm_mail': this.termsMail
@@ -53739,7 +53740,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "title" }, [
-      _c("img", { attrs: { src: "/images/profile_icon.png" } }),
+      _c("img", {
+        staticStyle: { width: "30px" },
+        attrs: { src: "/images/user.svg" }
+      }),
       _vm._v(" "),
       _c("div", [_vm._v(" From:")])
     ])
@@ -53758,7 +53762,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-title" }, [
       _c("div", { staticClass: "title" }, [
-        _c("img", { attrs: { src: "/images/profile_icon.png" } }),
+        _c("img", {
+          staticStyle: { width: "30px" },
+          attrs: { src: "/images/user2.svg" }
+        }),
         _vm._v(" "),
         _c("div", [_vm._v(" To:")])
       ]),
@@ -53780,7 +53787,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-title" }, [
       _c("div", { staticClass: "title" }, [
-        _c("img", { attrs: { src: "/images/profile_icon.png" } }),
+        _c("img", {
+          staticStyle: { width: "30px" },
+          attrs: { src: "/images/tracking.svg" }
+        }),
         _vm._v(" "),
         _c("div", [_vm._v(" Shipment Information:")])
       ]),
@@ -53804,7 +53814,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-title" }, [
       _c("div", { staticClass: "title" }, [
-        _c("img", { attrs: { src: "/images/profile_icon.png" } }),
+        _c("img", {
+          staticStyle: { width: "30px" },
+          attrs: { src: "/images/calendar.svg" }
+        }),
         _vm._v(" "),
         _c("div", [_vm._v(" Pick Up Dates:")])
       ]),
@@ -53818,7 +53831,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-title" }, [
       _c("div", { staticClass: "title" }, [
-        _c("img", { attrs: { src: "/images/profile_icon.png" } }),
+        _c("img", {
+          staticStyle: { width: "30px" },
+          attrs: { src: "/images/notepad.svg" }
+        }),
         _vm._v(" "),
         _c("div", [_vm._v(" Notes:")])
       ]),
