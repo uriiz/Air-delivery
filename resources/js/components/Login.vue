@@ -61,7 +61,7 @@
                     }
                 ).then((res) => {
                     this.loader = false;
-                    window.location = "/";
+                    window.location = "/dashboard";
                 }).catch((res) => {
                     this.loader = false;
                     this.errorLogin = 'The given data was invalid';

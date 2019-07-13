@@ -1,5 +1,6 @@
 <template>
 <div>
+    <header-top></header-top>
     <div class="container">
         <welcome></welcome>
         <main-form></main-form>

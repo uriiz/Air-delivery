@@ -31,9 +31,9 @@ class OfferController extends Controller
             return;
         }
 
-        $offerId = '3223';
         $offer = Offer::create([
             'user_id'=>Auth::id(),
+            'submit_action'=>$request->submit_action,
             'from_name'=>$request->from_name,
             'from_company_name'=>$request->from_company_name,
             'to_company_name'=>$request->to_company_name,
@@ -55,9 +55,9 @@ class OfferController extends Controller
             'to_country_code'=>$request->to_country_code,
             'from_country_code'=>$request->from_country_code,
             'note'=>$request->note,
-            'order_id'=>$offerId,
+            'order_id'=>'111',
         ]);
-        return $request->pack;
+
         foreach ($request->pack as $p){
             Package::create([
                 'user_id'=>Auth::id(),
@@ -67,8 +67,12 @@ class OfferController extends Controller
                 'package_height'=>$p['package_height'],
                 'package_length'=>$p['package_length'],
                 'package_weight'=>$p['package_weight'],
-                'package_type'=>'saas',
+                'package_type'=>$p['package_type'],
             ]);
+        }
+
+        if($request->submit_action){
+
         }
 
         return $offer;

@@ -270,7 +270,7 @@
                     }
                 ).then((res) => {
                     this.loader = false;
-                    window.location = "/";
+                    window.location = "/dashboard/add-new";
                 }).catch((res) => {
                     this.loader = false;
                     this.errorLogin = 'The email has already been taken.';

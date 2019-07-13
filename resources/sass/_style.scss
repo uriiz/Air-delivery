@@ -389,3 +389,220 @@ body{
     display: flex;
   }
 }
+.main-dashboard{
+  min-height: calc(100vh - 0px);
+}
+.head-dash{
+  position: fixed;
+  top:0;
+  left:300px;
+  width:calc(100% - 300px);
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dashboard-sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #1d2d3a;
+  overflow-y: auto;
+  height: 100%;
+  width: 300px;
+  z-index: 801;
+}
+.main-dashboard{
+  padding-top: 100px;
+  padding-left: 300px;
+}
+.user-profile{
+  text-align: center;
+  h2{
+    font-weight: 300;
+    font-size: 20px;
+    color: #96bb01;
+    line-height: 23px;
+    text-align: center;
+  }
+  p{
+    color: #ffffff;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    font-size: 16px;
+  }
+  a{
+    color: #ffffff;
+    font-size: 16px;
+    padding-top: 4px;
+    &:hover{
+      color: #96bb01
+    }
+  }
+  .dash-log-out{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.dashboard-title{
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.user_img{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 18px;
+
+}
+.dashboard-sidebar{
+
+  h3{
+    color: #99b3c8;
+    font-weight: 300;
+    text-align: center;
+    font-size: 22px;
+  }
+  nav{
+    margin-top: 30px;
+    ul{
+      li{
+        a{
+          border-bottom: 1px solid #2a4157;
+          padding: 10px 30px 10px 30px;
+          display: flex;
+          align-items: center;
+          color:#fff;
+          transition: 0.5s ease all;
+          &:hover{
+            color: #96bb01
+          }
+          img{
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+header .top_nav .action a {
+  color: #ff7800;
+  font-size: 16px;
+  vertical-align: middle;
+  margin-left: 14px;
+
+}
+header .top_nav .action {
+
+  vertical-align: middle;
+  padding-top: 7px;
+
+  position: relative;
+  padding-bottom: 11px;
+  display: flex;
+  align-items: center;
+}
+.head-dash{
+  background: #111b23;
+  border-bottom: 4px solid #8fb301;
+  padding: 13px 25px;
+}
+header .top_nav .action ul {
+  position: absolute;
+  top: 100%;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s ease all;
+
+}
+header .top_nav .action:hover{
+  &:hover{
+    ul{
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+header .top_nav .action ul li {
+  min-width: 226px;
+  min-height: 35px;
+  background: #ff7800;
+  color: #fff;
+  margin-top: 9px;
+  border-radius: 5px;
+  position: relative;
+  -o-transition: 0s ease all;
+  -webkit-transition: 0s ease all;
+  -moz-transition: 0s ease all;
+  transition: 0s ease all;
+  box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
+  -o-transform: translateY(-15px);
+  -webkit-transform: translateY(-15px);
+  -moz-transform: translateY(-15px);
+  transform: translateY(-15px);
+}
+header .top_nav .action ul li a {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 12px 5px;
+  margin: 0;
+}
+.brand_fidbek{
+  .fidbek{
+    a{
+      font-size: 20px;
+      line-height: 27px;
+      color: #fff;
+      background: #8eb33e;
+      border-radius: 55px;
+      text-align: center;
+      vertical-align: text-bottom;
+      padding: 0 10px;
+      cursor: pointer;
+      border: 0;
+      margin: 0;
+      outline: 0;
+      box-sizing: border-box;
+      text-rendering: auto;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0;
+      text-shadow: none;
+      display: block;
+    }
+  }
+}
+.brand_fidbek{
+  display: flex;
+  align-items: center;
+  .brand {
+    color: #fff;
+    font-size: 28px;
+    position: relative;
+    margin-left: 30px;
+    &:after{
+      content: "";
+      display: block;
+      background: #273846;
+      width: 1px;
+      height: 50px;
+      position: absolute;
+      left: -13px;
+      top: -4px;
+    }
+  }
+}
+.main-dashborad-in{
+  padding: 50px;
+}
+.main-dashboard{
+  .main-form{
+    margin: 0 auto;
+    max-width: 85%;
+  }
+}

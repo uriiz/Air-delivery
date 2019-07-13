@@ -216,23 +216,14 @@
                             </b-numberinput>
                         </div>
                     </b-table-column>
-                    <b-table-column width="100" field="package_type" label="Type">
-                        <b-field>
-                            <b-select value="1" placeholder="Type" v-model="props.row.package_type">
-                                <option
-                                        v-for="option in props.row.package_type"
-                                        :value="option.id"
-                                        :key="option.id">
-                                    {{ option.name }}
-
-                                </option>
-                                <option selected value="1">{{i18n.choose}}</option>
-                                <option value="import">{{i18n.import}}</option>
-                                <option value="export">{{i18n.export}}</option>
-                                <option value="loaded">{{i18n.loaded}}</option>
-                                <option value="cargo_in_transit">{{i18n.in_transit}}</option>
-                            </b-select>
-                        </b-field>
+                    <b-table-column width="200" field="package_type" label="Type">
+                        <select class="input" v-model="props.row.package_type">
+                            <option value="General Cargo">General Cargo</option>
+                            <option value="Cooling">Cooling</option>
+                            <option value="Radioactive">Radioactive</option>
+                            <option value="Food">Food</option>
+                            <option value="Medicines">Medicines</option>
+                        </select>
                     </b-table-column>
                 </template>
 
@@ -435,7 +426,7 @@
                 }
 
                 if(this.validate()){
-                    console.log(this.data)
+
                     window.axios.post(
                         '/save-offer',
                         {
@@ -465,7 +456,7 @@
                             'pack_type':this.packType,
                         }
                     ).then((res) => {
-
+                        window.location.href = "/dashboard";
                     }).catch((res) => {
 
                     });
@@ -525,13 +516,9 @@
                     'package_height':1,
                     'package_length':1,
                     'package_weight':1,
-                    'package_type':[
-                        {"id":1,"name":'GENERAL CARGO'},
-                        {"id":2,"name":'Cooling'},
-                        {"id":3,"name":'Radioactive'},
-                        {"id":4,"name":'Food'},
-                        {"id":5,"name":'Medicines'},
-                    ],
+                    'package_type':'General Cargo',
+
+
                 });
             },
             filterDateFrom(){
