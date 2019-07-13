@@ -2013,6 +2013,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var today = new Date();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2027,6 +2032,10 @@ var today = new Date();
       fromLng: 0,
       toLat: 0,
       toLng: 0,
+      fromCountryName: '',
+      fromCountryCode: '',
+      toCountryName: '',
+      toCountryCode: '',
       fromAddressName: '',
       toAddressName: '',
       fromAddressId: '',
@@ -2036,6 +2045,7 @@ var today = new Date();
       minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
       maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
       fromFullName: '',
+      packType: '',
       fromCompanyName: '',
       fromSelectedAddress: '',
       fromZipCode: '',
@@ -2114,6 +2124,7 @@ var today = new Date();
         this.loaderSub = true;
         this.submitAction = true;
       } else {
+        this.submitAction = false;
         this.loaderDraft = true;
       }
 
@@ -2138,7 +2149,12 @@ var today = new Date();
           'pack': this.data,
           'from_date': this.fromDate,
           'to_date': this.toDate,
-          'note': this.note
+          'note': this.notes,
+          'to_country_name': this.toCountryName,
+          'to_country_code': this.toCountryCode,
+          'from_country_name': this.fromCountryName,
+          'from_country_code': this.fromCountryCode,
+          'pack_type': this.packType
         }).then(function (res) {})["catch"](function (res) {});
         this.loaderSub = false;
         this.loaderDraft = false;
@@ -2264,18 +2280,41 @@ var today = new Date();
         return;
       }
     },
-    getFromAddressData: function getFromAddressData(addressData, placeResultData, id) {
-      console.log(placeResultData);
+    getFromAddressData: function getFromAddressData(addressData) {
       this.fromLat = addressData.geometry.location.lat();
-      this.toLat = addressData.geometry.location.lng();
+      this.fromLng = addressData.geometry.location.lng();
       this.fromAddressName = addressData.formatted_address;
       this.fromAddressId = addressData.place_id;
+      var contryName = '';
+      var contryCode = '';
+
+      for (var i = 0; i < addressData.address_components.length; i++) {
+        if (addressData.address_components[i].types.includes("country")) {
+          contryName = addressData.address_components[i].long_name;
+          contryCode = addressData.address_components[i].short_name;
+        }
+      }
+
+      this.fromCountryName = contryName;
+      this.fromCountryCode = contryCode;
     },
     getToAddressData: function getToAddressData(addressData) {
-      this.latTo = addressData.geometry.location.lat();
-      this.lngTo = addressData.geometry.location.lng();
+      this.toLat = addressData.geometry.location.lat();
+      this.toLng = addressData.geometry.location.lng();
       this.toAddressName = addressData.formatted_address;
       this.toAddressId = addressData.place_id;
+      var contryName = '';
+      var contryCode = '';
+
+      for (var i = 0; i < addressData.address_components.length; i++) {
+        if (addressData.address_components[i].types.includes("country")) {
+          contryName = addressData.address_components[i].long_name;
+          contryCode = addressData.address_components[i].short_name;
+        }
+      }
+
+      this.toCountryName = contryName;
+      this.toCountryCode = contryCode;
     }
   }
 });
@@ -53537,24 +53576,59 @@ var render = function() {
                         [
                           _c(
                             "b-select",
-                            { attrs: { placeholder: "Type", value: "1" } },
-                            _vm._l(props.row.package_type, function(option) {
-                              return _c(
-                                "option",
-                                {
-                                  key: option.id,
-                                  domProps: { value: option.id }
+                            {
+                              attrs: { value: "1", placeholder: "Type" },
+                              model: {
+                                value: props.row.package_type,
+                                callback: function($$v) {
+                                  _vm.$set(props.row, "package_type", $$v)
                                 },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(option.name) +
-                                      "\n                            "
-                                  )
-                                ]
+                                expression: "props.row.package_type"
+                              }
+                            },
+                            [
+                              _vm._l(props.row.package_type, function(option) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: option.id,
+                                    domProps: { value: option.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(option.name) +
+                                        "\n\n                            "
+                                    )
+                                  ]
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { selected: "", value: "1" } },
+                                [_vm._v(_vm._s(_vm.i18n.choose))]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "import" } }, [
+                                _vm._v(_vm._s(_vm.i18n.import))
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "export" } }, [
+                                _vm._v(_vm._s(_vm.i18n.export))
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "loaded" } }, [
+                                _vm._v(_vm._s(_vm.i18n.loaded))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "cargo_in_transit" } },
+                                [_vm._v(_vm._s(_vm.i18n.in_transit))]
                               )
-                            }),
-                            0
+                            ],
+                            2
                           )
                         ],
                         1

@@ -23,6 +23,6 @@ Route::post('/get-user', 'HomeController@getUser');
 
 Route::group(['middleware' => 'auth'],function() {
 
-    Route::post('/save-offer', 'OfferController@getUser');
+    Route::post('/save-offer', 'OfferController@create');
 
 });

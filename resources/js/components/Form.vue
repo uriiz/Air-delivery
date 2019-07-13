@@ -218,14 +218,19 @@
                     </b-table-column>
                     <b-table-column width="100" field="package_type" label="Type">
                         <b-field>
-                            <b-select placeholder="Type" value="1">
+                            <b-select value="1" placeholder="Type" v-model="props.row.package_type">
                                 <option
                                         v-for="option in props.row.package_type"
                                         :value="option.id"
                                         :key="option.id">
                                     {{ option.name }}
-                                </option>
 
+                                </option>
+                                <option selected value="1">{{i18n.choose}}</option>
+                                <option value="import">{{i18n.import}}</option>
+                                <option value="export">{{i18n.export}}</option>
+                                <option value="loaded">{{i18n.loaded}}</option>
+                                <option value="cargo_in_transit">{{i18n.in_transit}}</option>
                             </b-select>
                         </b-field>
                     </b-table-column>
@@ -330,6 +335,10 @@
                 fromLng:0,
                 toLat:0,
                 toLng:0,
+                fromCountryName:'',
+                fromCountryCode:'',
+                toCountryName:'',
+                toCountryCode:'',
                 fromAddressName:'',
                 toAddressName:'',
                 fromAddressId:'',
@@ -339,6 +348,7 @@
                 minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() ),
                 maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
                 fromFullName: '',
+                packType: '',
                 fromCompanyName: '',
                 fromSelectedAddress: '',
                 fromZipCode: '',
@@ -415,10 +425,12 @@
             },
 
             submit(type){
+
                 if(type == 'submit'){
                     this.loaderSub = true;
                     this.submitAction = true
                 }else{
+                    this.submitAction = false
                     this.loaderDraft = true;
                 }
 
@@ -445,9 +457,12 @@
                             'pack':this.data,
                             'from_date':this.fromDate,
                             'to_date':this.toDate,
-                            'note':this.note,
-
-
+                            'note':this.notes,
+                            'to_country_name':this.toCountryName,
+                            'to_country_code':this.toCountryCode,
+                            'from_country_name':this.fromCountryName,
+                            'from_country_code':this.fromCountryCode,
+                            'pack_type':this.packType,
                         }
                     ).then((res) => {
 
@@ -584,20 +599,47 @@
                     return;
                 }
             },
-            getFromAddressData: function (addressData, placeResultData, id) {
-                console.log(placeResultData)
+            getFromAddressData: function (addressData) {
+
                 this.fromLat = addressData.geometry.location.lat();
-                this.toLat = addressData.geometry.location.lng();
+                this.fromLng = addressData.geometry.location.lng();
                 this.fromAddressName = addressData.formatted_address;
-                this.fromAddressId = addressData.place_id
+                this.fromAddressId = addressData.place_id;
+                let contryName = '';
+                let contryCode = '';
+                for (let i = 0; i < addressData.address_components.length ; i++){
+
+                    if(addressData.address_components[i].types.includes("country")){
+                        contryName = addressData.address_components[i].long_name;
+                        contryCode = addressData.address_components[i].short_name;
+                    }
+
+                }
+                this.fromCountryName = contryName;
+                this.fromCountryCode = contryCode;
+
 
             },
             getToAddressData: function (addressData) {
 
-                this.latTo = addressData.geometry.location.lat();
-                this.lngTo = addressData.geometry.location.lng();
+                this.toLat = addressData.geometry.location.lat();
+                this.toLng = addressData.geometry.location.lng();
+
                 this.toAddressName = addressData.formatted_address;
-                this.toAddressId = addressData.place_id
+                this.toAddressId = addressData.place_id;
+                let contryName = '';
+                let contryCode = '';
+                for (let i = 0; i < addressData.address_components.length ; i++){
+
+                    if(addressData.address_components[i].types.includes("country")){
+                        contryName = addressData.address_components[i].long_name;
+                        contryCode = addressData.address_components[i].short_name;
+                    }
+
+                }
+                this.toCountryName = contryName;
+                this.toCountryCode = contryCode;
+
             },
 
         }

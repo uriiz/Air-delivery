@@ -27,6 +27,10 @@ class Offer extends Model
         'to_date',
         'note',
         'user_id',
-
+        'to_country_name',
+        'to_country_code',
+        'from_country_name',
+        'from_country_code',
+        'order_id',
     ];
 }
