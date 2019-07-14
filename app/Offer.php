@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
+
+
     protected $fillable = [
         'id',
         'submit_action',
@@ -33,4 +36,28 @@ class Offer extends Model
         'from_country_code',
         'order_id',
     ];
+
+    public static function setPrettyTime($time)
+    {
+        if(!$time){
+            return '';
+        }
+        return Carbon::parse($time)->format('m/d/Y H:i');
+    }
+
+    public static function setPrettyTimeNoHour($time)
+    {
+        if(!$time){
+            return '';
+        }
+        return Carbon::parse($time)->format('m/d/Y');
+    }
+
+    public static function getPackagesByOfferId($id)
+    {
+        if(!$id){
+            return '';
+        }
+        return Package::where('order_id',$id)->get();
+    }
 }

@@ -17,25 +17,26 @@
             <ul>
                 <li>
                     <router-link :to="{ name: 'dashboard' }">
-                        <img src="https://my.tranzila.com/assets/images/master/icon_1.png" alt="" class="mCS_img_loaded">
+                        <img src="/images/icon_1.png" alt="" class="mCS_img_loaded">
                         <div>Main</div>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'addOffer' }">
-                        <img src="https://my.tranzila.com/assets/images/master/icon_1.png" alt="" class="mCS_img_loaded">
+                        <img src="/images/icon_2.png" alt="" class="mCS_img_loaded">
                         <div>Send New Offer</div>
                     </router-link>
                 </li>
                 <li>
-                    <a href="">
-                        <img src="https://my.tranzila.com/assets/images/master/icon_1.png" alt="" class="mCS_img_loaded">
-                        <div>Main</div>
-                    </a>
+                    <router-link :to="{ name: 'myOffer' }">
+
+                        <img src="/images/secure5.png" alt="" class="mCS_img_loaded">
+                        <div>My Offers</div>
+                    </router-link>
                 </li>
                 <li>
                     <a href="">
-                        <img src="https://my.tranzila.com/assets/images/master/icon_1.png" alt="" class="mCS_img_loaded">
+                        <img src="/images/secure5.png" alt="" class="mCS_img_loaded">
                         <div>Main</div>
                     </a>
                 </li>

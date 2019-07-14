@@ -54,6 +54,7 @@
                             required
                             ref="address"
                             autocomplete="off"
+                            lang="EN"
                             class="input"
                             :class="{ 'is-danger': hasErrorFromLat }"
                             placeholder="Full Address"

@@ -95,9 +95,20 @@ class OfferController extends Controller
      * @param  \App\Offer  $offer
      * @return \Illuminate\Http\Response
      */
-    public function show(Offer $offer)
+    public function show(Request $request,Offer $offer)
     {
-        //
+        if(! Auth::id()){
+            return ;
+        }
+
+        $offers =  Offer::where('user_id',Auth::id())->orderBy('created_at', 'DESC')->get();
+        foreach ($offers as $o){
+            $o->pretty_time = Offer::setPrettyTime($o->created_at);
+            $o->from_date = Offer::setPrettyTimeNoHour($o->from_date);
+            $o->to_date = Offer::setPrettyTimeNoHour($o->to_date);
+            $o->packages = Offer::getPackagesByOfferId($o->id);
+        }
+        return $offers;
     }
 
     /**

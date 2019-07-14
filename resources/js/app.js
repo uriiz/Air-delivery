@@ -16,7 +16,7 @@ Vue.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyB7bSuHoE_CtSITfN1gUUPNULV704buZ7o',
         libraries: 'places',
-
+        language:'EN'
     },
 })
 Vue.use(Buefy)
@@ -26,8 +26,11 @@ import Hello from './views/Hello'
 import Home from './views/Home'
 import Dashboard from './views/Dashboard'
 import DashboardAddNew from './views/dashboard/DashboardAddNew'
+import DashboardOffers from './views/dashboard/DashboardOffers'
 import HeaderTop from './components/HeaderTopMenu'
 import Sidebar from './components/Sidebar'
+import myOffers from './components/MyOffers'
+import ExtraData from './components/ExtraData'
 import HeaderDashboard from './components/HeaderDasboard'
 import Login from './components/Login'
 import Form from './components/Form'
@@ -35,6 +38,8 @@ import Welcome from './components/Welcome'
 
 
 Vue.component('header-top', HeaderTop);
+Vue.component('my-offers', myOffers);
+Vue.component('table-extra-data-row', ExtraData);
 Vue.component('sidebar', Sidebar);
 Vue.component('header-dashboard', HeaderDashboard);
 Vue.component('main-form', Form);
@@ -80,6 +85,14 @@ const router = new VueRouter({
             component: DashboardAddNew,
             beforeEnter: authMiddleware
         },
+
+        {
+            path: '/dashboard/my-offers',
+            name: 'myOffer',
+            component: DashboardOffers,
+            beforeEnter: authMiddleware
+        },
+
     ],
 });
 
