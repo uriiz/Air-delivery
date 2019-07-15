@@ -201,7 +201,7 @@
                         <div class="range-tab">
                             <b-numberinput v-model="props.row.package_height" min="0">
                             </b-numberinput>
-                            
+
                         </div>
                     </b-table-column>
 
@@ -457,7 +457,7 @@
                             'pack_type':this.packType,
                         }
                     ).then((res) => {
-                        window.location.href = "/dashboard";
+                        window.location.href = "/dashboard/my-offers";
                     }).catch((res) => {
 
                     });

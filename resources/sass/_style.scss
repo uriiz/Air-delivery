@@ -700,6 +700,7 @@ header .top_nav .action ul li a {
   text-align:center;
 }
 .rotating{
+    padding: 20px 0;
   -webkit-animation: rotating 2s linear infinite;
 }
 @-webkit-keyframes rotating {
@@ -740,4 +741,39 @@ header .top_nav .action ul li a {
       -webkit-appearance: menulist;
     }
   }
+}
+@media screen and (max-width: 1700px) {
+    .dashboard-sidebar{
+        width:250px;
+    }
+    .user-profile p{
+        padding-right: 20px;
+        padding-left: 20px;
+        font-size: 12px;
+    }
+    .dashboard-sidebar nav ul li a{
+        font-size: 13px;
+    }
+    .head-dash{
+        width: calc(100% - 250px);
+    }
+    .main-dashboard{
+        padding-left: 250px;
+    }
+    .head-dash{
+        left: 250px;
+        padding: 0 25px;
+    }
+    .main-dashborad-in{
+        padding-top: 10px;
+    }
+    .main-dashboard .main-form{
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    body {
+       display: none;
+    }
 }
