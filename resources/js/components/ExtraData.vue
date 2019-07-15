@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrap-ul-map">
         <ul>
             <li>
                 <strong>From:</strong> {{from_address_name}}
@@ -104,11 +104,12 @@
                     </div>
                 </gmap-info-window>
             </GmapMap>
+            <div v-if="!submit_action"
+                 class="make-draft-to-post">
+                Send Offer
+            </div>
         </div>
-        <div v-if="!submit_action"
-             class="make-draft-to-post">
-            Send Offer
-        </div>
+
     </div>
 </template>
 

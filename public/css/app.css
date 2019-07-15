@@ -826,6 +826,71 @@ header .top_nav .action ul li a {
   line-height: 30px;
 }
 
+.wrap-ul-map {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+
+.loader1 {
+  text-align: center;
+}
+
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.filter-inputs {
+  display: -webkit-box;
+  display: flex;
+}
+
+.filter-inputs .wrap-input {
+  margin-right: 20px;
+}
+
+.filter-inputs .wrap-input input,
+.filter-inputs .wrap-input select {
+  width: 100%;
+  background-color: transparent;
+  display: block;
+  box-sizing: border-box;
+  border-radius: 20px;
+  height: 2.4375rem;
+  margin: 0 0 1rem;
+  padding: 0.5rem;
+  border: 1px solid #cacaca;
+  font-size: 15px;
+  font-weight: 400;
+  color: #0a0a0a;
+  -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
+  -webkit-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.filter-inputs .wrap-input input:focus,
+.filter-inputs .wrap-input select:focus {
+  outline: none;
+}
+
+.filter-inputs .wrap-input select {
+  -webkit-appearance: menulist;
+}
+
 nav.navbar.navbar-expand-md.navbar-light.bg-white.shadow-sm {
   display: none;
 }

@@ -2,11 +2,34 @@
     <div>
 
         <div class="main-table">
+            <div class="filter-inputs">
+
+                <div class="wrap-input">
+                    <b-input icon="account" placeholder="From Name" v-model="fromNameSearch"></b-input>
+                </div>
+                <div class="wrap-input">
+                    <b-input icon="account" placeholder="To Name" v-model="toNameSearch"></b-input>
+                </div>
+
+                <div class="wrap-input">
+                    <select v-model="searchDraft" class="input">
+                        <option selected value="-1">Status</option>
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+
+            </div>
             <div class="main-table-title">
                 <h3>Orders History</h3>
             </div>
             <div class="main-table-box">
+
+                <div class="loader1" v-if="loader">
+                    <img src="/images/loader1.png" class="rotating" alt="">
+                </div>
                 <b-table
+                        v-if="!loader"
                         :data="data"
                         detail-key="id"
                         ref="table"
@@ -46,7 +69,7 @@
 
                         <b-table-column label="Status">
 
-                            <div v-if="props.row.submit_action">
+                            <div v-if="props.row.submit_action == 'published'">
                                 <span class="tag is-success">
                                     Submitted
                                 </span>
@@ -92,6 +115,7 @@
 
 
 <script>
+    const today = new Date()
     export default {
 
         mounted() {
@@ -116,9 +140,9 @@
 
                     }
                 ).then((res) => {
-                    this.data = res.data;
-                    console.log(this.data)
-                    console.log(this.data.packages)
+                    this.offers = res.data;
+                    console.log(this.offers)
+                    this.loader = false;
                 }).catch((res) => {
 
                 });
@@ -129,12 +153,38 @@
             return {
                 currentUserId:$("#details-helper").data('id'),
                 currentUserName:$("#details-helper").data('name'),
-                data: [],
+                offers:[],
+                fromNameSearch:'',
+                toNameSearch:'',
+                searchDraft:'-1',
+                fromCreateSearch:new Date(today.getFullYear(), today.getMonth(), today.getDate() ),
+                toCreateSearch:new Date(today.getFullYear(), today.getMonth(), today.getDate() ),
                 isPaginated: true,
+                loader: true,
                 perPage: 12,
                 openedRows:[],
             }
         },
+        computed:{
+            data(){
+
+            if(this.searchDraft == '-1')
+                {
+                    return this.offers.filter((offer) => {
+                        return offer.from_name.toLowerCase().indexOf(this.fromNameSearch.toLowerCase()) !== -1
+                            && offer.to_name.toLowerCase().indexOf(this.toNameSearch.toLowerCase()) !== -1
+                    });
+                }else{
+
+                return this.offers.filter((offer) => {
+                    return offer.from_name.toLowerCase().indexOf(this.fromNameSearch.toLowerCase()) !== -1
+                        && offer.to_name.toLowerCase().indexOf(this.toNameSearch.toLowerCase()) !== -1
+                        && offer.submit_action == this.searchDraft
+                });
+
+              }
+            }
+        }
     }
 
 </script>

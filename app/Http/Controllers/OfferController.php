@@ -33,7 +33,7 @@ class OfferController extends Controller
 
         $offer = Offer::create([
             'user_id'=>Auth::id(),
-            'submit_action'=>$request->submit_action,
+            'submit_action'=>$request->submit_action ? 'published' : 'draft',
             'from_name'=>$request->from_name,
             'from_company_name'=>$request->from_company_name,
             'to_company_name'=>$request->to_company_name,
@@ -107,6 +107,7 @@ class OfferController extends Controller
             $o->from_date = Offer::setPrettyTimeNoHour($o->from_date);
             $o->to_date = Offer::setPrettyTimeNoHour($o->to_date);
             $o->packages = Offer::getPackagesByOfferId($o->id);
+
         }
         return $offers;
     }

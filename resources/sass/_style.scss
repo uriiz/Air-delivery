@@ -692,3 +692,52 @@ header .top_nav .action ul li a {
     }
   }
 }
+.wrap-ul-map{
+  display: flex;
+  justify-content: space-between;
+}
+.loader1{
+  text-align:center;
+}
+.rotating{
+  -webkit-animation: rotating 2s linear infinite;
+}
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+.filter-inputs{
+  display: flex;
+
+  .wrap-input{
+    margin-right: 20px;
+    input,select{
+      width: 100%;
+      background-color:transparent;
+      display: block;
+      box-sizing: border-box;
+      border-radius: 20px;
+      height: 2.4375rem;
+      margin: 0 0 1rem;
+      padding: .5rem;
+      border: 1px solid #cacaca;
+      font-size: 15px;
+      font-weight: 400;
+      color: #0a0a0a;
+      -webkit-transition: border-color .25s ease-in-out,-webkit-box-shadow .5s;
+      transition: box-shadow .5s,border-color .25s ease-in-out;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      &:focus{
+        outline: none;
+      }
+    }
+    select{
+      -webkit-appearance: menulist;
+    }
+  }
+}

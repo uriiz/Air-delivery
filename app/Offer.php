@@ -60,4 +60,13 @@ class Offer extends Model
         }
         return Package::where('order_id',$id)->get();
     }
+    public static function translateStatus($status)
+    {
+        if(!$status){
+            return 'draft';
+        }
+        return 'published';
+    }
+
+
 }

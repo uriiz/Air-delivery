@@ -1812,6 +1812,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   methods: {
@@ -2934,6 +2935,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var today = new Date();
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getUserOffers();
@@ -2954,9 +2979,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       window.axios.post('/get-private-offers', {}).then(function (res) {
-        _this2.data = res.data;
-        console.log(_this2.data);
-        console.log(_this2.data.packages);
+        _this2.offers = res.data;
+        console.log(_this2.offers);
+        _this2.loader = false;
       })["catch"](function (res) {});
     }
   },
@@ -2964,11 +2989,32 @@ __webpack_require__.r(__webpack_exports__);
     return {
       currentUserId: $("#details-helper").data('id'),
       currentUserName: $("#details-helper").data('name'),
-      data: [],
+      offers: [],
+      fromNameSearch: '',
+      toNameSearch: '',
+      searchDraft: '-1',
+      fromCreateSearch: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+      toCreateSearch: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
       isPaginated: true,
+      loader: true,
       perPage: 12,
       openedRows: []
     };
+  },
+  computed: {
+    data: function data() {
+      var _this3 = this;
+
+      if (this.searchDraft == '-1') {
+        return this.offers.filter(function (offer) {
+          return offer.from_name.toLowerCase().indexOf(_this3.fromNameSearch.toLowerCase()) !== -1 && offer.to_name.toLowerCase().indexOf(_this3.toNameSearch.toLowerCase()) !== -1;
+        });
+      } else {
+        return this.offers.filter(function (offer) {
+          return offer.from_name.toLowerCase().indexOf(_this3.fromNameSearch.toLowerCase()) !== -1 && offer.to_name.toLowerCase().indexOf(_this3.toNameSearch.toLowerCase()) !== -1 && offer.submit_action == _this3.searchDraft;
+        });
+      }
+    }
   }
 });
 
@@ -53581,7 +53627,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "wrap-ul-map" }, [
     _c("ul", [
       _c("li", [
         _c("strong", [_vm._v("From:")]),
@@ -53761,16 +53807,16 @@ var render = function() {
             )
           ],
           2
-        )
+        ),
+        _vm._v(" "),
+        !_vm.submit_action
+          ? _c("div", { staticClass: "make-draft-to-post" }, [
+              _vm._v("\n            Send Offer\n        ")
+            ])
+          : _vm._e()
       ],
       1
-    ),
-    _vm._v(" "),
-    !_vm.submit_action
-      ? _c("div", { staticClass: "make-draft-to-post" }, [
-          _vm._v("\n        Send Offer\n    ")
-        ])
-      : _vm._e()
+    )
   ])
 }
 var staticRenderFns = [
@@ -55338,178 +55384,285 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "main-table" }, [
+      _c("div", { staticClass: "filter-inputs" }, [
+        _c(
+          "div",
+          { staticClass: "wrap-input" },
+          [
+            _c("b-input", {
+              attrs: { icon: "account", placeholder: "From Name" },
+              model: {
+                value: _vm.fromNameSearch,
+                callback: function($$v) {
+                  _vm.fromNameSearch = $$v
+                },
+                expression: "fromNameSearch"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "wrap-input" },
+          [
+            _c("b-input", {
+              attrs: { icon: "account", placeholder: "To Name" },
+              model: {
+                value: _vm.toNameSearch,
+                callback: function($$v) {
+                  _vm.toNameSearch = $$v
+                },
+                expression: "toNameSearch"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "wrap-input" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.searchDraft,
+                  expression: "searchDraft"
+                }
+              ],
+              staticClass: "input",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.searchDraft = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { selected: "", value: "-1" } }, [
+                _vm._v("Status")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "published" } }, [
+                _vm._v("Published")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "draft" } }, [_vm._v("Draft")])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "main-table-box" },
         [
-          _c("b-table", {
-            ref: "table",
-            attrs: {
-              data: _vm.data,
-              "detail-key": "id",
-              paginated: _vm.isPaginated,
-              "per-page": _vm.perPage,
-              openedDetailed: _vm.openedRows,
-              detailed: ""
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(props) {
-                  return [
-                    _c(
-                      "b-table-column",
-                      { attrs: { field: "id", label: "Order ID" } },
-                      [
-                        _c(
-                          "div",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.openRow(props.row)
+          _vm.loader
+            ? _c("div", { staticClass: "loader1" }, [
+                _c("img", {
+                  staticClass: "rotating",
+                  attrs: { src: "/images/loader1.png", alt: "" }
+                })
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.loader
+            ? _c("b-table", {
+                ref: "table",
+                attrs: {
+                  data: _vm.data,
+                  "detail-key": "id",
+                  paginated: _vm.isPaginated,
+                  "per-page": _vm.perPage,
+                  openedDetailed: _vm.openedRows,
+                  detailed: ""
+                },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _c(
+                            "b-table-column",
+                            { attrs: { field: "id", label: "Order ID" } },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openRow(props.row)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            #" +
+                                      _vm._s(props.row.id) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                field: "pretty_time",
+                                label: "Created",
+                                sortable: ""
                               }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            #" +
-                                _vm._s(props.row.id) +
-                                "\n                        "
-                            )
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-table-column",
-                      {
-                        attrs: {
-                          field: "pretty_time",
-                          label: "Created",
-                          sortable: ""
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.pretty_time) +
-                            "\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-table-column",
-                      { attrs: { field: "from_name", label: "From Name" } },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.from_name) +
-                            "\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-table-column",
-                      { attrs: { field: "to_name", label: "To Name" } },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.to_name) +
-                            "\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-table-column",
-                      {
-                        attrs: {
-                          field: "from_date",
-                          label: "From Date",
-                          sortable: ""
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.from_date) +
-                            "\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-table-column",
-                      {
-                        attrs: {
-                          field: "to_date",
-                          label: "To Date",
-                          sortable: ""
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(props.row.to_date) +
-                            "\n                    "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("b-table-column", { attrs: { label: "Status" } }, [
-                      props.row.submit_action
-                        ? _c("div", [
-                            _c("span", { staticClass: "tag is-success" }, [
+                            },
+                            [
                               _vm._v(
-                                "\n                                Submitted\n                            "
+                                "\n                        " +
+                                  _vm._s(props.row.pretty_time) +
+                                  "\n                    "
                               )
-                            ])
-                          ])
-                        : _c("div", [
-                            _c("span", { staticClass: "tag is-warning" }, [
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: { field: "from_name", label: "From Name" }
+                            },
+                            [
                               _vm._v(
-                                "\n                                Draft\n                            "
+                                "\n                        " +
+                                  _vm._s(props.row.from_name) +
+                                  "\n                    "
                               )
-                            ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            { attrs: { field: "to_name", label: "To Name" } },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(props.row.to_name) +
+                                  "\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                field: "from_date",
+                                label: "From Date",
+                                sortable: ""
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(props.row.from_date) +
+                                  "\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                field: "to_date",
+                                label: "To Date",
+                                sortable: ""
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(props.row.to_date) +
+                                  "\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("b-table-column", { attrs: { label: "Status" } }, [
+                            props.row.submit_action == "published"
+                              ? _c("div", [
+                                  _c(
+                                    "span",
+                                    { staticClass: "tag is-success" },
+                                    [
+                                      _vm._v(
+                                        "\n                                Submitted\n                            "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              : _c("div", [
+                                  _c(
+                                    "span",
+                                    { staticClass: "tag is-warning" },
+                                    [
+                                      _vm._v(
+                                        "\n                                Draft\n                            "
+                                      )
+                                    ]
+                                  )
+                                ])
                           ])
-                    ])
-                  ]
-                }
-              },
-              {
-                key: "detail",
-                fn: function(props) {
-                  return [
-                    _c("table-extra-data-row", {
-                      attrs: {
-                        from_address_name: props.row.from_address_name,
-                        from_company_name: props.row.from_company_name,
-                        from_lat: props.row.from_lat,
-                        from_lng: props.row.from_lng,
-                        from_name: props.row.from_name,
-                        from_zip_code: props.row.from_zip_code,
-                        notes: props.row.note,
-                        to_address_name: props.row.to_address_name,
-                        to_company_name: props.row.to_company_name,
-                        to_lat: props.row.to_lat,
-                        to_lng: props.row.to_lng,
-                        to_name: props.row.to_name,
-                        to_zip_code: props.row.to_zip_code,
-                        submit_action: props.row.submit_action,
-                        packages: props.row.packages,
-                        rowId: props.row.id
+                        ]
                       }
-                    })
-                  ]
-                }
-              }
-            ])
-          })
+                    },
+                    {
+                      key: "detail",
+                      fn: function(props) {
+                        return [
+                          _c("table-extra-data-row", {
+                            attrs: {
+                              from_address_name: props.row.from_address_name,
+                              from_company_name: props.row.from_company_name,
+                              from_lat: props.row.from_lat,
+                              from_lng: props.row.from_lng,
+                              from_name: props.row.from_name,
+                              from_zip_code: props.row.from_zip_code,
+                              notes: props.row.note,
+                              to_address_name: props.row.to_address_name,
+                              to_company_name: props.row.to_company_name,
+                              to_lat: props.row.to_lat,
+                              to_lng: props.row.to_lng,
+                              to_name: props.row.to_name,
+                              to_zip_code: props.row.to_zip_code,
+                              submit_action: props.row.submit_action,
+                              packages: props.row.packages,
+                              rowId: props.row.id
+                            }
+                          })
+                        ]
+                      }
+                    }
+                  ],
+                  null,
+                  false,
+                  289658374
+                )
+              })
+            : _vm._e()
         ],
         1
       )
@@ -73937,7 +74090,7 @@ var user = $('#details-helper').data('id');
 var authMiddleware = function authMiddleware(to, from, next) {
   if (!user) {
     next = '/';
-    window.location = "/join";
+    window.location = "/";
   }
 
   return next();
@@ -73962,6 +74115,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
     path: '/dashboard/add-new',
     name: 'addOffer',
     component: _views_dashboard_DashboardAddNew__WEBPACK_IMPORTED_MODULE_10__["default"],
+    beforeEnter: authMiddleware
+  }, {
+    path: '/dashboard/my-offers',
+    name: 'myOffer',
+    component: _views_dashboard_DashboardOffers__WEBPACK_IMPORTED_MODULE_11__["default"],
     beforeEnter: authMiddleware
   }, {
     path: '/dashboard/my-offers',

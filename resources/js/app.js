@@ -52,7 +52,7 @@ var user = $('#details-helper').data('id');
 const authMiddleware = (to, from, next) => {
     if (!user) {
         next = '/';
-        window.location = "/join";
+        window.location = "/";
     }
 
     return next();
@@ -92,6 +92,13 @@ const router = new VueRouter({
             component: DashboardOffers,
             beforeEnter: authMiddleware
         },
+        {
+            path: '/dashboard/my-offers',
+            name: 'myOffer',
+            component: DashboardOffers,
+            beforeEnter: authMiddleware
+        },
+
 
     ],
 });
