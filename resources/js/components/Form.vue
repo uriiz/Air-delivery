@@ -578,12 +578,7 @@
             checkUser(){
 
                 if(!this.currentUserId) {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Oops...',
-                        text: 'You need to be logged in!',
-                        footer: '<a href="#">Not yet registered?</a>'
-                    })
+                    window.location.href = "/?login=1";
                     return;
                 }
             },

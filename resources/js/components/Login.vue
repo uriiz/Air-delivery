@@ -3,6 +3,10 @@
         <div class="modal-card" style="width: auto">
             <header class="modal-card-head">
                 <p class="modal-card-title">Login</p>
+                <div>
+                    <a style="color:#000;text-decoration: underline;display: block" href="/?register=1">Not Register Yet?</a>
+                </div>
+
             </header>
             <section class="modal-card-body">
                 <b-field label="Email">
@@ -27,6 +31,7 @@
                 </b-field>
 
                 <b-checkbox v-model="remember">Remember me</b-checkbox>
+                <a style="color:#000;text-decoration: underline;display:block" href="/password/reset/">Forgot Password?</a>
                 <div class="error-login">
                     <p v-if="errorLogin" style="color: red">{{errorLogin}}</p>
                 </div>

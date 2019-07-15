@@ -17,10 +17,12 @@
 
 Auth::routes();
 Route::get('/', 'HomeController@index');
+Route::get('/?login=1', 'HomeController@index')->name('custom-login');
+Route::get('/?register=1', 'HomeController@index')->name('custom-register');
 Route::post('/log-out', 'HomeController@logOut');
 Route::post('/get-user', 'HomeController@getUser');
-//Route::get('/', 'HomeController@index')->name('home');
-Route::get('/join', 'HomeController@index');
+
+
 Route::group(['middleware' => 'auth'],function() {
     Route::get('/dashboard', 'HomeController@index');
     Route::get('/dashboard/add-new', 'HomeController@index');

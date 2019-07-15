@@ -3,6 +3,7 @@
         <div class="modal-card modal-card-register" style="width: auto">
             <header class="modal-card-head">
                 <p class="modal-card-title">Register</p>
+                <a style="color:#000;text-decoration: underline"  href="/?login=1">Already Registered?</a>
             </header>
             <section class="modal-card-body">
 

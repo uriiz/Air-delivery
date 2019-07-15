@@ -2457,12 +2457,7 @@ var today = new Date();
     },
     checkUser: function checkUser() {
       if (!this.currentUserId) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-          type: 'error',
-          title: 'Oops...',
-          text: 'You need to be logged in!',
-          footer: '<a href="#">Not yet registered?</a>'
-        });
+        window.location.href = "/?login=1";
         return;
       }
     },
@@ -2710,6 +2705,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    var url = new URL(window.location.href);
+    var login = url.searchParams.get("login");
+    var register = url.searchParams.get("register");
+
+    if (login) {
+      this.cardModal();
+    }
+
+    if (register) {
+      this.register();
+    }
+  },
   methods: {
     logOut: function logOut() {
       window.axios.post('/log-out').then(function (res) {
@@ -2751,6 +2759,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3029,6 +3042,7 @@ var today = new Date();
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -54801,34 +54815,19 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("ul", [
               _c("li", {}, [
-                _c(
-                  "a",
-                  { attrs: { href: "https://my.tranzila.com/cash_register" } },
-                  [_vm._v("New debit transaction")]
-                )
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v("New debit transaction")
+                ])
               ]),
               _vm._v(" "),
               _c("li", {}, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href:
-                        "https://my.tranzila.com/transactions/txns_list/find"
-                    }
-                  },
-                  [_vm._v("Cancel/Credit/Force transactions")]
-                )
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v("Cancel/Credit/Force transactions")
+                ])
               ]),
               _vm._v(" "),
               _c("li", {}, [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "https://my.tranzila.com/invoices/invoice" }
-                  },
-                  [_vm._v("New invoice")]
-                )
+                _c("a", { attrs: { href: "#" } }, [_vm._v("New invoice")])
               ])
             ])
           ])
@@ -55300,6 +55299,19 @@ var render = function() {
             [_vm._v("Remember me")]
           ),
           _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticStyle: {
+                color: "#000",
+                "text-decoration": "underline",
+                display: "block"
+              },
+              attrs: { href: "/password/reset/" }
+            },
+            [_vm._v("Forgot Password?")]
+          ),
+          _vm._v(" "),
           _c("div", { staticClass: "error-login" }, [
             _vm.errorLogin
               ? _c("p", { staticStyle: { color: "red" } }, [
@@ -55357,7 +55369,22 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("header", { staticClass: "modal-card-head" }, [
-      _c("p", { staticClass: "modal-card-title" }, [_vm._v("Login")])
+      _c("p", { staticClass: "modal-card-title" }, [_vm._v("Login")]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "a",
+          {
+            staticStyle: {
+              color: "#000",
+              "text-decoration": "underline",
+              display: "block"
+            },
+            attrs: { href: "/?register=1" }
+          },
+          [_vm._v("Not Register Yet?")]
+        )
+      ])
     ])
   }
 ]
@@ -56220,7 +56247,16 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("header", { staticClass: "modal-card-head" }, [
-      _c("p", { staticClass: "modal-card-title" }, [_vm._v("Register")])
+      _c("p", { staticClass: "modal-card-title" }, [_vm._v("Register")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticStyle: { color: "#000", "text-decoration": "underline" },
+          attrs: { href: "/?login=1" }
+        },
+        [_vm._v("Already Registered?")]
+      )
     ])
   }
 ]
@@ -56468,7 +56504,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("router-view")], 1)
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true

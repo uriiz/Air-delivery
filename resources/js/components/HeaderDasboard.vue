@@ -5,9 +5,9 @@
             <div class="action">
                 <img src="https://my.tranzila.com/assets/images/master/pluse_icon.png" alt=""><a href="javascript:void(0)">Quick access</a>
                 <ul>
-                    <li class=""><a href="https://my.tranzila.com/cash_register">New debit transaction</a></li>
-                    <li class=""><a href="https://my.tranzila.com/transactions/txns_list/find">Cancel/Credit/Force transactions</a></li>
-                    <li class=""><a href="https://my.tranzila.com/invoices/invoice">New invoice</a></li>                         <!--<li><a href="javascript:void(0)" onclick="menuRedirect('billing','manualinv');">New invoice</a></li>-->
+                    <li class=""><a href="#">New debit transaction</a></li>
+                    <li class=""><a href="#">Cancel/Credit/Force transactions</a></li>
+                    <li class=""><a href="#">New invoice</a></li>                         <!--<li><a href="javascript:void(0)" onclick="menuRedirect('billing','manualinv');">New invoice</a></li>-->
                 </ul>
             </div>
         </div>

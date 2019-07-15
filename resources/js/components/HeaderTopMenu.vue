@@ -140,6 +140,18 @@
     import Register from './Register'
 
     export default {
+
+        mounted() {
+            let url = new URL(window.location.href);
+            let login = url.searchParams.get("login");
+            let register = url.searchParams.get("register");
+            if(login){
+               this.cardModal()
+            }
+            if(register){
+                this.register()
+            }
+        },
         methods: {
             logOut(){
 
