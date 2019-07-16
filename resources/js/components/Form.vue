@@ -564,7 +564,6 @@
                         this.fromCompanyName = res.data.company_name;
                         this.fromSelectedAddress = '';
                         this.fromZipCode = res.data.zip_code;
-
                         this.FullName = res.data.name;
                         this.CompanyName = res.data.company_name;
                         this.SelectedAddress = '';

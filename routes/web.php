@@ -27,7 +27,9 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('/dashboard', 'HomeController@index');
     Route::get('/dashboard/add-new', 'HomeController@index');
     Route::get('/dashboard/my-offers', 'HomeController@index');
+    Route::get('/dashboard/my-profile', 'HomeController@index');
     Route::post('/save-offer', 'OfferController@create');
     Route::post('/get-private-offers', 'OfferController@show');
+    Route::post('/add-message-images', 'HomeController@updateUser');
 
 });

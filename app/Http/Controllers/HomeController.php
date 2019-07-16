@@ -41,4 +41,8 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function updateUser()
+    {
+        return 'https://my.tranzila.com/assets/images/bg1.jpg';
+    }
 }

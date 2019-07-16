@@ -29,16 +29,15 @@
                 </li>
                 <li>
                     <router-link :to="{ name: 'myOffer' }">
-
                         <img src="/images/secure5.png" alt="" class="mCS_img_loaded">
                         <div>My Offers</div>
                     </router-link>
                 </li>
                 <li>
-                    <a href="">
-                        <img src="/images/secure5.png" alt="" class="mCS_img_loaded">
-                        <div>Main</div>
-                    </a>
+                    <router-link :to="{ name: 'profile' }">
+                        <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
+                        <div>My Account</div>
+                    </router-link>
                 </li>
                 <li>
                     <a href="">

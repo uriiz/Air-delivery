@@ -27,6 +27,7 @@ import Home from './views/Home'
 import Dashboard from './views/Dashboard'
 import DashboardAddNew from './views/dashboard/DashboardAddNew'
 import DashboardOffers from './views/dashboard/DashboardOffers'
+import DashboardProfile from './views/dashboard/DashboardProfile'
 import HeaderTop from './components/HeaderTopMenu'
 import Sidebar from './components/Sidebar'
 import myOffers from './components/MyOffers'
@@ -35,9 +36,12 @@ import HeaderDashboard from './components/HeaderDasboard'
 import Login from './components/Login'
 import Form from './components/Form'
 import Welcome from './components/Welcome'
-
-
+import MyAccount from './components/MyAccount'
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+Vue.component('vue2-dropzone', vue2Dropzone);
 Vue.component('header-top', HeaderTop);
+Vue.component('my-account', MyAccount);
 Vue.component('my-offers', myOffers);
 Vue.component('table-extra-data-row', ExtraData);
 Vue.component('sidebar', Sidebar);
@@ -96,6 +100,13 @@ const router = new VueRouter({
             path: '/dashboard/my-offers',
             name: 'myOffer',
             component: DashboardOffers,
+            beforeEnter: authMiddleware
+        },
+
+        {
+            path: '/dashboard/my-profile',
+            name: 'profile',
+            component: DashboardProfile,
             beforeEnter: authMiddleware
         },
 
