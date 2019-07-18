@@ -192,6 +192,7 @@
                             v-else
                             :class="{ active: level3 }"
                             class="button is-primary next-level"
+                            :disabled="loader"
                             @click.prevent="submit"
                             type="is-success"
                     >

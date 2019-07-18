@@ -3,10 +3,15 @@
         <div class="dashboard-title"><h3>Dashboard</h3></div>
 
         <div class="user-profile">
-            <div class="user_img">
-                <img src="https://my.tranzila.com/assets/images/master/user_profile.jpg" alt="" class="mCS_img_loaded">
+
+            <div :style="{ 'background-image': 'url(' + currentUserLogo + ')' }"
+                 class="user-image-bg">
             </div>
-            <h2>{{dateShowTex}}<br>{{currentUserName}}</h2>
+            <h2>{{dateShowTex}}<br>
+                <span>
+                    {{currentUserName}}
+                </span>
+            </h2>
             <p>Your last login, 13.07.2019, 01:33</p>
             <a class="dash-log-out" href="#"  @click.prevent="logOut">
                 <b-icon icon="logout"></b-icon>
@@ -17,8 +22,8 @@
             <ul>
                 <li>
                     <router-link :to="{ name: 'dashboard' }">
-                        <img src="/images/icon_1.png" alt="" class="mCS_img_loaded">
-                        <div>Main</div>
+                        <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
+                        <div>notification/activity</div>
                     </router-link>
                 </li>
                 <li>
@@ -39,12 +44,7 @@
                         <div>My Account</div>
                     </router-link>
                 </li>
-                <li>
-                    <a href="">
-                        <img src="https://my.tranzila.com/assets/images/master/icon_1.png" alt="" class="mCS_img_loaded">
-                        <div>Main</div>
-                    </a>
-                </li>
+
             </ul>
         </nav>
     </div>
@@ -94,8 +94,8 @@
             return {
                 currentUserId:$("#details-helper").data('id'),
                 currentUserName:$("#details-helper").data('name'),
+                currentUserLogo:$("#details-helper").data('logo'),
                 dateShowTex:'',
-
             }
         },
     }

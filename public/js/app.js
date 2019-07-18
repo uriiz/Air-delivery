@@ -2218,6 +2218,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var today = new Date();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2229,7 +2234,9 @@ var today = new Date();
     return {
       currentUserId: $("#details-helper").data('id'),
       fromLat: 0,
+      loadDraft: 0,
       fromLng: 0,
+      loadSubmit: false,
       toLat: 0,
       toLng: 0,
       fromCountryName: '',
@@ -2320,15 +2327,15 @@ var today = new Date();
       return true;
     },
     submit: function submit(type) {
-      if (type == 'submit') {
-        this.loaderSub = true;
-        this.submitAction = true;
-      } else {
-        this.submitAction = false;
-        this.loaderDraft = true;
-      }
-
       if (this.validate()) {
+        if (type == 'submit') {
+          this.loaderSub = true;
+          this.submitAction = true;
+        } else {
+          this.submitAction = false;
+          this.loaderDraft = true;
+        }
+
         window.axios.post('/save-offer', {
           'submit_action': this.submitAction,
           'from_name': this.fromFullName,
@@ -2357,8 +2364,6 @@ var today = new Date();
         }).then(function (res) {
           window.location.href = "/dashboard/my-offers";
         })["catch"](function (res) {});
-        this.loaderSub = false;
-        this.loaderDraft = false;
       } else {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
           type: 'error',
@@ -2855,6 +2860,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3031,30 +3038,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.loadUserInfo();
   },
   methods: {
+    updateUser: function updateUser() {
+      var _this = this;
+
+      if (!this.FullName || this.phone < 8) {
+        return;
+      }
+
+      this.loaderUpdate = true;
+      window.axios.post('/update-user', {
+        'email': this.email,
+        'name': this.FullName,
+        'job_title': this.jobTitle,
+        'company_name': this.companyName,
+        'zip_code': this.zipCode,
+        'phone': this.phone
+      }).then(function (res) {
+        if (res.data == 1) {
+          $('.user-profile h2 span').html(_this.FullName);
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Good job!', 'You Profile Has Update', 'success');
+        } else {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!, try agein letter',
+            footer: ''
+          });
+        }
+
+        _this.loaderUpdate = false;
+      })["catch"](function (res) {
+        _this.loaderUpdate = false;
+      });
+    },
     afterComplete: function afterComplete(file) {
       this.image = file.dataURL;
+      $('.user-profile .user-image-bg').attr("style", "background-image:url(" + file.dataURL + ")");
+      this.$refs.myVueDropzone.removeAllFiles();
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Good job!', 'You Profile Logo Has Update', 'success');
     },
     sendParameter: function sendParameter(file, xhr, formData) {
       formData.append('_token', this.token);
     },
     loadUserInfo: function loadUserInfo() {
-      var _this = this;
+      var _this2 = this;
 
       window.axios.post('/get-user').then(function (res) {
         if (res.data) {
-          _this.FullName = res.data.name;
-          _this.CompanyName = res.data.company_name;
-          _this.email = res.data.email;
-          _this.Address = res.data.address;
-          _this.phone = res.data.phone;
-          _this.zipCode = res.data.zip_code;
-          _this.jobTitle = res.data.job_title;
-          _this.loader = false;
+          _this2.FullName = res.data.name;
+          _this2.companyName = res.data.company_name;
+          _this2.email = res.data.email;
+          _this2.Address = res.data.address;
+          _this2.phone = res.data.phone;
+          _this2.zipCode = res.data.zip_code;
+          _this2.jobTitle = res.data.job_title;
+          _this2.image = res.data.logo;
+          _this2.loader = false;
           console.log(res.data);
         }
       })["catch"](function (res) {});
@@ -3067,11 +3127,12 @@ __webpack_require__.r(__webpack_exports__);
       token: $('meta[name="csrf-token"]').attr('content'),
       FullName: '',
       companyName: '',
-      image: 'https://my.tranzila.com/assets/images/master/user_profile.jpg',
+      image: '',
       fromSelectedAddress: '',
       zipCode: '',
       email: '',
       phone: '',
+      loaderUpdate: '',
       jobTitle: '',
       hasErrorFullName: false,
       hasErrorPhone: false,
@@ -3216,6 +3277,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var today = new Date();
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3238,7 +3306,11 @@ var today = new Date();
 
       window.axios.post('/get-private-offers', {}).then(function (res) {
         _this2.offers = res.data;
-        console.log(_this2.offers);
+
+        if (res.data.length < 1) {
+          _this2.showIfEmpty = true;
+        }
+
         _this2.loader = false;
       })["catch"](function (res) {});
     }
@@ -3248,6 +3320,7 @@ var today = new Date();
       currentUserId: $("#details-helper").data('id'),
       currentUserName: $("#details-helper").data('name'),
       offers: [],
+      showIfEmpty: false,
       fromNameSearch: '',
       toNameSearch: '',
       searchDraft: '-1',
@@ -3287,6 +3360,7 @@ var today = new Date();
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -3687,6 +3761,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       currentUserId: $("#details-helper").data('id'),
       currentUserName: $("#details-helper").data('name'),
+      currentUserLogo: $("#details-helper").data('logo'),
       dateShowTex: ''
     };
   }
@@ -54896,7 +54971,7 @@ var render = function() {
             _c(
               "b-button",
               {
-                attrs: { type: "is-success" },
+                attrs: { disabled: _vm.loaderSub, type: "is-success" },
                 on: {
                   click: function($event) {
                     return _vm.submit("submit")
@@ -54918,7 +54993,7 @@ var render = function() {
             _c(
               "b-button",
               {
-                attrs: { type: "is-warning" },
+                attrs: { disabled: _vm.loaderDraft, type: "is-warning" },
                 on: {
                   click: function($event) {
                     return _vm.submit("draft")
@@ -54944,11 +55019,11 @@ var render = function() {
           { staticClass: "submit-form" },
           [
             _c("b-button", { attrs: { disabled: "", type: "is-success" } }, [
-              _vm._v("Submit Offer")
+              _vm._v("\n            Submit Offer\n\n        ")
             ]),
             _vm._v(" "),
             _c("b-button", { attrs: { disabled: "", type: "is-warning" } }, [
-              _vm._v("Save Draft")
+              _vm._v("Save Draft\n\n        ")
             ])
           ],
           1
@@ -55719,232 +55794,260 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           !_vm.loader
-            ? _c("div", [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "inputs-account" }, [
+            ? _c(
+                "div",
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "inputs-account" }, [
+                    _c(
+                      "div",
+                      { staticClass: "wrap-input-flex" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              type: { "is-danger": _vm.hasErrorFullName },
+                              message: {
+                                "this field is required": _vm.hasErrorFullName
+                              },
+                              label: "Full Name *"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                rounded: "",
+                                type: "text",
+                                icon: "account",
+                                placeholder: "Full Name",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.FullName,
+                                callback: function($$v) {
+                                  _vm.FullName = $$v
+                                },
+                                expression: "FullName"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "wrap-input-flex" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              type: { "is-danger": _vm.hasErrorPhone },
+                              message: {
+                                "this field is required": _vm.hasErrorPhone
+                              },
+                              label: "phone *"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                rounded: "",
+                                type: "text",
+                                icon: "phone",
+                                placeholder: "Phone",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.phone,
+                                callback: function($$v) {
+                                  _vm.phone = $$v
+                                },
+                                expression: "phone"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "wrap-input-flex" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Company Name" } },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                rounded: "",
+                                type: "text",
+                                icon: "worker",
+                                placeholder: "Company Name"
+                              },
+                              model: {
+                                value: _vm.companyName,
+                                callback: function($$v) {
+                                  _vm.companyName = $$v
+                                },
+                                expression: "companyName"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "wrap-input-flex" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Email" } },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                rounded: "",
+                                type: "text",
+                                icon: "email",
+                                readonly: "",
+                                placeholder: "Full Name"
+                              },
+                              model: {
+                                value: _vm.email,
+                                callback: function($$v) {
+                                  _vm.email = $$v
+                                },
+                                expression: "email"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "wrap-input-flex" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Zip Code" } },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                rounded: "",
+                                type: "text",
+                                icon: "meteor",
+                                placeholder: "Zip Code"
+                              },
+                              model: {
+                                value: _vm.zipCode,
+                                callback: function($$v) {
+                                  _vm.zipCode = $$v
+                                },
+                                expression: "zipCode"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "wrap-input-flex" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Job Title" } },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                rounded: "",
+                                type: "text",
+                                icon: "worker",
+                                placeholder: "Job Title"
+                              },
+                              model: {
+                                value: _vm.jobTitle,
+                                callback: function($$v) {
+                                  _vm.jobTitle = $$v
+                                },
+                                expression: "jobTitle"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "button is-success flex-btn",
+                      attrs: { type: "is-success" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.updateUser($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", [_vm._v("Update Profile")]),
+                      _vm._v(" "),
+                      _vm.loaderUpdate
+                        ? _c("img", {
+                            staticStyle: { width: "25px" },
+                            attrs: { src: "/images/loader.gif", alt: "" }
+                          })
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "wrap-input-flex" },
+                    { staticClass: "upload-logo" },
                     [
-                      _c(
-                        "b-field",
-                        {
-                          attrs: {
-                            type: { "is-danger": _vm.hasErrorFullName },
-                            message: {
-                              "this field is required": _vm.hasErrorFullName
-                            },
-                            label: "Full Name *"
-                          }
+                      _c("vue2-dropzone", {
+                        ref: "myVueDropzone",
+                        attrs: {
+                          id: "myVueDropzone",
+                          timeout: 90000,
+                          options: _vm.myoptions
                         },
-                        [
-                          _c("b-input", {
-                            attrs: {
-                              rounded: "",
-                              type: "text",
-                              icon: "account",
-                              placeholder: "Full Name",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.FullName,
-                              callback: function($$v) {
-                                _vm.FullName = $$v
-                              },
-                              expression: "FullName"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "wrap-input-flex" },
-                    [
-                      _c(
-                        "b-field",
-                        {
-                          attrs: {
-                            type: { "is-danger": _vm.hasErrorPhone },
-                            message: {
-                              "this field is required": _vm.hasErrorPhone
-                            },
-                            label: "phone *"
-                          }
-                        },
-                        [
-                          _c("b-input", {
-                            attrs: {
-                              rounded: "",
-                              type: "text",
-                              icon: "phone",
-                              placeholder: "Phone",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.phone,
-                              callback: function($$v) {
-                                _vm.phone = $$v
-                              },
-                              expression: "phone"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "wrap-input-flex" },
-                    [
-                      _c(
-                        "b-field",
-                        { attrs: { label: "Company Name" } },
-                        [
-                          _c("b-input", {
-                            attrs: {
-                              rounded: "",
-                              type: "text",
-                              icon: "worker",
-                              placeholder: "Company Name"
-                            },
-                            model: {
-                              value: _vm.companyName,
-                              callback: function($$v) {
-                                _vm.companyName = $$v
-                              },
-                              expression: "companyName"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "wrap-input-flex" },
-                    [
-                      _c(
-                        "b-field",
-                        { attrs: { label: "Email" } },
-                        [
-                          _c("b-input", {
-                            attrs: {
-                              rounded: "",
-                              type: "text",
-                              icon: "email",
-                              readonly: "",
-                              placeholder: "Full Name"
-                            },
-                            model: {
-                              value: _vm.email,
-                              callback: function($$v) {
-                                _vm.email = $$v
-                              },
-                              expression: "email"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "wrap-input-flex" },
-                    [
-                      _c(
-                        "b-field",
-                        { attrs: { label: "Zip Code" } },
-                        [
-                          _c("b-input", {
-                            attrs: {
-                              rounded: "",
-                              type: "text",
-                              icon: "meteor",
-                              placeholder: "Zip Code"
-                            },
-                            model: {
-                              value: _vm.zipCode,
-                              callback: function($$v) {
-                                _vm.zipCode = $$v
-                              },
-                              expression: "zipCode"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "wrap-input-flex" },
-                    [
-                      _c(
-                        "b-field",
-                        { attrs: { label: "Job Title" } },
-                        [
-                          _c("b-input", {
-                            attrs: {
-                              rounded: "",
-                              type: "text",
-                              icon: "worker",
-                              placeholder: "Job Title"
-                            },
-                            model: {
-                              value: _vm.jobTitle,
-                              callback: function($$v) {
-                                _vm.jobTitle = $$v
-                              },
-                              expression: "jobTitle"
-                            }
-                          })
-                        ],
-                        1
-                      )
+                        on: {
+                          "vdropzone-sending": _vm.sendParameter,
+                          "vdropzone-complete": _vm.afterComplete
+                        }
+                      })
                     ],
                     1
                   )
-                ]),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "upload-logo" },
-                  [
-                    _c("vue2-dropzone", {
-                      ref: "myVueDropzone",
-                      attrs: {
-                        id: "myVueDropzone",
-                        timeout: 90000,
-                        options: _vm.myoptions
-                      },
-                      on: {
-                        "vdropzone-sending": _vm.sendParameter,
-                        "vdropzone-complete": _vm.afterComplete
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
+                ],
+                1
+              )
             : _vm._e()
         ]),
         _vm._v(" "),
@@ -55992,9 +56095,11 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "card-content" }, [
                       _c("div", { staticClass: "user_img" }, [
-                        _c("img", {
-                          staticClass: "mCS_img_loaded",
-                          attrs: { src: _vm.image, alt: "" }
+                        _c("div", {
+                          staticClass: "user-image-bg",
+                          style: {
+                            "background-image": "url(" + _vm.image + ")"
+                          }
                         })
                       ]),
                       _vm._v(" "),
@@ -56037,9 +56142,24 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("footer", { staticClass: "card-footer" }, [
-                      _c("a", { staticClass: "card-footer-item" }, [
-                        _vm._v("Save")
-                      ])
+                      _c(
+                        "a",
+                        {
+                          staticClass: "card-footer-item",
+                          on: { click: _vm.updateUser }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Save\n                            "
+                          ),
+                          _vm.loaderUpdate
+                            ? _c("img", {
+                                staticStyle: { width: "25px" },
+                                attrs: { src: "/images/loader.gif", alt: "" }
+                              })
+                            : _vm._e()
+                        ]
+                      )
                     ])
                   ]
                 )
@@ -56228,7 +56348,26 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          !_vm.loader
+          _vm.showIfEmpty
+            ? _c("div", [
+                _c("p", [
+                  _vm._v(
+                    "To date you have not applied for a quote, click here to receive quotes from your request"
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "pretty-link",
+                    attrs: { href: "/dashboard/add-new" }
+                  },
+                  [_vm._v("\n                    New Offer\n                ")]
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.loader && _vm.data.length > 0
             ? _c("b-table", {
                 ref: "table",
                 attrs: {
@@ -56934,7 +57073,7 @@ var render = function() {
                         {
                           staticClass: "button is-primary next-level",
                           class: { active: _vm.level3 },
-                          attrs: { type: "is-success" },
+                          attrs: { disabled: _vm.loader, type: "is-success" },
                           on: {
                             click: function($event) {
                               $event.preventDefault()
@@ -57006,12 +57145,22 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "user-profile" }, [
-      _vm._m(1),
+      _c("div", {
+        staticClass: "user-image-bg",
+        style: { "background-image": "url(" + _vm.currentUserLogo + ")" }
+      }),
       _vm._v(" "),
       _c("h2", [
         _vm._v(_vm._s(_vm.dateShowTex)),
         _c("br"),
-        _vm._v(_vm._s(_vm.currentUserName))
+        _vm._v(" "),
+        _c("span", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.currentUserName) +
+              "\n            "
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("p", [_vm._v("Your last login, 13.07.2019, 01:33")]),
@@ -57045,10 +57194,10 @@ var render = function() {
             _c("router-link", { attrs: { to: { name: "dashboard" } } }, [
               _c("img", {
                 staticClass: "mCS_img_loaded",
-                attrs: { src: "/images/icon_1.png", alt: "" }
+                attrs: { src: "/images/icon_5.png", alt: "" }
               }),
               _vm._v(" "),
-              _c("div", [_vm._v("Main")])
+              _c("div", [_vm._v("notification/activity")])
             ])
           ],
           1
@@ -57097,9 +57246,7 @@ var render = function() {
             ])
           ],
           1
-        ),
-        _vm._v(" "),
-        _vm._m(2)
+        )
       ])
     ])
   ])
@@ -57111,38 +57258,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "dashboard-title" }, [
       _c("h3", [_vm._v("Dashboard")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "user_img" }, [
-      _c("img", {
-        staticClass: "mCS_img_loaded",
-        attrs: {
-          src: "https://my.tranzila.com/assets/images/master/user_profile.jpg",
-          alt: ""
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "" } }, [
-        _c("img", {
-          staticClass: "mCS_img_loaded",
-          attrs: {
-            src: "https://my.tranzila.com/assets/images/master/icon_1.png",
-            alt: ""
-          }
-        }),
-        _vm._v(" "),
-        _c("div", [_vm._v("Main")])
-      ])
     ])
   }
 ]

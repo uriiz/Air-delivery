@@ -84,6 +84,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'zip_code' => $data['zip_code'],
             'phone' => $data['phone'],
+            'logo' => '/images/user_profile.jpg',
             'confirm_term' => Carbon::now(),
             'confirm_mail' => $now,
             'password' => Hash::make($data['password']),

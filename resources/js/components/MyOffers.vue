@@ -28,8 +28,15 @@
                 <div class="loader1" v-if="loader">
                     <img src="/images/loader1.png" class="rotating" alt="">
                 </div>
+
+                <div v-if="showIfEmpty">
+                    <p>To date you have not applied for a quote, click here to receive quotes from your request</p>
+                    <a class="pretty-link" href="/dashboard/add-new">
+                        New Offer
+                    </a>
+                </div>
                 <b-table
-                        v-if="!loader"
+                        v-if="!loader && data.length > 0"
                         :data="data"
                         detail-key="id"
                         ref="table"
@@ -141,7 +148,10 @@
                     }
                 ).then((res) => {
                     this.offers = res.data;
-                    console.log(this.offers)
+                    if(res.data.length < 1){
+                       this.showIfEmpty = true;
+                    }
+
                     this.loader = false;
                 }).catch((res) => {
 
@@ -154,6 +164,7 @@
                 currentUserId:$("#details-helper").data('id'),
                 currentUserName:$("#details-helper").data('name'),
                 offers:[],
+                showIfEmpty:false,
                 fromNameSearch:'',
                 toNameSearch:'',
                 searchDraft:'-1',

@@ -291,19 +291,24 @@
         </section>
 
         <div class="submit-form" v-if="currentUserId">
-            <b-button @click="submit('submit')" type="is-success">
+            <b-button :disabled="loaderSub" @click="submit('submit')" type="is-success">
                 <div>Submit Offer</div>
                 <img v-if="loaderSub" style="width:25px" src="/images/loader.gif" alt="">
             </b-button>
-            <b-button @click="submit('draft')" type="is-warning">
+            <b-button :disabled="loaderDraft" @click="submit('draft')" type="is-warning">
                 <div>Save Draft</div>
                 <img v-if="loaderDraft" style="width:25px" src="/images/loader.gif" alt="">
             </b-button>
         </div>
 
         <div class="submit-form" v-else>
-            <b-button disabled type="is-success">Submit Offer</b-button>
-            <b-button disabled type="is-warning">Save Draft</b-button>
+            <b-button disabled type="is-success">
+                Submit Offer
+
+            </b-button>
+            <b-button disabled type="is-warning">Save Draft
+
+            </b-button>
         </div>
 
     </div>
@@ -324,7 +329,9 @@
             return {
                 currentUserId:$("#details-helper").data('id'),
                 fromLat:0,
+                loadDraft:0,
                 fromLng:0,
+                loadSubmit:false,
                 toLat:0,
                 toLng:0,
                 fromCountryName:'',
@@ -418,15 +425,15 @@
 
             submit(type){
 
-                if(type == 'submit'){
-                    this.loaderSub = true;
-                    this.submitAction = true
-                }else{
-                    this.submitAction = false
-                    this.loaderDraft = true;
-                }
-
                 if(this.validate()){
+                    if(type == 'submit'){
+
+                        this.loaderSub = true;
+                        this.submitAction = true
+                    }else{
+                        this.submitAction = false
+                        this.loaderDraft = true;
+                    }
 
                     window.axios.post(
                         '/save-offer',
@@ -462,8 +469,7 @@
 
                     });
 
-                    this.loaderSub = false;
-                    this.loaderDraft = false;
+
                 }else{
                     Swal.fire({
                         type: 'error',

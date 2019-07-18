@@ -532,6 +532,10 @@ body {
   text-align: center;
 }
 
+.user-profile h2 span {
+  font-size: 17px;
+}
+
 .user-profile p {
   color: #ffffff;
   padding-top: 4px;
@@ -930,6 +934,36 @@ header .top_nav .action ul li a {
   color: #fff;
   padding: 10px 10px;
   border-radius: 10px;
+}
+
+.user-image-bg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: auto;
+}
+
+.flex-btn span {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.flex-btn img {
+  margin-left: 4px;
+}
+
+.pretty-link {
+  display: inline-block;
+  background: #EF4700;
+  color: #fff;
+  padding: 10px 13px;
+  border-radius: 40px;
+  margin: 10px 0 0 0;
 }
 
 /***************responsive***************/

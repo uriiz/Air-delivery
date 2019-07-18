@@ -27,6 +27,7 @@
             <div id="details-helper"
                  data-avatar="{{Auth::user()->avatar}}"
                  data-id="{{Auth::user()->id}}"
+                 data-logo="{{Auth::user()->logo}}"
                  data-name="{{Auth::user()->name}}"
                  style="display: none"></div>
         @endguest

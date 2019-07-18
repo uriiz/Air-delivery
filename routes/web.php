@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('/dashboard/my-profile', 'HomeController@index');
     Route::post('/save-offer', 'OfferController@create');
     Route::post('/get-private-offers', 'OfferController@show');
-    Route::post('/add-message-images', 'HomeController@updateUser');
+    Route::post('/add-message-images', 'HomeController@updateUserImage');
+    Route::post('/update-user', 'HomeController@updateUser');
 
 });

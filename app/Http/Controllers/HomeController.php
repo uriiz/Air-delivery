@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {
@@ -41,8 +43,65 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function updateUser()
+    public function updateUser(Request $request)
     {
-        return 'https://my.tranzila.com/assets/images/bg1.jpg';
+
+        if(!Auth::id()){
+            return;
+        }
+
+        if(!$request->name){
+            $name = Auth::user()->name;
+        }else{
+            $name = $request->name;
+        }
+        if(!$request->phone){
+            $phone = Auth::user()->phone;
+        }else{
+            $phone = $request->phone;
+        }
+
+        return User::where('id',Auth::id())->update([
+            'name'=> $name,
+            'phone'=> $phone,
+            'company_name' => $request->company_name,
+            'zip_code' => $request->zip_code,
+            'job_title' => $request->job_title,
+        ]);
     }
+    public function updateUserImage(Request $request)
+    {
+        if(!Auth::user()->id){
+            return;
+        }
+
+        if ( ! Input::hasFile('file')) {
+            return ;
+        }
+        $file = Input::file('file');
+
+        $this->validate($request, [
+            'file' => 'mimes:jpeg,png,jpg|max:10000',
+        ]);
+
+        $imageFiles = [
+            'jpeg',
+            'png',
+            'jpg',
+        ];
+        if(!is_string($file)){
+            if(!in_array($file->getClientOriginalExtension(),$imageFiles)){
+                return 'not match file';
+            }
+        }
+        $imageName = time().'.'.$file->getClientOriginalExtension();
+        $file->move(public_path('images/logos/'.Auth::user()->id), $imageName);
+        $link = '/images/logos/'.Auth::user()->id.'/'.$imageName;
+        return User::where('id',Auth::id())->update([
+            'logo'=> $link,
+        ]);
+
+    }
+
+
 }

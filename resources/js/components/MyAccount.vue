@@ -111,6 +111,15 @@
                         </div>
                     </div>
 
+                    <b-button
+                            class="button is-success flex-btn"
+                            @click.prevent="updateUser"
+                            type="is-success"
+                    >
+                        <div>Update Profile</div>
+                        <img v-if="loaderUpdate" style="width:25px" src="/images/loader.gif" alt="">
+                    </b-button>
+
                     <div style="margin:40px 0 20px 0;" class="form-title">
                         <div class="title">
                             <img style="width:30px" src="/images/user2.svg">
@@ -149,7 +158,10 @@
                         </div>
                         <div class="card-content">
                             <div class="user_img">
-                                <img :src="image" alt="" class="mCS_img_loaded"></div>
+                                <div :style="{ 'background-image': 'url(' + image + ')' }"
+                                     class="user-image-bg">
+                                </div>
+                               </div>
                             <div class="content" style="min-width: 250px">
                                 <strong style="display:block">{{FullName}}</strong>
                                 <p style="margin: 0" v-if="email">Email: {{email}}</p>
@@ -162,7 +174,10 @@
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <a class="card-footer-item">Save</a>
+                            <a class="card-footer-item" @click="updateUser">
+                                Save
+                                <img v-if="loaderUpdate" style="width:25px" src="/images/loader.gif" alt="">
+                            </a>
 
                         </footer>
                     </b-collapse>
@@ -175,7 +190,7 @@
 
 
 <script>
-
+    import Swal from 'sweetalert2'
     export default {
 
         mounted() {
@@ -184,8 +199,56 @@
 
         },
         methods: {
+
+
+            updateUser(){
+                if(!this.FullName || this.phone < 8 ){
+                   return;
+                }
+                this.loaderUpdate = true
+                window.axios.post(
+                    '/update-user',
+                    {
+                        'email':this.email,
+                        'name':this.FullName,
+                        'job_title':this.jobTitle,
+                        'company_name':this.companyName,
+                        'zip_code':this.zipCode,
+                        'phone':this.phone,
+                    }
+                ).then((res) => {
+
+                    if(res.data == 1) {
+                        $('.user-profile h2 span').html(this.FullName)
+                        Swal.fire(
+                            'Good job!',
+                            'You Profile Has Update',
+                            'success'
+                        )
+                    }else{
+
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!, try agein letter',
+                            footer: ''
+                        })
+                    }
+                    this.loaderUpdate = false
+                }).catch((res) => {
+                    this.loaderUpdate = false
+                });
+            },
             afterComplete(file) {
                 this.image = file.dataURL
+
+                $('.user-profile .user-image-bg').attr("style","background-image:url("+file.dataURL+")")
+                this.$refs.myVueDropzone.removeAllFiles();
+                Swal.fire(
+                    'Good job!',
+                    'You Profile Logo Has Update',
+                    'success'
+                )
             },
 
 
@@ -201,14 +264,16 @@
                 ).then((res) => {
                     if(res.data){
                         this.FullName = res.data.name;
-                        this.CompanyName = res.data.company_name;
+                        this.companyName = res.data.company_name;
                         this.email = res.data.email;
                         this.Address = res.data.address;
                         this.phone = res.data.phone;
                         this.zipCode = res.data.zip_code;
                         this.jobTitle = res.data.job_title;
+                        this.image = res.data.logo;
                         this.loader = false;
                         console.log(res.data)
+
                     }
                 }).catch((res) => {
 
@@ -222,11 +287,12 @@
                 token:$('meta[name="csrf-token"]').attr('content'),
                 FullName :'',
                 companyName:'',
-                image:'https://my.tranzila.com/assets/images/master/user_profile.jpg',
+                image:'',
                 fromSelectedAddress :'',
                 zipCode :'',
                 email :'',
                 phone:'',
+                loaderUpdate:'',
                 jobTitle:'',
                 hasErrorFullName:false,
                 hasErrorPhone:false,
