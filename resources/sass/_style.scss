@@ -806,6 +806,28 @@ header .top_nav .action ul li a {
   border-radius: 40px;
   margin: 10px 0 0 0;
 }
+.wrp-outsite-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.col-md-8{
+  .card{
+    padding: 20px;
+  }
+}
+.reset-pas{
+  background-color: #23d160;
+  border-color: transparent;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
 /***************responsive***************/
 @media screen and (max-width: 1700px) {
     .dashboard-sidebar{
