@@ -828,6 +828,11 @@ header .top_nav .action ul li a {
   font-size: 16px;
   cursor: pointer;
 }
+.main-form-disable{
+  .field{
+    pointer-events: none;
+  }
+}
 /***************responsive***************/
 @media screen and (max-width: 1700px) {
     .dashboard-sidebar{

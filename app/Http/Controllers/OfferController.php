@@ -84,9 +84,13 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function getOfferDetails(Request $request)
     {
-        //
+        if(! Auth::id()){
+            return ;
+        }
+
+        return Offer::where('id',15)->first();
     }
 
     /**

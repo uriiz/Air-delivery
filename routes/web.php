@@ -32,5 +32,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/get-private-offers', 'OfferController@show');
     Route::post('/add-message-images', 'HomeController@updateUserImage');
     Route::post('/update-user', 'HomeController@updateUser');
+    Route::post('/get-order-details', 'OfferController@getOfferDetails');
+    Route::get('/dashboard/offer/{id}', 'HomeController@index');
 
 });

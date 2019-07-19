@@ -28,7 +28,9 @@ import Dashboard from './views/Dashboard'
 import DashboardAddNew from './views/dashboard/DashboardAddNew'
 import DashboardOffers from './views/dashboard/DashboardOffers'
 import DashboardProfile from './views/dashboard/DashboardProfile'
+import DashboardOffer from './views/dashboard/DashboardOffer'
 import HeaderTop from './components/HeaderTopMenu'
+import FormSingle from './components/FormSingle'
 import Sidebar from './components/Sidebar'
 import myOffers from './components/MyOffers'
 import ExtraData from './components/ExtraData'
@@ -47,6 +49,7 @@ Vue.component('table-extra-data-row', ExtraData);
 Vue.component('sidebar', Sidebar);
 Vue.component('header-dashboard', HeaderDashboard);
 Vue.component('main-form', Form);
+Vue.component('main-form-single', FormSingle);
 Vue.component('header-login', Login);
 Vue.component('welcome', Welcome);
 Vue.component('multi-select', Multiselect);
@@ -107,6 +110,12 @@ const router = new VueRouter({
             path: '/dashboard/my-profile',
             name: 'profile',
             component: DashboardProfile,
+            beforeEnter: authMiddleware
+        },
+        {
+            path: '/dashboard/offer/:id',
+            name: 'offer',
+            component: DashboardOffer,
             beforeEnter: authMiddleware
         },
 
