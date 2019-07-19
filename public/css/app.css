@@ -999,6 +999,18 @@ header .top_nav .action ul li a {
     width: 250px;
   }
 
+  .wrap-profile-card-field .main-table-box.my-account {
+    margin: 0;
+  }
+
+  .wrap-profile-card-field .card-profile {
+    max-width: 50%;
+  }
+
+  .main-table-box.my-account {
+    max-width: 80%;
+  }
+
   .user-profile p {
     padding-right: 20px;
     padding-left: 20px;

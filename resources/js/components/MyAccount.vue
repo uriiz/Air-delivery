@@ -243,12 +243,8 @@
                 this.image = file.dataURL
 
                 $('.user-profile .user-image-bg').attr("style","background-image:url("+file.dataURL+")")
-                this.$refs.myVueDropzone.removeAllFiles();
-                Swal.fire(
-                    'Good job!',
-                    'You Profile Logo Has Update',
-                    'success'
-                )
+                //this.$refs.myVueDropzone.removeAllFiles();
+
             },
 
 

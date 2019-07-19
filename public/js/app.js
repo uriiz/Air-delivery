@@ -3094,9 +3094,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     afterComplete: function afterComplete(file) {
       this.image = file.dataURL;
-      $('.user-profile .user-image-bg').attr("style", "background-image:url(" + file.dataURL + ")");
-      this.$refs.myVueDropzone.removeAllFiles();
-      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire('Good job!', 'You Profile Logo Has Update', 'success');
+      $('.user-profile .user-image-bg').attr("style", "background-image:url(" + file.dataURL + ")"); //this.$refs.myVueDropzone.removeAllFiles();
     },
     sendParameter: function sendParameter(file, xhr, formData) {
       formData.append('_token', this.token);
@@ -76990,8 +76988,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\projects\Air-delivery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\projects\Air-delivery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\project\Air-delivery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\project\Air-delivery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
