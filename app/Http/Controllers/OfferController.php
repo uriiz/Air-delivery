@@ -27,54 +27,29 @@ class OfferController extends Controller
      */
     public function create(Request $request)
     {
+
         if(!Auth::user()){
             return;
         }
-
-        $offer = Offer::create([
-            'user_id'=>Auth::id(),
-            'submit_action'=>$request->submit_action ? 'published' : 'draft',
-            'from_name'=>$request->from_name,
-            'from_company_name'=>$request->from_company_name,
-            'to_company_name'=>$request->to_company_name,
-            'from_lat'=>$request->from_lat,
-            'from_lng'=>$request->from_lng,
-            'from_address_name'=>$request->from_address_name,
-            'from_address_id'=>$request->from_address_id,
-            'from_zip_code'=>$request->from_zip_code,
-            'to_name'=>$request->to_name,
-            'to_lat'=>$request->to_lat,
-            'to_lng'=>$request->to_lng,
-            'to_address_name'=>$request->to_address_name,
-            'to_address_id'=>$request->to_address_id,
-            'to_zip_code'=>$request->to_zip_code,
-            'from_date'=>new Carbon($request->from_date),
-            'to_date'=>new Carbon($request->to_date),
-            'to_country_name'=>$request->to_country_name,
-            'from_country_name'=>$request->from_country_name,
-            'to_country_code'=>$request->to_country_code,
-            'from_country_code'=>$request->from_country_code,
-            'note'=>$request->note,
-            'order_id'=>'111',
-        ]);
-
-        foreach ($request->pack as $p){
-            Package::create([
-                'user_id'=>Auth::id(),
-                'order_id'=> $offer->id,
-                'package_quantity'=>$p['package_quantity'],
-                'package_width'=>$p['package_width'],
-                'package_height'=>$p['package_height'],
-                'package_length'=>$p['package_length'],
-                'package_weight'=>$p['package_weight'],
-                'package_type'=>$p['package_type'],
-            ]);
-        }
-
+        $offer = Offer::newOffer($request);
         if($request->submit_action){
 
         }
 
+        return $offer;
+    }
+    public function deleteOffer(Request $request)
+    {
+        return Offer::where('id',$request->id)
+            ->where('submit_action','draft')
+            ->where('user_id',Auth::id())->delete();
+    }
+    public function update(Request $request)
+    {
+
+        $id = $request->id;
+        Package::where('order_id',$id)->delete();
+        $offer = Offer::updateOffer($request,$id);
         return $offer;
     }
 
@@ -90,7 +65,16 @@ class OfferController extends Controller
             return ;
         }
 
-        return Offer::where('id',15)->first();
+        $offer =  Offer::where('id',$request->id)
+            ->where('submit_action','draft')
+            ->where('user_id',Auth::id())->first();
+
+        if(! $offer || !$offer->id ){
+            return null;
+        }
+        $packages = Package::where('order_id',$offer->id)->get();
+        $offer->packages = $packages;
+        return $offer;
     }
 
     /**
@@ -134,10 +118,7 @@ class OfferController extends Controller
      * @param  \App\Offer  $offer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Offer $offer)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.

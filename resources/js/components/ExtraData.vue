@@ -104,10 +104,16 @@
                     </div>
                 </gmap-info-window>
             </GmapMap>
-            <div v-if="!submit_action"
-                 class="make-draft-to-post">
+
+            <router-link class="make-draft-to-post"
+                         v-if="submit_action=='draft'"
+                         :to="{ name: 'offer', params: {id:rowId } }">
                 Send Offer
-            </div>
+            </router-link>
+
+
+
+
         </div>
 
     </div>

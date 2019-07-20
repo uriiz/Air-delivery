@@ -1813,6 +1813,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   methods: {
@@ -2823,6 +2829,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var today = new Date();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2875,11 +2892,38 @@ var today = new Date();
       loaderSub: false,
       loaderDraft: false,
       submitAction: false,
-      notes: ''
+      notes: '',
+      errorShow: true
     };
   },
   props: ['id'],
   methods: {
+    confirmDelete: function confirmDelete() {
+      window.axios.post('/delete-offer', {
+        'id': this.id
+      }).then(function (res) {
+        window.location.href = "/dashboard/my-offers";
+      })["catch"](function (res) {});
+    },
+    deleteOffer: function deleteOffer() {
+      var _this = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          _this.confirmDelete();
+        } else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
+          return;
+        }
+      });
+    },
     validate: function validate() {
       var err = false;
 
@@ -2927,8 +2971,8 @@ var today = new Date();
           this.loaderDraft = true;
         }
 
-        window.axios.post('/save-offer', {
-          'submit_action': this.submitAction,
+        window.axios.post('/update-offer', {
+          'submit_action': true,
           'from_name': this.fromFullName,
           'from_company_name': this.fromCompanyName,
           'from_lat': this.fromLat,
@@ -2951,7 +2995,8 @@ var today = new Date();
           'to_country_code': this.toCountryCode,
           'from_country_name': this.fromCountryName,
           'from_country_code': this.fromCountryCode,
-          'pack_type': this.packType
+          'pack_type': this.packType,
+          'id': this.id
         }).then(function (res) {
           window.location.href = "/dashboard/my-offers";
         })["catch"](function (res) {});
@@ -2968,7 +3013,7 @@ var today = new Date();
       }
     },
     deleteRow: function deleteRow(id) {
-      var _this = this;
+      var _this2 = this;
 
       if (this.data.length == 1) {
         return;
@@ -2991,7 +3036,7 @@ var today = new Date();
         reverseButtons: true
       }).then(function (result) {
         if (result.value) {
-          _this.data = _this.data.filter(function (x) {
+          _this2.data = _this2.data.filter(function (x) {
             return x.id !== id;
           });
         } else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
@@ -3036,22 +3081,55 @@ var today = new Date();
       }
     },
     loadUserInfo: function loadUserInfo() {
-      var _this2 = this;
+      var _this3 = this;
 
-      window.axios.post('/get-order-details').then(function (res) {
+      window.axios.post('/get-order-details', {
+        id: this.id
+      }).then(function (res) {
         if (res.data) {
-          console.log(res.data);
-          _this2.fromFullName = res.data.from_name;
-          _this2.fromCompanyName = res.data.from_company_name;
-          _this2.fromSelectedAddress = res.data.from_address_name;
-          _this2.fromZipCode = res.data.from_zip_code;
-          _this2.toFullName = res.data.to_name;
-          _this2.toCompanyName = res.data.to_company_name;
-          _this2.toSelectedAddress = res.data.to_address_name;
-          _this2.toZipCode = res.data.to_zip_code;
-          _this2.fromDate = new Date(res.data.from_date);
-          _this2.toDate = new Date(res.data.to_date);
-          _this2.notes = res.data.note;
+          _this3.fromFullName = res.data.from_name;
+          _this3.fromCompanyName = res.data.from_company_name;
+          _this3.fromAddressName = res.data.from_address_name;
+          _this3.fromZipCode = res.data.from_zip_code;
+          _this3.fromLat = res.data.from_lat;
+          _this3.fromLng = res.data.from_lng;
+          _this3.fromCountryName = res.data.from_country_name;
+          _this3.fromCountryCode = res.data.from_country_code;
+          _this3.fromAddressId = res.data.from_address_id;
+          _this3.toFullName = res.data.to_name;
+          _this3.toCompanyName = res.data.to_company_name;
+          _this3.toAddressName = res.data.to_address_name;
+          _this3.toZipCode = res.data.to_zip_code;
+          _this3.toLat = res.data.to_lat;
+          _this3.toLng = res.data.to_lng;
+          _this3.toCountryName = res.data.to_country_name;
+          _this3.fromDate = new Date(res.data.from_date);
+          _this3.toDate = new Date(res.data.to_date);
+          _this3.toCountryCode = res.data.to_country_code;
+          _this3.toAddressId = res.data.to_address_id;
+          _this3.notes = res.data.note;
+
+          for (var i = 0; i < res.data.packages.length; i++) {
+            res.data.packages[i].package_height = Number(res.data.packages[i].package_height);
+            res.data.packages[i].package_length = Number(res.data.packages[i].package_length);
+            res.data.packages[i].package_quantity = Number(res.data.packages[i].package_quantity);
+            res.data.packages[i].package_weight = Number(res.data.packages[i].package_weight);
+            res.data.packages[i].package_width = Number(res.data.packages[i].package_width);
+          }
+
+          _this3.data = res.data.packages;
+          _this3.errorShow = false;
+        } else {
+          _this3.errorShow = true;
+
+          _this3.$dialog.alert({
+            title: 'Error',
+            message: "Something's not good, we can't get this information",
+            type: 'is-danger',
+            hasIcon: false,
+            icon: 'times-circle',
+            iconPack: 'fa'
+          });
         }
       })["catch"](function (res) {});
     },
@@ -54818,10 +54896,15 @@ var render = function() {
           2
         ),
         _vm._v(" "),
-        !_vm.submit_action
-          ? _c("div", { staticClass: "make-draft-to-post" }, [
-              _vm._v("\n            Send Offer\n        ")
-            ])
+        _vm.submit_action == "draft"
+          ? _c(
+              "router-link",
+              {
+                staticClass: "make-draft-to-post",
+                attrs: { to: { name: "offer", params: { id: _vm.rowId } } }
+              },
+              [_vm._v("\n            Send Offer\n        ")]
+            )
           : _vm._e()
       ],
       1
@@ -55786,719 +55869,804 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "main-form main-form-disable" }, [
-    _c("div", { staticClass: "triancle" }),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-top" }, [
-      _c(
-        "section",
-        [
-          _c(
-            "b-field",
-            {
-              attrs: {
-                label: "Full Name *",
-                type: { "is-danger": _vm.hasErrorFromFullName },
-                message: { "this field is required": _vm.hasErrorFromFullName }
-              }
-            },
-            [
-              _c("b-input", {
-                attrs: {
-                  readonly: "",
-                  type: "text",
-                  icon: "account",
-                  placeholder: "Full Name",
-                  required: ""
-                },
-                on: { input: _vm.checkUser },
-                model: {
-                  value: _vm.fromFullName,
-                  callback: function($$v) {
-                    _vm.fromFullName = $$v
-                  },
-                  expression: "fromFullName"
-                }
-              })
-            ],
-            1
-          ),
+  return _c("div", { staticClass: "main-form" }, [
+    !_vm.errorShow
+      ? _c("div", [
+          _vm._m(0),
           _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Company Name" } },
-            [
-              _c("b-input", {
-                attrs: {
-                  readonly: "",
-                  type: "text",
-                  icon: "worker",
-                  placeholder: "Company Name"
-                },
-                on: { input: _vm.checkUser },
-                model: {
-                  value: _vm.fromCompanyName,
-                  callback: function($$v) {
-                    _vm.fromCompanyName = $$v
-                  },
-                  expression: "fromCompanyName"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label" }, [_vm._v("Full Address *")]),
-            _vm._v(" "),
+          _c("div", { staticClass: "form-top" }, [
             _c(
-              "div",
-              {
-                staticClass: "control has-icons-left is-clearfix",
-                class: { "has-icons-right": _vm.hasErrorFromLat }
-              },
+              "section",
               [
-                _c("GmapAutocomplete", {
-                  ref: "address",
-                  staticClass: "input",
-                  class: { "is-danger": _vm.hasErrorFromLat },
-                  attrs: {
-                    id: "map",
-                    required: "",
-                    readonly: "",
-                    value: _vm.fromSelectedAddress,
-                    autocomplete: "off",
-                    lang: "EN",
-                    placeholder: "Full Address"
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "Full Name *",
+                      type: { "is-danger": _vm.hasErrorFromFullName },
+                      message: {
+                        "this field is required": _vm.hasErrorFromFullName
+                      }
+                    }
                   },
-                  on: { place_changed: _vm.getFromAddressData }
-                }),
-                _vm._v(" "),
-                _vm.hasErrorFromLat
-                  ? _c("p", { staticClass: "help is-danger" }, [
-                      _vm._v("this field is required")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.hasErrorFromLat
-                  ? _c(
-                      "span",
-                      { staticClass: "icon is-right has-text-danger" },
-                      [
-                        _c("i", {
-                          staticClass: "mdi mdi-alert-circle mdi-24px"
-                        })
-                      ]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._m(1)
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Zip Code" } },
-            [
-              _c("b-input", {
-                attrs: {
-                  readonly: "",
-                  type: "text",
-                  icon: "meteor",
-                  placeholder: "Zip Code"
-                },
-                on: { input: _vm.checkUser },
-                model: {
-                  value: _vm.fromZipCode,
-                  callback: function($$v) {
-                    _vm.fromZipCode = $$v
-                  },
-                  expression: "fromZipCode"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-top" }, [
-      _c(
-        "section",
-        [
-          _c(
-            "b-field",
-            {
-              attrs: {
-                type: { "is-danger": _vm.hasErrorToFullName },
-                message: { "this field is required": _vm.hasErrorToFullName },
-                label: "Full Name *"
-              }
-            },
-            [
-              _c("b-input", {
-                attrs: {
-                  readonly: "",
-                  type: "text",
-                  icon: "account",
-                  placeholder: "Full Name",
-                  required: ""
-                },
-                on: { input: _vm.checkUser },
-                model: {
-                  value: _vm.toFullName,
-                  callback: function($$v) {
-                    _vm.toFullName = $$v
-                  },
-                  expression: "toFullName"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Company Name" } },
-            [
-              _c("b-input", {
-                attrs: {
-                  readonly: "",
-                  type: "text",
-                  icon: "worker",
-                  placeholder: "Company Name"
-                },
-                on: { input: _vm.checkUser },
-                model: {
-                  value: _vm.toCompanyName,
-                  callback: function($$v) {
-                    _vm.toCompanyName = $$v
-                  },
-                  expression: "toCompanyName"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label" }, [_vm._v("Full Address *")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "control has-icons-left is-clearfix",
-                class: { "has-icons-right": _vm.hasErrorToLat }
-              },
-              [
-                _c("GmapAutocomplete", {
-                  ref: "address",
-                  staticClass: "input",
-                  class: { "is-danger": _vm.hasErrorToLat },
-                  attrs: {
-                    readonly: "",
-                    id: "map2",
-                    autocomplete: "off",
-                    required: "",
-                    value: _vm.toSelectedAddress,
-                    placeholder: "Full Address"
-                  },
-                  on: { place_changed: _vm.getToAddressData }
-                }),
-                _vm._v(" "),
-                _vm.hasErrorToLat
-                  ? _c("p", { staticClass: "help is-danger" }, [
-                      _vm._v("this field is required")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.hasErrorToLat
-                  ? _c(
-                      "span",
-                      { staticClass: "icon is-right has-text-danger" },
-                      [
-                        _c("i", {
-                          staticClass: "mdi mdi-alert-circle mdi-24px"
-                        })
-                      ]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._m(3)
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "b-field",
-            { attrs: { label: "Zip Code" } },
-            [
-              _c("b-input", {
-                attrs: {
-                  readonly: "",
-                  type: "text",
-                  icon: "meteor",
-                  placeholder: "Zip Code"
-                },
-                on: { input: _vm.checkUser },
-                model: {
-                  value: _vm.toZipCode,
-                  callback: function($$v) {
-                    _vm.toZipCode = $$v
-                  },
-                  expression: "toZipCode"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(4),
-    _vm._v(" "),
-    _c(
-      "div",
-      [
-        _c("b-table", {
-          staticStyle: { "pointer-events": "none" },
-          attrs: { data: _vm.data },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(props) {
-                return [
-                  _c("b-table-column", { attrs: { label: "", width: "40" } }, [
-                    _c("div", { staticClass: "wrap-del-index" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "delete-tab",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteRow(props.row.id)
-                            }
-                          }
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "text",
+                        icon: "account",
+                        placeholder: "Full Name",
+                        required: ""
+                      },
+                      on: { input: _vm.checkUser },
+                      model: {
+                        value: _vm.fromFullName,
+                        callback: function($$v) {
+                          _vm.fromFullName = $$v
                         },
-                        [
+                        expression: "fromFullName"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  { attrs: { label: "Company Name" } },
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "text",
+                        icon: "worker",
+                        placeholder: "Company Name"
+                      },
+                      on: { input: _vm.checkUser },
+                      model: {
+                        value: _vm.fromCompanyName,
+                        callback: function($$v) {
+                          _vm.fromCompanyName = $$v
+                        },
+                        expression: "fromCompanyName"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "field" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v("Full Address *")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "control has-icons-left is-clearfix",
+                      class: { "has-icons-right": _vm.hasErrorFromLat }
+                    },
+                    [
+                      _c("GmapAutocomplete", {
+                        ref: "address",
+                        staticClass: "input",
+                        class: { "is-danger": _vm.hasErrorFromLat },
+                        attrs: {
+                          id: "map",
+                          required: "",
+                          value: _vm.fromAddressName,
+                          autocomplete: "off",
+                          lang: "EN",
+                          placeholder: "Full Address"
+                        },
+                        on: { place_changed: _vm.getFromAddressData }
+                      }),
+                      _vm._v(" "),
+                      _vm.hasErrorFromLat
+                        ? _c("p", { staticClass: "help is-danger" }, [
+                            _vm._v("this field is required")
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.hasErrorFromLat
+                        ? _c(
+                            "span",
+                            { staticClass: "icon is-right has-text-danger" },
+                            [
+                              _c("i", {
+                                staticClass: "mdi mdi-alert-circle mdi-24px"
+                              })
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  { attrs: { label: "Zip Code" } },
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "text",
+                        icon: "meteor",
+                        placeholder: "Zip Code"
+                      },
+                      on: { input: _vm.checkUser },
+                      model: {
+                        value: _vm.fromZipCode,
+                        callback: function($$v) {
+                          _vm.fromZipCode = $$v
+                        },
+                        expression: "fromZipCode"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-top" }, [
+            _c(
+              "section",
+              [
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      type: { "is-danger": _vm.hasErrorToFullName },
+                      message: {
+                        "this field is required": _vm.hasErrorToFullName
+                      },
+                      label: "Full Name *"
+                    }
+                  },
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "text",
+                        icon: "account",
+                        placeholder: "Full Name",
+                        required: ""
+                      },
+                      on: { input: _vm.checkUser },
+                      model: {
+                        value: _vm.toFullName,
+                        callback: function($$v) {
+                          _vm.toFullName = $$v
+                        },
+                        expression: "toFullName"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  { attrs: { label: "Company Name" } },
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "text",
+                        icon: "worker",
+                        placeholder: "Company Name"
+                      },
+                      on: { input: _vm.checkUser },
+                      model: {
+                        value: _vm.toCompanyName,
+                        callback: function($$v) {
+                          _vm.toCompanyName = $$v
+                        },
+                        expression: "toCompanyName"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "field" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v("Full Address *")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "control has-icons-left is-clearfix",
+                      class: { "has-icons-right": _vm.hasErrorToLat }
+                    },
+                    [
+                      _c("GmapAutocomplete", {
+                        ref: "address",
+                        staticClass: "input",
+                        class: { "is-danger": _vm.hasErrorToLat },
+                        attrs: {
+                          id: "map2",
+                          autocomplete: "off",
+                          required: "",
+                          value: _vm.toAddressName,
+                          placeholder: "Full Address"
+                        },
+                        on: { place_changed: _vm.getToAddressData }
+                      }),
+                      _vm._v(" "),
+                      _vm.hasErrorToLat
+                        ? _c("p", { staticClass: "help is-danger" }, [
+                            _vm._v("this field is required")
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.hasErrorToLat
+                        ? _c(
+                            "span",
+                            { staticClass: "icon is-right has-text-danger" },
+                            [
+                              _c("i", {
+                                staticClass: "mdi mdi-alert-circle mdi-24px"
+                              })
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._m(3)
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  { attrs: { label: "Zip Code" } },
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "text",
+                        icon: "meteor",
+                        placeholder: "Zip Code"
+                      },
+                      on: { input: _vm.checkUser },
+                      model: {
+                        value: _vm.toZipCode,
+                        callback: function($$v) {
+                          _vm.toZipCode = $$v
+                        },
+                        expression: "toZipCode"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("b-table", {
+                attrs: { data: _vm.data },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
                           _c(
-                            "svg",
+                            "b-table-column",
+                            { attrs: { label: "", width: "40" } },
+                            [
+                              _c("div", { staticClass: "wrap-del-index" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "delete-tab",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteRow(props.row.id)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          width: "25",
+                                          height: "25",
+                                          viewBox: "0 0 25 25"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              fill: "none",
+                                              "fill-rule": "evenodd"
+                                            }
+                                          },
+                                          [
+                                            _c("circle", {
+                                              attrs: {
+                                                cx: "12.5",
+                                                cy: "12.5",
+                                                r: "12.5",
+                                                fill: "#FE004C",
+                                                "fill-rule": "nonzero"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("path", {
+                                              attrs: {
+                                                fill: "#FFF",
+                                                stroke: "#FFF",
+                                                d:
+                                                  "M18.636 7.74l-.74-.74-5.078 5.078L7.74 7 7 7.74l5.078 5.078L7 17.896l.74.74 5.078-5.077 5.078 5.077.74-.74-5.077-5.078z"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(props.index + 1) +
+                                      "\n                        "
+                                  )
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
                             {
                               attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                width: "25",
-                                height: "25",
-                                viewBox: "0 0 25 25"
+                                centered: "",
+                                width: "150",
+                                field: "package_quantity",
+                                label: "Quantity (cm)"
+                              }
+                            },
+                            [
+                              _c("b-field", [
+                                _c(
+                                  "div",
+                                  { staticClass: "range-tab" },
+                                  [
+                                    _c("b-numberinput", {
+                                      attrs: { min: "0" },
+                                      model: {
+                                        value: props.row.package_quantity,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            props.row,
+                                            "package_quantity",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "props.row.package_quantity"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                centered: "",
+                                width: "150",
+                                field: "package_width",
+                                label: "Width (cm)"
                               }
                             },
                             [
                               _c(
-                                "g",
+                                "div",
+                                { staticClass: "range-tab" },
+                                [
+                                  _c("b-numberinput", {
+                                    attrs: { min: "0" },
+                                    model: {
+                                      value: props.row.package_width,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          props.row,
+                                          "package_width",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "props.row.package_width"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                centered: "",
+                                width: "150",
+                                field: "package_height",
+                                label: "Height (cm)"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "range-tab" },
+                                [
+                                  _c("b-numberinput", {
+                                    attrs: { min: "0" },
+                                    model: {
+                                      value: props.row.package_height,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          props.row,
+                                          "package_height",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "props.row.package_height"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                centered: "",
+                                width: "150",
+                                field: "package_length",
+                                label: "Length (cm)"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "range-tab" },
+                                [
+                                  _c("b-numberinput", {
+                                    attrs: { min: "0" },
+                                    model: {
+                                      value: props.row.package_length,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          props.row,
+                                          "package_length",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "props.row.package_length"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                centered: "",
+                                width: "150",
+                                field: "package_weight",
+                                label: "Weight (kg)"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "range-tab" },
+                                [
+                                  _c("b-numberinput", {
+                                    attrs: { min: "0" },
+                                    model: {
+                                      value: props.row.package_weight,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          props.row,
+                                          "package_weight",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "props.row.package_weight"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
+                            {
+                              attrs: {
+                                width: "200",
+                                field: "package_type",
+                                label: "Type"
+                              }
+                            },
+                            [
+                              _c(
+                                "select",
                                 {
-                                  attrs: {
-                                    fill: "none",
-                                    "fill-rule": "evenodd"
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: props.row.package_type,
+                                      expression: "props.row.package_type"
+                                    }
+                                  ],
+                                  staticClass: "input",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        props.row,
+                                        "package_type",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
                                   }
                                 },
                                 [
-                                  _c("circle", {
-                                    attrs: {
-                                      cx: "12.5",
-                                      cy: "12.5",
-                                      r: "12.5",
-                                      fill: "#FE004C",
-                                      "fill-rule": "nonzero"
-                                    }
-                                  }),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "General Cargo" } },
+                                    [_vm._v("General Cargo")]
+                                  ),
                                   _vm._v(" "),
-                                  _c("path", {
-                                    attrs: {
-                                      fill: "#FFF",
-                                      stroke: "#FFF",
-                                      d:
-                                        "M18.636 7.74l-.74-.74-5.078 5.078L7.74 7 7 7.74l5.078 5.078L7 17.896l.74.74 5.078-5.077 5.078 5.077.74-.74-5.077-5.078z"
-                                    }
-                                  })
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Cooling" } },
+                                    [_vm._v("Cooling")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Radioactive" } },
+                                    [_vm._v("Radioactive")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "Food" } }, [
+                                    _vm._v("Food")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Medicines" } },
+                                    [_vm._v("Medicines")]
+                                  )
                                 ]
                               )
                             ]
                           )
                         ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(props.index + 1) +
-                            "\n                        "
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      attrs: {
-                        centered: "",
-                        width: "150",
-                        field: "package_quantity",
-                        label: "Quantity (cm)"
                       }
-                    },
-                    [
-                      _c("b-field", [
-                        _c(
-                          "div",
-                          { staticClass: "range-tab" },
-                          [
-                            _c("b-numberinput", {
-                              attrs: { readonly: "", min: "0" },
-                              model: {
-                                value: props.row.package_quantity,
-                                callback: function($$v) {
-                                  _vm.$set(props.row, "package_quantity", $$v)
-                                },
-                                expression: "props.row.package_quantity"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    ],
-                    1
-                  ),
+                    }
+                  ],
+                  null,
+                  false,
+                  2296189908
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "add-package", on: { click: _vm.addRow } },
+                [
+                  _vm._m(5),
                   _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      attrs: {
-                        centered: "",
-                        width: "150",
-                        field: "package_width",
-                        label: "Width (cm)"
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "range-tab" },
-                        [
-                          _c("b-numberinput", {
-                            attrs: { min: "0" },
-                            model: {
-                              value: props.row.package_width,
-                              callback: function($$v) {
-                                _vm.$set(props.row, "package_width", $$v)
-                              },
-                              expression: "props.row.package_width"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      attrs: {
-                        centered: "",
-                        width: "150",
-                        field: "package_height",
-                        label: "Height (cm)"
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "range-tab" },
-                        [
-                          _c("b-numberinput", {
-                            attrs: { min: "0" },
-                            model: {
-                              value: props.row.package_height,
-                              callback: function($$v) {
-                                _vm.$set(props.row, "package_height", $$v)
-                              },
-                              expression: "props.row.package_height"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      attrs: {
-                        centered: "",
-                        width: "150",
-                        field: "package_length",
-                        label: "Length (cm)"
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "range-tab" },
-                        [
-                          _c("b-numberinput", {
-                            attrs: { min: "0" },
-                            model: {
-                              value: props.row.package_length,
-                              callback: function($$v) {
-                                _vm.$set(props.row, "package_length", $$v)
-                              },
-                              expression: "props.row.package_length"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      attrs: {
-                        centered: "",
-                        width: "150",
-                        field: "package_weight",
-                        label: "Weight (kg)"
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "range-tab" },
-                        [
-                          _c("b-numberinput", {
-                            attrs: { min: "0" },
-                            model: {
-                              value: props.row.package_weight,
-                              callback: function($$v) {
-                                _vm.$set(props.row, "package_weight", $$v)
-                              },
-                              expression: "props.row.package_weight"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      attrs: {
-                        width: "200",
-                        field: "package_type",
-                        label: "Type"
-                      }
-                    },
-                    [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: props.row.package_type,
-                              expression: "props.row.package_type"
-                            }
-                          ],
-                          staticClass: "input",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                props.row,
-                                "package_type",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "General Cargo" } }, [
-                            _vm._v("General Cargo")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "Cooling" } }, [
-                            _vm._v("Cooling")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "Radioactive" } }, [
-                            _vm._v("Radioactive")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "Food" } }, [
-                            _vm._v("Food")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "Medicines" } }, [
-                            _vm._v("Medicines")
-                          ])
-                        ]
-                      )
-                    ]
-                  )
+                  _c("div", [
+                    _vm._v("\n                Add Package\n            ")
+                  ])
                 ]
-              }
-            }
-          ])
-        })
-      ],
-      1
-    ),
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
+          _c(
+            "section",
+            [
+              _c(
+                "b-field",
+                { attrs: { label: "Pickup Date" } },
+                [
+                  _c("b-datepicker", {
+                    attrs: {
+                      "min-date": _vm.minDate,
+                      "mobile-native": false,
+                      placeholder: "Click to select...",
+                      icon: "calendar-today"
+                    },
+                    on: { input: _vm.filterDateFrom },
+                    model: {
+                      value: _vm.fromDate,
+                      callback: function($$v) {
+                        _vm.fromDate = $$v
+                      },
+                      expression: "fromDate"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-field",
+                { attrs: { label: "Deliver Date" } },
+                [
+                  _c("b-datepicker", {
+                    attrs: {
+                      "min-date": _vm.fromDate,
+                      "mobile-native": false,
+                      placeholder: "Click to select...",
+                      icon: "calendar-today"
+                    },
+                    on: { input: _vm.filterDateTo },
+                    model: {
+                      value: _vm.toDate,
+                      callback: function($$v) {
+                        _vm.toDate = $$v
+                      },
+                      expression: "toDate"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._m(7),
+          _vm._v(" "),
+          _c(
+            "section",
+            [
+              _c(
+                "b-field",
+                { attrs: { label: "Notes" } },
+                [
+                  _c("b-input", {
+                    attrs: { maxlength: "600", type: "textarea" },
+                    model: {
+                      value: _vm.notes,
+                      callback: function($$v) {
+                        _vm.notes = $$v
+                      },
+                      expression: "notes"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.currentUserId
+            ? _c(
+                "div",
+                { staticClass: "submit-form" },
+                [
+                  _c(
+                    "b-button",
+                    {
+                      attrs: { disabled: _vm.loaderSub, type: "is-success" },
+                      on: {
+                        click: function($event) {
+                          return _vm.submit("submit")
+                        }
+                      }
+                    },
+                    [
+                      _c("div", [_vm._v("Submit Offer")]),
+                      _vm._v(" "),
+                      _vm.loaderSub
+                        ? _c("img", {
+                            staticStyle: { width: "25px" },
+                            attrs: { src: "/images/loader.gif", alt: "" }
+                          })
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "go-back button is-danger",
+                      on: { click: _vm.deleteOffer }
+                    },
+                    [_vm._v("\n            Delete Offer\n        ")]
+                  )
+                ],
+                1
+              )
+            : _c(
+                "div",
+                { staticClass: "submit-form" },
+                [
+                  _c(
+                    "b-button",
+                    { attrs: { disabled: "", type: "is-success" } },
+                    [_vm._v("\n            Submit Offer\n\n        ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    { attrs: { disabled: "", type: "is-warning" } },
+                    [_vm._v("Save Draft\n\n        ")]
+                  )
+                ],
+                1
+              )
+        ])
+      : _vm._e(),
     _vm._v(" "),
-    _vm._m(5),
-    _vm._v(" "),
-    _c(
-      "section",
-      [
-        _c(
-          "b-field",
-          { attrs: { label: "Pickup Date" } },
-          [
-            _c("b-datepicker", {
-              attrs: {
-                "mobile-native": false,
-                placeholder: "Click to select...",
-                icon: "calendar-today"
-              },
-              on: { input: _vm.filterDateFrom },
-              model: {
-                value: _vm.fromDate,
-                callback: function($$v) {
-                  _vm.fromDate = $$v
-                },
-                expression: "fromDate"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "b-field",
-          { attrs: { label: "Deliver Date" } },
-          [
-            _c("b-datepicker", {
-              attrs: {
-                "mobile-native": false,
-                placeholder: "Click to select...",
-                icon: "calendar-today"
-              },
-              on: { input: _vm.filterDateTo },
-              model: {
-                value: _vm.toDate,
-                callback: function($$v) {
-                  _vm.toDate = $$v
-                },
-                expression: "toDate"
-              }
-            })
-          ],
-          1
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _vm._m(6),
-    _vm._v(" "),
-    _c(
-      "section",
-      [
-        _c(
-          "b-field",
-          { attrs: { label: "Notes" } },
-          [
-            _c("b-input", {
-              attrs: { maxlength: "600", type: "textarea" },
-              model: {
-                value: _vm.notes,
-                callback: function($$v) {
-                  _vm.notes = $$v
-                },
-                expression: "notes"
-              }
-            })
-          ],
-          1
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _vm.currentUserId
-      ? _c(
-          "div",
-          { staticClass: "submit-form" },
-          [
-            _c(
-              "b-button",
-              {
-                attrs: { disabled: _vm.loaderSub, type: "is-success" },
-                on: {
-                  click: function($event) {
-                    return _vm.submit("submit")
-                  }
-                }
-              },
-              [
-                _c("div", [_vm._v("Submit Offer")]),
-                _vm._v(" "),
-                _vm.loaderSub
-                  ? _c("img", {
-                      staticStyle: { width: "25px" },
-                      attrs: { src: "/images/loader.gif", alt: "" }
-                    })
-                  : _vm._e()
-              ]
-            )
-          ],
-          1
-        )
-      : _c(
-          "div",
-          { staticClass: "submit-form" },
-          [
-            _c("b-button", { attrs: { disabled: "", type: "is-success" } }, [
-              _vm._v("\n            Submit Offer\n\n        ")
-            ])
-          ],
-          1
-        )
+    _vm.errorShow
+      ? _c("div", [
+          _c(
+            "a",
+            {
+              staticClass: "go-back button is-danger",
+              attrs: { href: "/dashboard/" }
+            },
+            [_vm._v("\n        Go Back\n    ")]
+          )
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -56565,6 +56733,16 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "add-package-circle" }, [
+      _c("div", { staticClass: "add-package-circle-bg" }, [
+        _vm._v("\n                    +\n                ")
+      ])
     ])
   },
   function() {

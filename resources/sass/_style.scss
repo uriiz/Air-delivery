@@ -830,8 +830,11 @@ header .top_nav .action ul li a {
 }
 .main-form-disable{
   .field{
-    pointer-events: none;
+
   }
+}
+a.go-back{
+  margin-top: 70px;
 }
 /***************responsive***************/
 @media screen and (max-width: 1700px) {

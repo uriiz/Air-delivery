@@ -1,78 +1,76 @@
 <template>
-    <div class="main-form main-form-disable">
-        <div class="triancle"></div>
+    <div class="main-form">
+
+        <div v-if="!errorShow">
         <div class="form-title">
-           <div class="title">
-               <img style="width:30px" src="/images/user.svg">
-              <div> From:</div>
-           </div>
-
-        </div>
-        <div class="form-top">
-        <section>
-            <b-field label="Full Name *"
-                     :type="{ 'is-danger': hasErrorFromFullName }"
-                     :message="{ 'this field is required': hasErrorFromFullName }">
-                <b-input
-                        readonly
-                        type="text"
-                        icon="account"
-                        @input="checkUser"
-                        v-model="fromFullName"
-                        placeholder="Full Name"
-                        required>
-                </b-input>
-            </b-field>
-
-            <b-field label="Company Name">
-                <b-input
-                        readonly
-                        type="text"
-                        icon="worker"
-                        @input="checkUser"
-                        v-model="fromCompanyName"
-                        placeholder="Company Name"
-                        >
-                </b-input>
-            </b-field>
-
-            <div class="field">
-                <label class="label">Full Address *</label>
-                <div class="control has-icons-left is-clearfix"
-                     :class="{ 'has-icons-right': hasErrorFromLat }">
-
-                    <GmapAutocomplete
-                            id="map"
-                            required
-                            readonly
-                            :value="fromSelectedAddress"
-                            ref="address"
-                            autocomplete="off"
-                            lang="EN"
-                            class="input"
-                            :class="{ 'is-danger': hasErrorFromLat }"
-                            placeholder="Full Address"
-                            @place_changed="getFromAddressData"
-                    >
-                    </GmapAutocomplete>
-                    <p v-if="hasErrorFromLat" class="help is-danger">this field is required</p>
-                    <span v-if="hasErrorFromLat" class="icon is-right has-text-danger"><i class="mdi mdi-alert-circle mdi-24px"></i></span>
-                    <span class="icon is-left"><i class="mdi mdi-earth mdi-24px"></i></span>
-                </div>
+            <div class="title">
+                <img style="width:30px" src="/images/user.svg">
+                <div> From:</div>
             </div>
 
-            <b-field label="Zip Code">
-                <b-input
-                        readonly
-                        type="text"
-                        icon="meteor"
-                        @input="checkUser"
-                        v-model="fromZipCode"
-                        placeholder="Zip Code"
-                >
-                </b-input>
-            </b-field>
-        </section>
+        </div>
+
+        <div class="form-top">
+            <section>
+                <b-field label="Full Name *"
+                         :type="{ 'is-danger': hasErrorFromFullName }"
+                         :message="{ 'this field is required': hasErrorFromFullName }">
+                    <b-input
+                            type="text"
+                            icon="account"
+                            @input="checkUser"
+                            v-model="fromFullName"
+                            placeholder="Full Name"
+                            required>
+                    </b-input>
+                </b-field>
+
+                <b-field label="Company Name">
+                    <b-input
+                            type="text"
+                            icon="worker"
+                            @input="checkUser"
+                            v-model="fromCompanyName"
+                            placeholder="Company Name"
+                    >
+                    </b-input>
+                </b-field>
+
+                <div class="field">
+                    <label class="label">Full Address *</label>
+                    <div class="control has-icons-left is-clearfix"
+                         :class="{ 'has-icons-right': hasErrorFromLat }">
+
+                        <GmapAutocomplete
+                                id="map"
+                                required
+                                ref="address"
+                                :value="fromAddressName"
+                                autocomplete="off"
+                                lang="EN"
+                                class="input"
+                                :class="{ 'is-danger': hasErrorFromLat }"
+                                placeholder="Full Address"
+                                @place_changed="getFromAddressData"
+                        >
+                        </GmapAutocomplete>
+                        <p v-if="hasErrorFromLat" class="help is-danger">this field is required</p>
+                        <span v-if="hasErrorFromLat" class="icon is-right has-text-danger"><i class="mdi mdi-alert-circle mdi-24px"></i></span>
+                        <span class="icon is-left"><i class="mdi mdi-earth mdi-24px"></i></span>
+                    </div>
+                </div>
+
+                <b-field label="Zip Code">
+                    <b-input
+                            type="text"
+                            icon="meteor"
+                            @input="checkUser"
+                            v-model="fromZipCode"
+                            placeholder="Zip Code"
+                    >
+                    </b-input>
+                </b-field>
+            </section>
         </div>
         <div class="form-title">
             <div class="title">
@@ -87,9 +85,8 @@
             <section>
                 <b-field :type="{ 'is-danger': hasErrorToFullName }"
                          :message="{ 'this field is required': hasErrorToFullName }"
-                        label="Full Name *">
+                         label="Full Name *">
                     <b-input
-                            readonly
                             type="text"
                             icon="account"
                             @input="checkUser"
@@ -101,7 +98,6 @@
 
                 <b-field label="Company Name">
                     <b-input
-                            readonly
                             type="text"
                             icon="worker"
                             @input="checkUser"
@@ -115,11 +111,10 @@
                     <label class="label">Full Address *</label>
                     <div class="control has-icons-left is-clearfix" :class="{ 'has-icons-right': hasErrorToLat }">
                         <GmapAutocomplete
-                                readonly
                                 id="map2"
                                 autocomplete="off"
                                 required
-                                :value="toSelectedAddress"
+                                :value="toAddressName"
                                 ref="address"
                                 class="input"
                                 :class="{ 'is-danger': hasErrorToLat }"
@@ -136,7 +131,6 @@
 
                 <b-field label="Zip Code">
                     <b-input
-                            readonly
                             type="text"
                             icon="meteor"
                             @input="checkUser"
@@ -160,20 +154,19 @@
         <div>
             <b-table
                     :data="data"
-                    style="pointer-events: none;"
-                    >
+            >
                 <template slot-scope="props">
 
                     <b-table-column label="" width="40">
                         <div class="wrap-del-index">
 
                             <div class="delete-tab" @click="deleteRow( props.row.id )">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <circle cx="12.5" cy="12.5" r="12.5" fill="#FE004C" fill-rule="nonzero"/>
-                                            <path fill="#FFF" stroke="#FFF" d="M18.636 7.74l-.74-.74-5.078 5.078L7.74 7 7 7.74l5.078 5.078L7 17.896l.74.74 5.078-5.077 5.078 5.077.74-.74-5.077-5.078z"/>
-                                        </g>
-                                    </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <circle cx="12.5" cy="12.5" r="12.5" fill="#FE004C" fill-rule="nonzero"/>
+                                        <path fill="#FFF" stroke="#FFF" d="M18.636 7.74l-.74-.74-5.078 5.078L7.74 7 7 7.74l5.078 5.078L7 17.896l.74.74 5.078-5.077 5.078 5.077.74-.74-5.077-5.078z"/>
+                                    </g>
+                                </svg>
                             </div>
                             <div>
                                 {{props.index+1}}
@@ -185,7 +178,7 @@
                     <b-table-column centered width="150" field="package_quantity" label="Quantity (cm)">
                         <b-field>
                             <div class="range-tab">
-                                <b-numberinput readonly v-model="props.row.package_quantity" min="0">
+                                <b-numberinput v-model="props.row.package_quantity" min="0">
                                 </b-numberinput>
                             </div>
                         </b-field>
@@ -231,7 +224,16 @@
 
             </b-table>
 
-
+            <div class="add-package" @click="addRow">
+                <div class="add-package-circle">
+                    <div class="add-package-circle-bg">
+                        +
+                    </div>
+                </div>
+                <div>
+                    Add Package
+                </div>
+            </div>
         </div>
 
         <div class="form-title">
@@ -245,10 +247,9 @@
         </div>
         <section>
             <b-field label="Pickup Date">
-
                 <b-datepicker
                         v-model="fromDate"
-
+                        :min-date="minDate"
                         @input="filterDateFrom"
                         :mobile-native="false"
                         placeholder="Click to select..."
@@ -257,7 +258,7 @@
             </b-field>
             <b-field label="Deliver Date">
                 <b-datepicker
-
+                        :min-date=fromDate
                         v-model="toDate"
                         @input="filterDateTo"
                         :mobile-native="false"
@@ -277,7 +278,6 @@
             </div>
         </div>
         <section>
-               
             <b-field label="Notes">
 
                 <b-input maxlength="600" type="textarea" v-model="notes"></b-input>
@@ -289,7 +289,9 @@
                 <div>Submit Offer</div>
                 <img v-if="loaderSub" style="width:25px" src="/images/loader.gif" alt="">
             </b-button>
-
+            <button class="go-back button is-danger" @click="deleteOffer">
+                Delete Offer
+            </button>
         </div>
 
         <div class="submit-form" v-else>
@@ -297,10 +299,19 @@
                 Submit Offer
 
             </b-button>
+            <b-button disabled type="is-warning">Save Draft
 
+            </b-button>
         </div>
 
     </div>
+    <div v-if="errorShow">
+        <a class="go-back button is-danger" href="/dashboard/">
+            Go Back
+        </a>
+    </div>
+    </div>
+
 </template>
 
 <script>
@@ -360,18 +371,48 @@
                 loaderDraft:false,
                 submitAction:false,
                 notes:'',
+                errorShow:true,
             }
         },
-        props:[
-            'id'
-        ],
+        props:['id'],
         methods: {
 
+            confirmDelete(){
+                window.axios.post(
+                    '/delete-offer',
+                    {
+                        'id':this.id,
+                    }
+                ).then((res) => {
+                    window.location.href = "/dashboard/my-offers";
+                }).catch((res) => {
+
+                });
+            },
+            deleteOffer(){
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        this.confirmDelete()
+                    } else if (
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        return
+                    }
+                })
+
+            },
             validate(){
 
                 let err = false
-
-
 
                 if(!this.fromFullName){
                     this.hasErrorFromFullName = true
@@ -418,9 +459,9 @@
                     }
 
                     window.axios.post(
-                        '/save-offer',
+                        '/update-offer',
                         {
-                            'submit_action':this.submitAction,
+                            'submit_action':true,
                             'from_name':this.fromFullName,
                             'from_company_name':this.fromCompanyName,
                             'from_lat':this.fromLat,
@@ -444,6 +485,7 @@
                             'from_country_name':this.fromCountryName,
                             'from_country_code':this.fromCountryCode,
                             'pack_type':this.packType,
+                            'id':this.id,
                         }
                     ).then((res) => {
                         window.location.href = "/dashboard/my-offers";
@@ -492,7 +534,7 @@
                     } else if (
                         result.dismiss === Swal.DismissReason.cancel
                     ) {
-                      return
+                        return
                     }
                 })
 
@@ -544,29 +586,60 @@
 
             },
             loadUserInfo(){
+
                 window.axios.post(
                     '/get-order-details',
+                    {id:this.id}
                 ).then((res) => {
                     if(res.data){
-                        console.log(res.data)
 
                         this.fromFullName = res.data.from_name;
                         this.fromCompanyName = res.data.from_company_name;
-                        this.fromSelectedAddress = res.data.from_address_name;
+                        this.fromAddressName = res.data.from_address_name;
                         this.fromZipCode = res.data.from_zip_code;
+                        this.fromLat = res.data.from_lat;
+                        this.fromLng = res.data.from_lng;
+                        this.fromCountryName = res.data.from_country_name;
+                        this.fromCountryCode = res.data.from_country_code;
+                        this.fromAddressId = res.data.from_address_id;
                         this.toFullName = res.data.to_name;
                         this.toCompanyName = res.data.to_company_name;
-                        this.toSelectedAddress = res.data.to_address_name;
+                        this.toAddressName = res.data.to_address_name;
                         this.toZipCode = res.data.to_zip_code;
+                        this.toLat = res.data.to_lat;
+                        this.toLng = res.data.to_lng;
+                        this.toCountryName = res.data.to_country_name;
                         this.fromDate = new Date(res.data.from_date)
                         this.toDate = new Date(res.data.to_date)
+                        this.toCountryCode = res.data.to_country_code
+                        this.toAddressId = res.data.to_address_id
                         this.notes = res.data.note
+                        for(let i =0;i < res.data.packages.length;i++){
+                            res.data.packages[i].package_height = Number(res.data.packages[i].package_height);
+                            res.data.packages[i].package_length = Number(res.data.packages[i].package_length);
+                            res.data.packages[i].package_quantity = Number(res.data.packages[i].package_quantity);
+                            res.data.packages[i].package_weight = Number(res.data.packages[i].package_weight);
+                            res.data.packages[i].package_width = Number(res.data.packages[i].package_width);
+                        }
+                        this.data = res.data.packages;
+                        this.errorShow = false
 
+                    }else{
+                        this.errorShow = true
+                        this.$dialog.alert({
+                            title: 'Error',
+                            message: "Something's not good, we can't get this information",
+                            type: 'is-danger',
+                            hasIcon: false,
+                            icon: 'times-circle',
+                            iconPack: 'fa'
+                        })
                     }
                 }).catch((res) => {
 
                 });
             },
+
 
             checkUser(){
 
