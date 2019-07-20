@@ -1,33 +1,56 @@
 <template>
     <div class="wrap-ul-map">
+
+            <div class="form-title" style="margin: 0px 0px 20px;">
+                <div class="title">
+                    <img src="/images/user2.svg" style="width: 30px;">
+                    <div>Offer Details:</div>
+                </div>
+                <div class="change-password" style="display: none;">
+                <a target="_blank" href="/password/reset">Change Password</a>
+            </div>
+            </div>
+            <div class="divTable darkTable">
+                <div class="divTableHeading">
+                    <div class="divTableRow">
+                        <div class="divTableHead"></div>
+                        <div class="divTableHead">From</div>
+                        <div class="divTableHead">To</div>
+                    </div>
+                </div>
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell"><strong>Address:</strong></div>
+                        <div class="divTableCell"> {{from_address_name}}</div>
+                        <div class="divTableCell">{{to_address_name}}</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"><strong>Zip Code:</strong></div>
+                        <div class="divTableCell">{{from_zip_code}}</div>
+                        <div class="divTableCell">{{to_zip_code}}</div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"><strong>Company Name:</strong></div>
+                        <div class="divTableCell">{{from_company_name}}</div>
+                        <div class="divTableCell">{{to_company_name}}</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        <div class="form-title" style="margin:20px 0px 0px 20px;">
+            <div class="title">
+                <img src="/images/user2.svg" style="width: 30px;">
+                <div>Packages ({{packages.length}}):</div>
+            </div>
+            <div class="change-password" style="display: none;">
+                <a target="_blank" href="/password/reset">Change Password</a>
+            </div>
+        </div>
         <ul>
-            <li>
-                <strong>From:</strong> {{from_address_name}}
-            </li>
-            <li>
-                <strong>To:</strong> {{to_address_name}}
-            </li>
-            <li v-if="from_zip_code">
-                <strong>From Zip Code:</strong> {{from_zip_code}}
-            </li>
-            <li v-if="to_zip_code">
-                <strong>From Zip Code:</strong> {{to_zip_code}}
-            </li>
-
-            <li v-if="from_company_name">
-                <strong>From Company Name:</strong> {{from_company_name}}
-            </li>
-
-            <li v-if="to_company_name">
-                <strong>To Company Name:</strong> {{to_company_name}}
-            </li>
-
-            <li v-if="notes">
-                <strong>Notes:</strong> {{notes}}
-            </li>
-
             <li v-if="packages">
-                <strong>Total Of ({{packages.length}}) Packages:</strong>
                 <ul class="pack-wrap">
                     <li v-for="(p, i) in packages">
                         <div class="num-pack">{{i+1}}</div>
@@ -53,7 +76,15 @@
                 </ul>
             </li>
         </ul>
-
+        <div class="form-title" style="margin:20px 0px 0px 20px;">
+            <div class="title">
+                <img src="/images/user2.svg" style="width: 30px;">
+                <div>Global View:</div>
+            </div>
+            <div class="change-password" style="display: none;">
+                <a target="_blank" href="/password/reset">Change Password</a>
+            </div>
+        </div>
         <div class="maps-section">
             <div class="extra-info">
 

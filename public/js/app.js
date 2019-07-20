@@ -1819,6 +1819,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   methods: {
@@ -54715,58 +54746,73 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "wrap-ul-map" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "divTable darkTable" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "divTableBody" }, [
+        _c("div", { staticClass: "divTableRow" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "divTableCell" }, [
+            _vm._v(" " + _vm._s(_vm.from_address_name))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "divTableCell" }, [
+            _vm._v(_vm._s(_vm.to_address_name))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "divTableRow" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "divTableCell" }, [
+            _vm._v(_vm._s(_vm.from_zip_code))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "divTableCell" }, [
+            _vm._v(_vm._s(_vm.to_zip_code))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "divTableRow" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "divTableCell" }, [
+            _vm._v(_vm._s(_vm.from_company_name))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "divTableCell" }, [
+            _vm._v(_vm._s(_vm.to_company_name))
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "form-title",
+        staticStyle: { margin: "20px 0px 0px 20px" }
+      },
+      [
+        _c("div", { staticClass: "title" }, [
+          _c("img", {
+            staticStyle: { width: "30px" },
+            attrs: { src: "/images/user2.svg" }
+          }),
+          _vm._v(" "),
+          _c("div", [_vm._v("Packages (" + _vm._s(_vm.packages.length) + "):")])
+        ]),
+        _vm._v(" "),
+        _vm._m(5)
+      ]
+    ),
+    _vm._v(" "),
     _c("ul", [
-      _c("li", [
-        _c("strong", [_vm._v("From:")]),
-        _vm._v(" " + _vm._s(_vm.from_address_name) + "\n        ")
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c("strong", [_vm._v("To:")]),
-        _vm._v(" " + _vm._s(_vm.to_address_name) + "\n        ")
-      ]),
-      _vm._v(" "),
-      _vm.from_zip_code
-        ? _c("li", [
-            _c("strong", [_vm._v("From Zip Code:")]),
-            _vm._v(" " + _vm._s(_vm.from_zip_code) + "\n        ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.to_zip_code
-        ? _c("li", [
-            _c("strong", [_vm._v("From Zip Code:")]),
-            _vm._v(" " + _vm._s(_vm.to_zip_code) + "\n        ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.from_company_name
-        ? _c("li", [
-            _c("strong", [_vm._v("From Company Name:")]),
-            _vm._v(" " + _vm._s(_vm.from_company_name) + "\n        ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.to_company_name
-        ? _c("li", [
-            _c("strong", [_vm._v("To Company Name:")]),
-            _vm._v(" " + _vm._s(_vm.to_company_name) + "\n        ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.notes
-        ? _c("li", [
-            _c("strong", [_vm._v("Notes:")]),
-            _vm._v(" " + _vm._s(_vm.notes) + "\n        ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
       _vm.packages
         ? _c("li", [
-            _c("strong", [
-              _vm._v("Total Of (" + _vm._s(_vm.packages.length) + ") Packages:")
-            ]),
-            _vm._v(" "),
             _c(
               "ul",
               { staticClass: "pack-wrap" },
@@ -54827,11 +54873,13 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
+    _vm._m(6),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "maps-section" },
       [
-        _vm._m(0),
+        _vm._m(7),
         _vm._v(" "),
         _c(
           "GmapMap",
@@ -54912,6 +54960,119 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "form-title", staticStyle: { margin: "0px 0px 20px" } },
+      [
+        _c("div", { staticClass: "title" }, [
+          _c("img", {
+            staticStyle: { width: "30px" },
+            attrs: { src: "/images/user2.svg" }
+          }),
+          _vm._v(" "),
+          _c("div", [_vm._v("Offer Details:")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "change-password", staticStyle: { display: "none" } },
+          [
+            _c("a", { attrs: { target: "_blank", href: "/password/reset" } }, [
+              _vm._v("Change Password")
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "divTableHeading" }, [
+      _c("div", { staticClass: "divTableRow" }, [
+        _c("div", { staticClass: "divTableHead" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "divTableHead" }, [_vm._v("From")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "divTableHead" }, [_vm._v("To")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "divTableCell" }, [
+      _c("strong", [_vm._v("Address:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "divTableCell" }, [
+      _c("strong", [_vm._v("Zip Code:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "divTableCell" }, [
+      _c("strong", [_vm._v("Company Name:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "change-password", staticStyle: { display: "none" } },
+      [
+        _c("a", { attrs: { target: "_blank", href: "/password/reset" } }, [
+          _vm._v("Change Password")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "form-title",
+        staticStyle: { margin: "20px 0px 0px 20px" }
+      },
+      [
+        _c("div", { staticClass: "title" }, [
+          _c("img", {
+            staticStyle: { width: "30px" },
+            attrs: { src: "/images/user2.svg" }
+          }),
+          _vm._v(" "),
+          _c("div", [_vm._v("Global View:")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "change-password", staticStyle: { display: "none" } },
+          [
+            _c("a", { attrs: { target: "_blank", href: "/password/reset" } }, [
+              _vm._v("Change Password")
+            ])
+          ]
+        )
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
