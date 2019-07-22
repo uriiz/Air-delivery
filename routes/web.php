@@ -21,10 +21,12 @@ Route::get('/?login=1', 'HomeController@index')->name('custom-login');
 Route::get('/?register=1', 'HomeController@index')->name('custom-register');
 Route::post('/log-out', 'HomeController@logOut');
 Route::post('/get-user', 'HomeController@getUser');
+Route::get('/app-login', 'HomeController@index');
 
 
 Route::group(['middleware' => 'auth'],function() {
     Route::get('/dashboard', 'HomeController@index');
+    Route::get('/app-dashboard', 'HomeController@index');
     Route::get('/dashboard/add-new', 'HomeController@index');
     Route::get('/dashboard/my-offers', 'HomeController@index');
     Route::get('/dashboard/my-profile', 'HomeController@index');

@@ -29,6 +29,7 @@
                  data-id="{{Auth::user()->id}}"
                  data-logo="{{Auth::user()->logo}}"
                  data-name="{{Auth::user()->name}}"
+                 data-r="{{Auth::user()->role}}"
                  style="display: none"></div>
         @endguest
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">

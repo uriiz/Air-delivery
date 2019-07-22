@@ -265,6 +265,7 @@
                         'lat':this.lat,
                         'lng':this.lng,
                         'address':this.address,
+                        'role':1,
                         'zip_code':this.zipCode,
                         'phone':this.phone,
                         'confirm_term':this.terms,

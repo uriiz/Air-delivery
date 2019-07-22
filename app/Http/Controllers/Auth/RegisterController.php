@@ -82,6 +82,7 @@ class RegisterController extends Controller
             'lat' => $data['lat'],
             'lng' => $data['lng'],
             'address' => $data['address'],
+            'role' => $data['role'],
             'zip_code' => $data['zip_code'],
             'phone' => $data['phone'],
             'logo' => '/images/user_profile.jpg',

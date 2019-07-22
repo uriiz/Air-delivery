@@ -46,7 +46,7 @@ class HomeController extends Controller
     public function updateUser(Request $request)
     {
 
-        if(!Auth::id()){
+        if(!Auth::user() || Auth::user()->role != 1){
             return;
         }
 
@@ -71,7 +71,7 @@ class HomeController extends Controller
     }
     public function updateUserImage(Request $request)
     {
-        if(!Auth::user()->id){
+        if(!Auth::user() || Auth::user()->role != 1){
             return;
         }
 

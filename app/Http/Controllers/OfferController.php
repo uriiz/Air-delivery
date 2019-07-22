@@ -28,8 +28,8 @@ class OfferController extends Controller
     public function create(Request $request)
     {
 
-        if(!Auth::user()){
-            return;
+        if(!Auth::user() || Auth::user()->role != 1){
+          return 0;
         }
         $offer = Offer::newOffer($request);
         if($request->submit_action){
@@ -40,13 +40,19 @@ class OfferController extends Controller
     }
     public function deleteOffer(Request $request)
     {
+        if(!Auth::user() || Auth::user()->role != 1){
+            return;
+        }
+
         return Offer::where('id',$request->id)
             ->where('submit_action','draft')
             ->where('user_id',Auth::id())->delete();
     }
     public function update(Request $request)
     {
-
+        if(!Auth::user() || Auth::user()->role != 1){
+            return;
+        }
         $id = $request->id;
         Package::where('order_id',$id)->delete();
         $offer = Offer::updateOffer($request,$id);
@@ -61,8 +67,8 @@ class OfferController extends Controller
      */
     public function getOfferDetails(Request $request)
     {
-        if(! Auth::id()){
-            return ;
+        if(!Auth::user() || Auth::user()->role != 1){
+            return;
         }
 
         $offer =  Offer::where('id',$request->id)
@@ -85,8 +91,8 @@ class OfferController extends Controller
      */
     public function show(Request $request,Offer $offer)
     {
-        if(! Auth::id()){
-            return ;
+        if(!Auth::user() || Auth::user()->role != 1){
+            return;
         }
 
         $offers =  Offer::where('user_id',Auth::id())->orderBy('created_at', 'DESC')->get();

@@ -25,17 +25,21 @@ import App from './views/App'
 import Hello from './views/Hello'
 import Home from './views/Home'
 import Dashboard from './views/Dashboard'
+import DashboardApp from './views/app/Dashboard'
 import DashboardAddNew from './views/dashboard/DashboardAddNew'
 import DashboardOffers from './views/dashboard/DashboardOffers'
 import DashboardProfile from './views/dashboard/DashboardProfile'
 import DashboardOffer from './views/dashboard/DashboardOffer'
 import HeaderTop from './components/HeaderTopMenu'
+import AppLoginC from './components/app/AppLogin'
 import FormSingle from './components/FormSingle'
 import Sidebar from './components/Sidebar'
+import SidebarApp from './components/app/Sidebar'
 import myOffers from './components/MyOffers'
 import ExtraData from './components/ExtraData'
 import HeaderDashboard from './components/HeaderDasboard'
 import Login from './components/Login'
+import LoginApp from './views/app/Login'
 import Form from './components/Form'
 import Welcome from './components/Welcome'
 import MyAccount from './components/MyAccount'
@@ -45,8 +49,10 @@ Vue.component('vue2-dropzone', vue2Dropzone);
 Vue.component('header-top', HeaderTop);
 Vue.component('my-account', MyAccount);
 Vue.component('my-offers', myOffers);
+Vue.component('app-loginc', AppLoginC);
 Vue.component('table-extra-data-row', ExtraData);
 Vue.component('sidebar', Sidebar);
+Vue.component('sidebar-app', SidebarApp);
 Vue.component('header-dashboard', HeaderDashboard);
 Vue.component('main-form', Form);
 Vue.component('main-form-single', FormSingle);
@@ -55,16 +61,38 @@ Vue.component('welcome', Welcome);
 Vue.component('multi-select', Multiselect);
 
 var user = $('#details-helper').data('id');
+var role = $('#details-helper').data('r');
 
 const authMiddleware = (to, from, next) => {
     if (!user) {
         next = '/';
         window.location = "/";
     }
-
+    if(role != 1){
+        next = '/';
+        window.location = "/";
+    }
+    return next();
+}
+const authMiddlewareShip = (to, from, next) => {
+    if (!user) {
+        next = '/';
+        window.location = "/";
+    }
+    if(role != 2){
+        next = '/';
+        window.location = "/";
+    }
     return next();
 }
 
+const loginStatus = (to, from, next) => {
+    if (user) {
+        window.location = "/";
+    }
+
+    return next();
+}
 
 const router = new VueRouter({
     mode: 'history',
@@ -117,6 +145,18 @@ const router = new VueRouter({
             name: 'offer',
             component: DashboardOffer,
             beforeEnter: authMiddleware
+        },
+        {
+            path: '/app-login',
+            name: 'appLogin',
+            component: LoginApp,
+            beforeEnter: loginStatus
+        },
+        {
+            path: '/app-dashboard',
+            name: 'appDashboard',
+            component: DashboardApp,
+            beforeEnter: authMiddlewareShip
         },
 
 

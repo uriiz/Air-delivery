@@ -384,9 +384,23 @@
                         'id':this.id,
                     }
                 ).then((res) => {
-                    window.location.href = "/dashboard/my-offers";
+                    if(res.data != 0) {
+                        window.location.href = "/dashboard/my-offers";
+                    }else{
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'something went wrong ):',
+                            footer: ''
+                        })
+                    }
                 }).catch((res) => {
-
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'something went wrong ):',
+                        footer: ''
+                    })
                 });
             },
             deleteOffer(){
@@ -488,7 +502,16 @@
                             'id':this.id,
                         }
                     ).then((res) => {
-                        window.location.href = "/dashboard/my-offers";
+                        if(res.data != 0) {
+                            window.location.href = "/dashboard/my-offers";
+                        }else{
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Oops...',
+                                text: 'something went wrong ):',
+                                footer: ''
+                            })
+                        }
                     }).catch((res) => {
 
                     });
