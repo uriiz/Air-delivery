@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\Offer;
 use App\Package;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OfferController extends Controller
 {
@@ -15,9 +17,41 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function getCountries()
     {
-        //
+
+        return Country::select('name')->get();
+
+    }
+    public function getAppOffers()
+    {
+        if(Auth::user()->role != 2){
+            return;
+        }
+        $offers =  Offer::where('submit_action','published')->orderBy('created_at', 'DESC')->get();
+        return collect($offers)->map(function($filter){
+           return [
+               'id'=>$filter['id'],
+               'from_lat'=>$filter['from_lat'],
+               'from_lng'=>$filter['from_lng'],
+               'from_address_name'=>$filter['from_address_name'],
+               'from_zip_code'=>$filter['from_zip_code'],
+               'to_lat'=>$filter['to_lat'],
+               'to_lng'=>$filter['to_lng'],
+               'to_zip_code'=>$filter['to_zip_code'],
+               'to_address_name'=>$filter['to_address_name'],
+               'from_date'=>Offer::setPrettyTimeNoHour($filter['from_date']),
+               'to_date'=>Offer::setPrettyTimeNoHour($filter['to_date']),
+               'note'=> $filter['note'],
+               'pretty_time'=>  Offer::setPrettyTime($filter['updated_at']),
+               'from_country_name'=> $filter['from_country_name'],
+               'to_country_name'=>   $filter['to_country_name'],
+               'from_company_name'=>   '****',
+               'to_company_name'=>   '****',
+               'packages'=> Offer::getPackagesByOfferId($filter['id'])
+           ];
+        });
     }
 
     /**

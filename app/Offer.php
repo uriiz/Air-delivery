@@ -111,6 +111,8 @@ class Offer extends Model
             ]);
         }
 
+        Country::setCountry($request->from_country_name,$request->to_country_name,$request->from_country_code,$request->to_country_code);
+
         return $offer;
     }
 

@@ -1081,6 +1081,39 @@ div.darkTable {
   padding: 0 100px;
 }
 
+.tag.is-success.action {
+  animation: glow 1s infinite alternate linear;
+  -webkit-animation: glow 1s infinite alternate linear;
+  -moz-animation: glow 1s infinite alternate linear;
+  -o-animation: glow 1s infinite alternate linear;
+  -ms-animation: glow 1s infinite alternate linear;
+  cursor: pointer;
+}
+
+@-webkit-keyframes glow {
+  from {
+    background: #ed1459;
+  }
+
+  to {
+    background: #eaae1f;
+  }
+}
+
+@keyframes glow {
+  from {
+    background: #ed1459;
+  }
+
+  to {
+    background: #eaae1f;
+  }
+}
+
+.form-title .title svg {
+  margin-right: 10px;
+}
+
 /***************responsive***************/
 
 @media screen and (max-width: 1700px) {

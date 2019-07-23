@@ -194,9 +194,7 @@
     export default {
 
         mounted() {
-
             this.loadUserInfo()
-
         },
         methods: {
 
