@@ -4961,7 +4961,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    this.getOffers();
     this.getCountries();
   },
   methods: {
@@ -4994,36 +4993,27 @@ __webpack_require__.r(__webpack_exports__);
         _this2.countries = res.data;
       })["catch"](function (res) {});
     },
-    getOffers: function getOffers() {
+    filterCounries: function filterCounries() {
       var _this3 = this;
 
-      window.axios.post('/app/get-orders').then(function (res) {
-        console.log(res.data);
-        _this3.offers = res.data;
-        _this3.loader = false;
-      })["catch"](function (res) {});
-    },
-    filterCounries: function filterCounries() {
-      var _this4 = this;
-
       if (this.fromCountryName != -1 || this.toCountryName != -1) {
-        return this.offers.filter(function (offer) {
-          if (_this4.fromCountryName != -1 && _this4.toCountryName == -1) {
-            return offer.from_country_name == _this4.fromCountryName;
+        return this.$store.getters.getNewOffers.filter(function (offer) {
+          if (_this3.fromCountryName != -1 && _this3.toCountryName == -1) {
+            return offer.from_country_name == _this3.fromCountryName;
           }
 
-          if (_this4.fromCountryName == -1 && _this4.toCountryName != -1) {
-            return offer.to_country_name == _this4.toCountryName;
+          if (_this3.fromCountryName == -1 && _this3.toCountryName != -1) {
+            return offer.to_country_name == _this3.toCountryName;
           }
 
-          if (_this4.fromCountryName != -1 && _this4.toCountryName != -1) {
-            return offer.to_country_name == _this4.toCountryName && offer.from_country_name == _this4.fromCountryName;
+          if (_this3.fromCountryName != -1 && _this3.toCountryName != -1) {
+            return offer.to_country_name == _this3.toCountryName && offer.from_country_name == _this3.fromCountryName;
           }
 
-          return _this4.offers;
+          return _this3.offers;
         });
       } else {
-        return this.offers;
+        return this.$store.getters.getNewOffers;
       }
     },
     filterPack: function filterPack(filters) {
@@ -5038,8 +5028,6 @@ __webpack_require__.r(__webpack_exports__);
               packArr.push(filters[j]);
             }
           }
-
-          console.log(packArr);
         }
 
         for (var x = 0; x < packArr.length; x++) {
@@ -5050,7 +5038,6 @@ __webpack_require__.r(__webpack_exports__);
           ids.push(packArr[x].id);
         }
 
-        console.log(arrFilterIds);
         return arrFilterIds;
       }
 
@@ -5062,7 +5049,6 @@ __webpack_require__.r(__webpack_exports__);
       currentUserId: $("#details-helper").data('id'),
       currentUserName: $("#details-helper").data('name'),
       offers: [],
-      loader: true,
       isPaginated: true,
       perPage: 12,
       openedRows: [],
@@ -5073,6 +5059,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    loader: function loader() {
+      if (this.$store.getters.getNewOffers.length > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     data: function data() {
       var filters = this.filterCounries();
       filters = this.filterPack(filters);
@@ -5172,8 +5165,8 @@ __webpack_require__.r(__webpack_exports__);
         'extra_price_currency': this.extraCostCurrency,
         'offer_id': this.id
       }).then(function (res) {
-        console.log(res.data);
         _this.loader = false;
+        location.reload();
       })["catch"](function (res) {});
     }
   },
@@ -5249,6 +5242,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.timeShow();
@@ -5279,6 +5283,11 @@ __webpack_require__.r(__webpack_exports__);
       currentUserLogo: $("#details-helper").data('logo'),
       dateShowTex: ''
     };
+  },
+  computed: {
+    countOffers: function countOffers() {
+      return this.$store.getters.getNewOffers.length;
+    }
   }
 });
 
@@ -5376,8 +5385,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {},
-  methods: {},
+  mounted: function mounted() {
+    this.getOffers();
+  },
+  methods: {
+    getOffers: function getOffers() {
+      var _this = this;
+
+      window.axios.post('/app/get-orders').then(function (res) {
+        _this.$store.commit('newOffers', res.data);
+      })["catch"](function (res) {});
+    }
+  },
   data: function data() {
     return {
       currentUserId: $("#details-helper").data('id'),
@@ -61361,7 +61380,23 @@ var render = function() {
                 attrs: { src: "/images/icon_5.png", alt: "" }
               }),
               _vm._v(" "),
-              _c("div", [_vm._v("New Quotation")])
+              _c("div", { staticClass: "noty" }, [
+                _c("div", [
+                  _vm._v(
+                    "\n                            New Quotation\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", { staticClass: "count" }, [
+                    _vm._v(
+                      "\n                               " +
+                        _vm._s(_vm.countOffers) +
+                        "\n                           "
+                    )
+                  ])
+                ])
+              ])
             ])
           ],
           1
@@ -80387,7 +80422,8 @@ var app = new Vue({
   components: {
     App: _views_App__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
-  router: router
+  router: router,
+  store: _store__WEBPACK_IMPORTED_MODULE_32__["store"]
 });
 
 /***/ }),
@@ -82156,8 +82192,19 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
-  state: {},
-  getters: {}
+  state: {
+    newOffersArr: []
+  },
+  getters: {
+    getNewOffers: function getNewOffers(state) {
+      return state.newOffersArr;
+    }
+  },
+  mutations: {
+    newOffers: function newOffers(state, offers) {
+      state.newOffersArr = offers;
+    }
+  }
 });
 
 /***/ }),

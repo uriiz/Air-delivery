@@ -8,12 +8,19 @@
 
 <script>
     export default {
-        mounted() {
-
-        },
+            mounted() {
+                this.getOffers()
+            },
         methods: {
 
+            getOffers(){
+                window.axios.post(
+                    '/app/get-orders',
+                ).then((res) => {
 
+                    this.$store.commit('newOffers',res.data);
+                }).catch((res) => {});
+            },
 
         },
         data() {

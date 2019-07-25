@@ -84,8 +84,9 @@
                         'offer_id':this.id,
                     }
                 ).then((res) => {
-                   console.log(res.data)
+
                     this.loader = false
+                    location.reload();
                 }).catch((res) => {});
             },
         },

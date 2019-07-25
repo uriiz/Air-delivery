@@ -116,7 +116,7 @@
 
     export default {
         mounted() {
-            this.getOffers()
+
             this.getCountries()
         },
         methods: {
@@ -148,18 +148,11 @@
                     this.countries = res.data;
                 }).catch((res) => {});
             },
-            getOffers(){
-                window.axios.post(
-                    '/app/get-orders',
-                ).then((res) => {
-                    console.log(res.data)
-                    this.offers = res.data;
-                    this.loader = false
-                }).catch((res) => {});
-            },
-            filterCounries(){
+
+                filterCounries(){
+
                 if(this.fromCountryName != -1 || this.toCountryName != -1) {
-                    return this.offers.filter((offer) => {
+                    return  this.$store.getters.getNewOffers.filter((offer) => {
                         if(this.fromCountryName != -1 &&  this.toCountryName == -1){
                             return offer.from_country_name == this.fromCountryName
                         }
@@ -174,7 +167,7 @@
                         return this.offers
                     });
                 }else{
-                    return this.offers
+                    return this.$store.getters.getNewOffers
                 }
             },
 
@@ -193,7 +186,7 @@
                                 packArr.push(filters[j])
                             }
                         }
-                        console.log(packArr)
+
                     }
 
 
@@ -206,7 +199,7 @@
                         }
                         ids.push(packArr[x].id)
                     }
-                    console.log(arrFilterIds)
+
                     return arrFilterIds;
 
                 }
@@ -218,7 +211,6 @@
                 currentUserId:$("#details-helper").data('id'),
                 currentUserName:$("#details-helper").data('name'),
                 offers:[],
-                loader:true,
                 isPaginated: true,
                 perPage: 12,
                 openedRows:[],
@@ -229,7 +221,16 @@
             }
         },
         computed:{
+            loader(){
+               if(this.$store.getters.getNewOffers.length > 0){
+                   return false
+               }else{
+                   return true
+               }
+            },
+
             data(){
+
                 let filters =  this.filterCounries();
                 filters = this.filterPack(filters);
                 return filters;

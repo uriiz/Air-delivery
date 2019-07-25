@@ -23,7 +23,18 @@
                 <li>
                     <router-link :to="{ name: 'appDashboard' }">
                         <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
-                        <div>New Quotation</div>
+                        <div class="noty">
+                            <div>
+                                New Quotation
+                            </div>
+                            <div>
+                               <div class="count">
+                                   {{countOffers}}
+                               </div>
+                            </div>
+
+
+                        </div>
                     </router-link>
                 </li>
 
@@ -88,6 +99,12 @@
                 dateShowTex:'',
             }
         },
+        computed:{
+            countOffers(){
+                return this.$store.getters.getNewOffers.length
+            }
+        },
+
     }
 
 </script>

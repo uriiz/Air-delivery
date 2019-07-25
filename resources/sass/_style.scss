@@ -957,6 +957,23 @@ div.darkTable {
 .mb5{
   margin: 10px 0;
 }
+.noty{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.count{
+  width: 30px;
+  height: 30px;
+  color:#fff;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  background-color: #ff7800;
+  justify-content: center;
+}
 /***************responsive***************/
 @media screen and (max-width: 1700px) {
     .dashboard-sidebar{

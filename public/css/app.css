@@ -1139,6 +1139,31 @@ div.darkTable {
   margin: 10px 0;
 }
 
+.noty {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+.count {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  background-color: #ff7800;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
 /***************responsive***************/
 
 @media screen and (max-width: 1700px) {
