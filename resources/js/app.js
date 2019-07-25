@@ -33,6 +33,7 @@ import DashboardOffer from './views/dashboard/DashboardOffer'
 import HeaderTop from './components/HeaderTopMenu'
 import AppLoginC from './components/app/AppLogin'
 import OfferApp from './components/app/OfferApp'
+import SetOffer from './components/app/SetOffer'
 import FormSingle from './components/FormSingle'
 import Sidebar from './components/Sidebar'
 import SidebarApp from './components/app/Sidebar'
@@ -54,6 +55,7 @@ Vue.component('app-loginc', AppLoginC);
 Vue.component('table-extra-data-row', ExtraData);
 Vue.component('sidebar', Sidebar);
 Vue.component('offer-app', OfferApp);
+Vue.component('set-offer', SetOffer);
 Vue.component('sidebar-app', SidebarApp);
 Vue.component('header-dashboard', HeaderDashboard);
 Vue.component('main-form', Form);
@@ -164,6 +166,8 @@ const router = new VueRouter({
 
     ],
 });
+
+import {store} from './store'
 
 const app = new Vue({
     el: '#app',

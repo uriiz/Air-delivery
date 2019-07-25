@@ -23,7 +23,7 @@
                 <li>
                     <router-link :to="{ name: 'appDashboard' }">
                         <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
-                        <div>notification/activity</div>
+                        <div>New Quotation</div>
                     </router-link>
                 </li>
 

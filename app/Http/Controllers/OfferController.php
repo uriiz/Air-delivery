@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Country;
 use App\Offer;
 use App\Package;
+use App\Response;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,34 @@ class OfferController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function setPrice(Request $request)
+    {
+
+        if(!Auth::id() || Auth::user()->role != 2){
+            return;
+        }
+        if($request->price <= 0 || $request->extra_price < 0 || !$request->offer_id){
+            return 'price issue';
+        }
+
+        $userId = Offer::where('id',$request->offer_id)->first();
+        $userId = $userId->user_id;
+
+        Response::create([
+            'offer_id' => $request->offer_id,
+            'price_offer' => $request->price,
+            'currency' => $request->price_currency,
+            'price_offer_extra' => $request->extra_price,
+            'currency_extra' => $request->extra_price_currency,
+            'company_id' => Auth::id(),
+            'user_id' => $userId,
+            'is_send_email' => 0,
+            'is_send' => 0,
+            'is_customer_response' => 0,
+        ]);
+
+    }
+
     public function getCountries()
     {
 
@@ -30,6 +59,19 @@ class OfferController extends Controller
             return;
         }
         $offers =  Offer::where('submit_action','published')->orderBy('created_at', 'DESC')->get();
+
+        $offersAvilable = [];
+        foreach ($offers as $offer){
+
+            $response = Response::where('offer_id',$offer->id)->where('company_id',Auth::id())->first();
+            if(count($response) == 1){
+
+            }else{
+                array_push($offersAvilable,$offer);
+            }
+        }
+
+        $offers = $offersAvilable;
         return collect($offers)->map(function($filter){
            return [
                'id'=>$filter['id'],

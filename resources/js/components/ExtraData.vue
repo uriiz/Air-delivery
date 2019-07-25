@@ -216,7 +216,7 @@
             </div>
             <div style="margin-top: 20px">
                 <b-field v-if="notes" label="Notes:"
-                         :label-position="labelPosition">
+                         >
                     <b-input disabled :value="notes" type="textarea"></b-input>
                 </b-field>
 

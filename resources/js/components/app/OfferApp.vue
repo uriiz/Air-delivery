@@ -34,7 +34,7 @@
                 </div>
 
             </div>
-            <div class="main-table-title"><h3>New Offers</h3></div>
+            <div class="main-table-title"><h3>New Quotation</h3></div>
             <div class="main-table-box">
                 <div class="loader1" v-if="loader">
                     <img src="/images/loader1.png" class="rotating" alt="">
@@ -79,7 +79,7 @@
                         </b-table-column>
 
                         <b-table-column field="to_date" label="Set Your Offer" >
-                           <span class="tag is-success action">
+                           <span @click="setOffer(props.row.id)" class="tag is-success action">
                                Set Your Offer !
                            </span>
                         </b-table-column>
@@ -112,12 +112,22 @@
 </template>
 
 <script>
+    import SetOffer from './SetOffer'
+
     export default {
         mounted() {
             this.getOffers()
             this.getCountries()
         },
         methods: {
+            setOffer(id){
+                this.$modal.open({
+                    parent: this,
+                    component: SetOffer,
+                    props:{id:id,},
+                    hasModalCard: true
+                })
+            },
             filterData(){
 
             },
@@ -135,10 +145,7 @@
                 window.axios.post(
                     '/get-countries',
                 ).then((res) => {
-
                     this.countries = res.data;
-
-                    console.log(res.data)
                 }).catch((res) => {});
             },
             getOffers(){

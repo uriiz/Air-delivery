@@ -1114,6 +1114,31 @@ div.darkTable {
   margin-right: 10px;
 }
 
+.wrap-price {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.wrap-price .field {
+  margin: 0 !important;
+  max-width: 140px;
+}
+
+.wrap-price .field .control {
+  margin: 0 !important;
+}
+
+.wrap-price select {
+  width: 60px;
+  margin-left: 20px;
+}
+
+.mb5 {
+  margin: 10px 0;
+}
+
 /***************responsive***************/
 
 @media screen and (max-width: 1700px) {

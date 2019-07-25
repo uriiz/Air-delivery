@@ -40,5 +40,6 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('/dashboard/offer/{id}', 'HomeController@index');
     Route::post('/app/get-orders', 'OfferController@getAppOffers');
     Route::post('/get-countries', 'OfferController@getCountries');
+    Route::post('/set-price', 'OfferController@setPrice');
 
 });
