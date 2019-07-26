@@ -23,13 +23,22 @@
                 <li>
                     <router-link :to="{ name: 'dashboard' }">
                         <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
-                        <div>notification/activity</div>
+                        <div class="noty">
+                        <div>
+                            New Quotation
+                        </div>
+                        <div>
+                            <div class="count">
+                                {{countOffers}}
+                            </div>
+                        </div>
+                    </div>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'addOffer' }">
                         <img src="/images/icon_2.png" alt="" class="mCS_img_loaded">
-                        <div>Send New Offer</div>
+                        <div>Send New Quotation</div>
                     </router-link>
                 </li>
                 <li>
@@ -56,9 +65,16 @@
         mounted() {
 
            this.timeShow()
+            this.getOffers()
         },
         methods: {
-
+            getOffers(){
+                window.axios.post(
+                    '/get-price-offer',
+                ).then((res) => {
+                    this.$store.commit('newOffersUser',res.data);
+                }).catch((res) => {console.log(res.data)});
+            },
             timeShow(){
 
                 var data = [
@@ -96,6 +112,12 @@
                 currentUserName:$("#details-helper").data('name'),
                 currentUserLogo:$("#details-helper").data('logo'),
                 dateShowTex:'',
+            }
+        },
+
+        computed:{
+            countOffers(){
+                return this.$store.getters.getNewOffersUser.length
             }
         },
     }

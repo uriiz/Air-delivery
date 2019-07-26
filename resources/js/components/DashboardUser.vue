@@ -22,17 +22,6 @@
                     </select>
                 </div>
 
-                <div class="wrap-input">
-                    <select @change="filterData" v-model="packageType" class="input">
-                        <option selected value="-1">Package Type</option>
-                        <option value="General Cargo">General Cargo</option>
-                        <option value="Cooling">Cooling</option>
-                        <option value="Radioactive">Radioactive</option>
-                        <option value="Food">Food</option>
-                        <option value="Medicines">Medicines</option>
-                    </select>
-                </div>
-
             </div>
             <div class="main-table-title"><h3>New Quotation</h3></div>
             <div class="main-table-box">
@@ -51,7 +40,7 @@
                 >
 
                     <template slot-scope="props">
-                        <b-table-column field="id" label="Order ID">
+                        <b-table-column field="id" label="Quotation ID">
                             <div @click="openRow(props.row)">
                                 #{{ props.row.id }}
                             </div>
@@ -71,21 +60,21 @@
                         </b-table-column>
 
                         <b-table-column field="to_date" label="From" >
-                            {{ props.row.from_country_name }}
+                            {{ props.row.from_name }}
                         </b-table-column>
 
                         <b-table-column field="to_date" label="To" >
-                            {{ props.row.to_country_name }}
+                            {{ props.row.to_name }}
                         </b-table-column>
 
-                        <b-table-column field="to_date" label="Set Your Offer" >
-                           <span @click="setOffer(props.row.id)" class="tag is-success action">
-                               Set Your Quotation !
+                        <b-table-column field="to_date" label="Watch" >
+                           <span @click="showPrices(props.row.response,props.row.id)" class="tag is-success action">
+                               Watch
                            </span>
                         </b-table-column>
                     </template>
                     <template slot="detail" slot-scope="props">
-                        <table-extra-data-row
+                        <extra-data-price
                                 :from_address_name="props.row.from_address_name"
                                 :from_company_name="props.row.from_company_name"
                                 :to_company_name="props.row.to_company_name"
@@ -98,10 +87,11 @@
                                 :to_lng="props.row.to_lng"
                                 :to_zip_code="props.row.to_zip_code"
                                 :packages="props.row.packages"
+                                :response="props.row.response"
                                 :rowId="props.row.id"
                         >
 
-                        </table-extra-data-row>
+                        </extra-data-price>
                     </template>
 
                 </b-table>
@@ -112,24 +102,22 @@
 </template>
 
 <script>
-    import SetOffer from './SetOffer'
 
+    import ShowPrice from './ShowPrice'
     export default {
         mounted() {
-
             this.getCountries()
         },
         methods: {
-            setOffer(id){
+            showPrices(data,id){
                 this.$modal.open({
                     parent: this,
-                    component: SetOffer,
-                    props:{id:id,},
+                    component: ShowPrice,
+                    props:{response:data,id:id},
                     hasModalCard: true
                 })
             },
             filterData(){
-
             },
             openRow(row) {
                 if(this.openedRows[0] !== row.id) {
@@ -149,10 +137,10 @@
                 }).catch((res) => {});
             },
 
-                filterCounries(){
+            filterCounries(){
 
                 if(this.fromCountryName != -1 || this.toCountryName != -1) {
-                    return  this.$store.getters.getNewOffers.filter((offer) => {
+                    return  this.$store.getters.getNewOffersUser.filter((offer) => {
                         if(this.fromCountryName != -1 &&  this.toCountryName == -1){
                             return offer.from_country_name == this.fromCountryName
                         }
@@ -167,7 +155,8 @@
                         return this.offers
                     });
                 }else{
-                    return this.$store.getters.getNewOffers
+
+                    return this.$store.getters.getNewOffersUser
                 }
             },
 
@@ -222,11 +211,11 @@
         },
         computed:{
             loader(){
-               if(this.$store.getters.getNewOffers.length > 0){
-                   return false
-               }else{
-                   return true
-               }
+                if(this.$store.getters.getNewOffersUser.length > 0){
+                    return false
+                }else{
+                    return true
+                }
             },
 
             data(){

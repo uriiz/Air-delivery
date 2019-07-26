@@ -31,13 +31,16 @@ import DashboardOffers from './views/dashboard/DashboardOffers'
 import DashboardProfile from './views/dashboard/DashboardProfile'
 import DashboardOffer from './views/dashboard/DashboardOffer'
 import HeaderTop from './components/HeaderTopMenu'
+import DashboardUser from './components/DashboardUser'
 import AppLoginC from './components/app/AppLogin'
 import OfferApp from './components/app/OfferApp'
 import SetOffer from './components/app/SetOffer'
 import FormSingle from './components/FormSingle'
+import ExtraDataPrice from './components/ExtraDataPrice'
 import Sidebar from './components/Sidebar'
 import SidebarApp from './components/app/Sidebar'
 import myOffers from './components/MyOffers'
+import ShowPrice from './components/ShowPrice'
 import ExtraData from './components/ExtraData'
 import HeaderDashboard from './components/HeaderDasboard'
 import Login from './components/Login'
@@ -56,11 +59,14 @@ Vue.component('table-extra-data-row', ExtraData);
 Vue.component('sidebar', Sidebar);
 Vue.component('offer-app', OfferApp);
 Vue.component('set-offer', SetOffer);
+Vue.component('show-price', ShowPrice);
 Vue.component('sidebar-app', SidebarApp);
 Vue.component('header-dashboard', HeaderDashboard);
 Vue.component('main-form', Form);
 Vue.component('main-form-single', FormSingle);
+Vue.component('extra-data-price', ExtraDataPrice);
 Vue.component('header-login', Login);
+Vue.component('dashboard-user', DashboardUser);
 Vue.component('welcome', Welcome);
 Vue.component('multi-select', Multiselect);
 

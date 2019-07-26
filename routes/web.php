@@ -41,5 +41,6 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/app/get-orders', 'OfferController@getAppOffers');
     Route::post('/get-countries', 'OfferController@getCountries');
     Route::post('/set-price', 'OfferController@setPrice');
+    Route::post('/get-price-offer', 'OfferController@getPriceOffer');
 
 });

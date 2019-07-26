@@ -32,8 +32,6 @@
                                    {{countOffers}}
                                </div>
                             </div>
-
-
                         </div>
                     </router-link>
                 </li>

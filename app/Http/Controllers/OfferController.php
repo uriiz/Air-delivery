@@ -19,6 +19,31 @@ class OfferController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function getPriceOffer(Request $request)
+    {
+        if(! Auth::id() || Auth::user()->role != 1){
+            return;
+        }
+        $offers =  Offer::where('user_id',Auth::id())->orderBy('created_at', 'DESC')->get();
+        $filterdOffers = [];
+        foreach ($offers as $o){
+
+            $respones = Response::where('user_id',Auth::id())->where('offer_id',$o->id)->get();
+
+            if(count($respones) == 0){
+                continue;
+            }
+
+            $o->pretty_time = Offer::setPrettyTime($o->created_at);
+            $o->from_date = Offer::setPrettyTimeNoHour($o->from_date);
+            $o->to_date = Offer::setPrettyTimeNoHour($o->to_date);
+            $o->packages = Offer::getPackagesByOfferId($o->id);
+            $o->response = $respones;
+            array_push($filterdOffers,$o);
+        }
+        return $filterdOffers;
+    }
+
     public function setPrice(Request $request)
     {
 
