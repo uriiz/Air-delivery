@@ -39,12 +39,14 @@ import FormSingle from './components/FormSingle'
 import ExtraDataPrice from './components/ExtraDataPrice'
 import Sidebar from './components/Sidebar'
 import SidebarApp from './components/app/Sidebar'
+import EditApp from './components/app/Edit'
 import myOffers from './components/MyOffers'
 import ShowPrice from './components/ShowPrice'
 import ExtraData from './components/ExtraData'
 import HeaderDashboard from './components/HeaderDasboard'
 import Login from './components/Login'
 import LoginApp from './views/app/Login'
+import appDashboardEdit from './views/app/Profile'
 import Form from './components/Form'
 import Welcome from './components/Welcome'
 import MyAccount from './components/MyAccount'
@@ -54,6 +56,7 @@ Vue.component('vue2-dropzone', vue2Dropzone);
 Vue.component('header-top', HeaderTop);
 Vue.component('my-account', MyAccount);
 Vue.component('my-offers', myOffers);
+Vue.component('app-edit', EditApp);
 Vue.component('app-loginc', AppLoginC);
 Vue.component('table-extra-data-row', ExtraData);
 Vue.component('sidebar', Sidebar);
@@ -166,6 +169,12 @@ const router = new VueRouter({
             path: '/app-dashboard',
             name: 'appDashboard',
             component: DashboardApp,
+            beforeEnter: authMiddlewareShip
+        },
+        {
+            path: '/app-dashboard/edit',
+            name: 'appDashboardEdit',
+            component: appDashboardEdit,
             beforeEnter: authMiddlewareShip
         },
 

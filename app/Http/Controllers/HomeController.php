@@ -46,7 +46,7 @@ class HomeController extends Controller
     public function updateUser(Request $request)
     {
 
-        if(!Auth::user() || Auth::user()->role != 1){
+        if(!Auth::user() ){
             return;
         }
 
@@ -61,17 +61,24 @@ class HomeController extends Controller
             $phone = $request->phone;
         }
 
+        if(!$request->company_phone){
+            $companyPhone = Auth::user()->company_phone;
+        }else{
+            $companyPhone = $request->company_phone;
+        }
+
         return User::where('id',Auth::id())->update([
             'name'=> $name,
             'phone'=> $phone,
             'company_name' => $request->company_name,
             'zip_code' => $request->zip_code,
             'job_title' => $request->job_title,
+            'company_phone' => $companyPhone,
         ]);
     }
     public function updateUserImage(Request $request)
     {
-        if(!Auth::user() || Auth::user()->role != 1){
+        if(!Auth::user()){
             return;
         }
 

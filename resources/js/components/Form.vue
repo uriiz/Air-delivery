@@ -9,7 +9,7 @@
             <div>
                 <div class="field">
                     <b-switch v-model="isFromMe"
-                              type="is-danger"
+                             
                               @input="switchFromTo"
                               true-value="from me"
                               false-value="to me">

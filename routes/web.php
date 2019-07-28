@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/?login=1', 'HomeController@index')->name('custom-login');
 Route::get('/?register=1', 'HomeController@index')->name('custom-register');
 Route::post('/log-out', 'HomeController@logOut');
-Route::post('/get-user', 'HomeController@getUser');
+
 Route::get('/app-login', 'HomeController@index');
 
 
@@ -42,5 +42,9 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/get-countries', 'OfferController@getCountries');
     Route::post('/set-price', 'OfferController@setPrice');
     Route::post('/get-price-offer', 'OfferController@getPriceOffer');
+    Route::get('/app-dashboard/edit', 'HomeController@index');
+    Route::post('/get-user', 'HomeController@getUser');
+    Route::post('/set-feedback', 'FeedBackController@store');
+
 
 });

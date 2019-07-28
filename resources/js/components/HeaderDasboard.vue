@@ -13,7 +13,7 @@
         </div>
         <div class="brand_fidbek">
             <div class="fidbek">
-                <a href="#">Feedback</a>
+                <a @click.prevent="feedBackTrigger" href="#">Feedback</a>
             </div>
             <div class="brand">
                 Freight-Me
@@ -23,9 +23,17 @@
     </header>
 </template>
 <script>
-
+    import FeedBack from './FeedBack'
     export default {
         methods: {
+
+            feedBackTrigger(){
+                this.$modal.open({
+                    parent: this,
+                    component: FeedBack,
+                    hasModalCard: true
+                })
+            },
             logOut(){
 
                 window.axios.post(

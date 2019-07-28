@@ -354,26 +354,6 @@ body {
   font-weight: bold;
 }
 
-.switch input[type=checkbox]:checked + .check.is-danger {
-  background: #111b23 !important;
-}
-
-.switch input[type=checkbox]:focus + .check {
-  background: #111b23 !important;
-}
-
-.switch input[type=checkbox] + .check:before {
-  background: #8fb301 !important;
-}
-
-.switch input[type=checkbox] + .check {
-  background: #111b23 !important;
-}
-
-.switch input[type=checkbox]:focus:checked + .check.is-danger {
-  box-shadow: none !important;
-}
-
 .form-title .switch .control-label {
   min-width: 80px;
 }

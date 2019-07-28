@@ -38,7 +38,7 @@
 
 
                 <li>
-                    <router-link :to="{ name: 'profile' }">
+                    <router-link :to="{ name: 'appDashboardEdit' }">
                         <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
                         <div>My Account</div>
                     </router-link>
@@ -54,10 +54,17 @@
 
         mounted() {
 
-            this.timeShow()
+            this.timeShow();
+            this.getOffers();
         },
         methods: {
-
+            getOffers(){
+                window.axios.post(
+                    '/app/get-orders',
+                ).then((res) => {
+                    this.$store.commit('newOffers',res.data);
+                }).catch((res) => {});
+            },
             timeShow(){
 
                 var data = [
