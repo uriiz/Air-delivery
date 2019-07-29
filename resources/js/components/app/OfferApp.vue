@@ -152,7 +152,7 @@
                 filterCounries(){
 
                 if(this.fromCountryName != -1 || this.toCountryName != -1) {
-                    return  this.$store.getters.getNewOffers.filter((offer) => {
+                    return this.$store.getters.getNewOffers.filter((offer) => {
                         if(this.fromCountryName != -1 &&  this.toCountryName == -1){
                             return offer.from_country_name == this.fromCountryName
                         }

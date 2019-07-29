@@ -28,11 +28,13 @@ import Dashboard from './views/Dashboard'
 import DashboardApp from './views/app/Dashboard'
 import DashboardAddNew from './views/dashboard/DashboardAddNew'
 import DashboardOffers from './views/dashboard/DashboardOffers'
+import DashboardAdmin from './views/admin/Dashboard'
 import DashboardProfile from './views/dashboard/DashboardProfile'
 import DashboardOffer from './views/dashboard/DashboardOffer'
 import HeaderTop from './components/HeaderTopMenu'
 import DashboardUser from './components/DashboardUser'
 import AppLoginC from './components/app/AppLogin'
+import AdminSideBar from './components/admin/SideBar'
 import OfferApp from './components/app/OfferApp'
 import SetOffer from './components/app/SetOffer'
 import FormSingle from './components/FormSingle'
@@ -71,6 +73,7 @@ Vue.component('extra-data-price', ExtraDataPrice);
 Vue.component('header-login', Login);
 Vue.component('dashboard-user', DashboardUser);
 Vue.component('welcome', Welcome);
+Vue.component('admin-sidebar', AdminSideBar);
 Vue.component('multi-select', Multiselect);
 
 var user = $('#details-helper').data('id');
@@ -93,6 +96,18 @@ const authMiddlewareShip = (to, from, next) => {
         window.location = "/";
     }
     if(role != 2){
+        next = '/';
+        window.location = "/";
+    }
+    return next();
+}
+
+const authMiddlewareAdmin = (to, from, next) => {
+    if (!user) {
+        next = '/';
+        window.location = "/";
+    }
+    if(role != 3){
         next = '/';
         window.location = "/";
     }
@@ -176,6 +191,13 @@ const router = new VueRouter({
             name: 'appDashboardEdit',
             component: appDashboardEdit,
             beforeEnter: authMiddlewareShip
+        },
+
+        {
+            path: '/admin-dashboard',
+            name: 'DashboardAdmin',
+            component: DashboardAdmin,
+            beforeEnter: authMiddlewareAdmin
         },
 
 

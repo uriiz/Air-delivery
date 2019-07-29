@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Offer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,27 @@ class HomeController extends Controller
 //        $this->middleware('auth');
     }
 
+    public function getUsers()
+    {
+        if(!Auth::id() || Auth::user()->role != 3){
+            return;
+        }
+        $users = User::where('role',1)->orderBy('created_at', 'DESC')->get();
+        foreach ($users as $u){
+            $u->offers = Offer::where('user_id',$u->id)->get();
+        }
+
+        return $users;
+    }
+
+    public function deleteUser(Request $request)
+    {
+        if(!Auth::id() || Auth::user()->role != 3){
+            return;
+        }
+
+        User::where('id',$request->id)->delete();
+    }
     public function getUser()
     {
         if(Auth::user()){

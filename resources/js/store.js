@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     state:{
         newOffersArr:[],
         newOffersUserArr:[],
+        usersArr:[],
     },
     getters:{
         getNewOffers(state){
@@ -15,6 +16,9 @@ export const store = new Vuex.Store({
         },
         getNewOffersUser(state){
             return state.newOffersUserArr
+        },
+        getUsers(state){
+            return state.usersArr
         },
     },
 
@@ -24,8 +28,19 @@ export const store = new Vuex.Store({
         },
         newOffersUser(state,offers){
             state.newOffersUserArr = offers
-            console.log(state.newOffersUserArr)
         },
+        users(state,users){
+            state.usersArr = users
+            console.log(state.usersArr)
+        },
+        deleteUser(state,id){
+
+            for(let i = 0;i<state.usersArr.length;i++){
+                if(state.usersArr[i].id == id){
+                    state.usersArr.splice(i,1)
+                }
+            }
+        }
     }
 
 })

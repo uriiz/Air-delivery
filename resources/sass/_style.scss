@@ -301,8 +301,28 @@ body{
 //.switch input[type=checkbox]:focus:checked + .check.is-danger{
 //  box-shadow: none !important;
 //}
-
-
+.order-admin-details{
+  direction: rtl;
+  p{
+    text-align: right;
+    direction: rtl;
+    display: flex;
+    strong{
+      margin-right:10px;
+    }
+  }
+}
+.sep-custom{
+  background: rgb(255, 120, 0);
+  color: rgb(255, 255, 255);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .form-title{
   .switch .control-label{
     min-width: 80px;

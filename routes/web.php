@@ -45,6 +45,9 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('/app-dashboard/edit', 'HomeController@index');
     Route::post('/get-user', 'HomeController@getUser');
     Route::post('/set-feedback', 'FeedBackController@store');
+    Route::post('/admin/get-users', 'HomeController@getUsers');
+    Route::post('/admin/delete-user', 'HomeController@deleteUser');
+    Route::get('/admin-dashboard', 'HomeController@index');
 
 
 });
