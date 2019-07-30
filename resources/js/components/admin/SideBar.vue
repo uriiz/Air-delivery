@@ -19,9 +19,16 @@
 
 
                 <li>
-                    <router-link :to="{ name: 'appDashboardEdit' }">
+                    <router-link :to="{ name: 'DashboardShipper' }">
                         <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
                         <div>משלחים</div>
+                    </router-link>
+                </li>
+
+                <li>
+                    <router-link :to="{ name: 'DashboardWaiting' }">
+                        <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
+                        <div>משלחים שמחכים לאישור!</div>
                     </router-link>
                 </li>
 

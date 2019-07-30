@@ -31,8 +31,6 @@
                     </b-field>
 
                     <b-field
-                            :type="{ 'is-danger': hasErrorCompanyPhone }"
-                            :message="{ 'please insert a current phone number': hasErrorCompanyPhone }"
                             label="Company Phone">
                         <b-input
                                 type="tel"
@@ -152,12 +150,6 @@
                     this.hasErrorCompanyName = false
                 }
 
-                if(!this.validatePhone(this.companyPhone)){
-                    this.hasErrorCompanyPhone = true
-                    err = true
-                }else{
-                    this.hasErrorCompanyPhone = false
-                }
 
                 if(!this.terms){
                     this.hasErrorTerm = true
@@ -194,7 +186,7 @@
                 }
                 this.loader = true;
                 window.axios.post(
-                    '/register',
+                    '/register-to-wait',
                     {
                         'email':this.email,
                         'name':this.name,
@@ -202,6 +194,7 @@
                         'password_confirmation':this.password,
                         'remember':true,
                         'company_name':this.companyName,
+                        'company_phone':this.companyPhone,
                         'role':2,
                         'job_title':'',
                         'lat':'',
@@ -211,16 +204,10 @@
                         'confirm_term':1,
                         'confirm_mail':false,
                         'phone':this.phone,
-
-
                     }
                 ).then((res) => {
                     this.loader = false;
-                    Swal.fire(
-                        'Good job!',
-                        'You Profile Has Update',
-                        'success'
-                    )
+
                     Swal.fire({
                         title: 'Good job!',
                         text: "Your request has been successfully received, please wait for your confirmation to be sent to the email address you left",

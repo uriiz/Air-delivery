@@ -2,17 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96f8e733-932d-46c1-88d6-3dc74f43d641" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/admin/SideBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/views/admin/Dashboard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/views/admin/DashboardShipper.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/views/admin/DashboardWaiting.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Form.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/app/OfferApp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/app/OfferApp.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/admin/SideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/admin/SideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/app/AppLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/app/AppLogin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/_style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,33 +28,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/views/admin/Dashboard.vue">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/admin/SideBar.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="88" column="59" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="59" />
-              <folding>
-                <element signature="n#style#0;n#img#0;n#b-table-column#2;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#path#0;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#path#1;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#polygon#0;n#g#0;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#polygon#1;n#g#0;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#polygon#0;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#path#0;n#g#1;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#path#1;n#g#1;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#path#2;n#g#1;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#path#3;n#g#1;n#g#0;n#svg#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#template#1;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/app/OfferApp.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="632">
-              <caret line="104" column="31" selection-start-line="86" selection-start-column="19" selection-end-line="104" selection-end-column="31" />
+            <state relative-caret-position="-303">
+              <caret line="28" column="63" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -61,30 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/store.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
-              <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/app/AppLogin.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="232" column="22" selection-start-line="223" selection-start-column="19" selection-end-line="232" selection-end-column="22" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/admin/SideBar.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="46" column="38" selection-start-line="42" selection-start-column="16" selection-end-line="46" selection-end-column="38" />
+            <state relative-caret-position="255">
+              <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -92,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="197" column="33" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="33" />
+            <state relative-caret-position="286">
+              <caret line="191" column="33" selection-start-line="191" selection-start-column="19" selection-end-line="191" selection-end-column="33" />
               <folding>
                 <element signature="e#103#137#0" expanded="true" />
                 <element signature="e#201#226#0" expanded="true" />
@@ -104,10 +60,30 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/sass/_style.scss">
+        <entry file="file://$PROJECT_DIR$/resources/js/views/admin/DashboardWaiting.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="304" column="16" selection-start-line="304" selection-start-column="16" selection-end-line="304" selection-end-column="16" />
+            <state relative-caret-position="379">
+              <caret line="197" column="60" selection-start-line="197" selection-start-column="60" selection-end-line="197" selection-end-column="60" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#b-table-column#9;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#svg#0;n#div#0;n#b-table-column#9;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#circle#0;n#svg#0;n#div#0;n#b-table-column#9;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#path#0;n#svg#0;n#div#0;n#b-table-column#9;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/app/AppLogin.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="229" selection-end-column="19" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,8 +91,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="48" column="64" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="64" />
+            <state relative-caret-position="565">
+              <caret line="51" column="66" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WaitController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="411">
+              <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+              <folding>
+                <element signature="e#40#53#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="712">
+              <caret line="91" column="56" selection-start-line="77" selection-start-column="12" selection-end-line="91" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -124,11 +121,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="27" column="39" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+            <state relative-caret-position="250">
+              <caret line="27" column="9" selection-start-line="25" selection-start-column="7" selection-end-line="27" selection-end-column="9" />
               <folding>
                 <element signature="e#40#54#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_30_200255_create_waits_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="18" column="45" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -137,10 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>aler</find>
-      <find>getPackagesByOfferId</find>
-      <find>stat</find>
-      <find>.form-title .title img</find>
       <find>countries</find>
       <find>price_offer_extra</find>
       <find>labelPosition</find>
@@ -155,7 +157,6 @@
       <find>updateUserImage</find>
       <find>getUser</find>
       <find>get-user</find>
-      <find>companyPhone</find>
       <find>sendEmail</find>
       <find>updateUser</find>
       <find>/update-user</find>
@@ -167,9 +168,15 @@
       <find>Swa</find>
       <find>getNewOffers</find>
       <find>openedRows</find>
+      <find>store</find>
+      <find>company_phone</find>
+      <find>companyPhone</find>
+      <find>$data</find>
+      <find>deleteUser</find>
     </findStrings>
     <replaceStrings>
       <replace>companyName</replace>
+      <replace>$request</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\projects\Air-delivery\database</dir>
@@ -187,23 +194,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/js/components/Login.vue" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
-        <option value="$PROJECT_DIR$/resources/js/views/dashboard/DashboardProfile.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/MyOffers.vue" />
-        <option value="$PROJECT_DIR$/storage/framework/views/dbd6242288369869495f1a1de8c370339fd33413.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" />
         <option value="$PROJECT_DIR$/resources/js/views/dashboard/DashboardOffer.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Register.vue" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
-        <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" />
         <option value="$PROJECT_DIR$/resources/js/components/FormSingle.vue" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/js/components/HeaderTopMenu.vue" />
         <option value="$PROJECT_DIR$/resources/js/views/app/Login.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/app/AppLogin.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/MyAccount.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/app/OrdersExtra.vue" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_23_223456_create_countries_table.php" />
@@ -230,14 +228,23 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/FeedBackController.php" />
         <option value="$PROJECT_DIR$/resources/js/components/FeedBack.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Form.vue" />
-        <option value="$PROJECT_DIR$/resources/js/app.js" />
-        <option value="$PROJECT_DIR$/resources/js/components/admin/SideBar.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/app/OfferApp.vue" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/js/store.js" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/resources/js/views/admin/Dashboard.vue" />
         <option value="$PROJECT_DIR$/resources/sass/_style.scss" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/resources/js/views/admin/DashboardShipper.vue" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="$PROJECT_DIR$/app/Wait.php" />
+        <option value="$PROJECT_DIR$/resources/js/components/app/AppLogin.vue" />
+        <option value="$PROJECT_DIR$/resources/js/components/Register.vue" />
+        <option value="$PROJECT_DIR$/resources/js/app.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/admin/SideBar.vue" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_30_200255_create_waits_table.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/WaitController.php" />
+        <option value="$PROJECT_DIR$/resources/js/store.js" />
+        <option value="$PROJECT_DIR$/resources/js/views/admin/DashboardWaiting.vue" />
       </list>
     </option>
   </component>
@@ -365,6 +372,25 @@
             <path>
               <item name="Air-delivery" type="b2602c69:ProjectViewProjectNode" />
               <item name="Air-delivery" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Air-delivery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Air-delivery" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Air-delivery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Air-delivery" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Air-delivery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Air-delivery" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -393,14 +419,6 @@
               <item name="Air-delivery" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Air-delivery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Air-delivery" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -409,7 +427,7 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -481,7 +499,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255459000" />
+    <option name="totallyTimeSpent" value="262627000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -544,55 +562,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/js/views/dashboard/DashboardAddNew.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="6" column="14" selection-end-line="26" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/views/dashboard/DashboardOffer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/views/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="3" column="78" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/views/dashboard/DashboardOffers.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="84" column="33" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="31" column="45" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/views/Home.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
@@ -604,16 +573,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="14" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Register.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1737">
-          <caret line="261" column="49" selection-start-line="261" selection-start-column="24" selection-end-line="261" selection-end-column="49" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#b-button#1;n#div#2;n#footer#0;n#div#0;n#form#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -649,13 +608,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="108" column="31" selection-start-line="108" selection-start-column="3" selection-end-line="108" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -906,25 +858,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="197" column="33" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="33" />
-          <folding>
-            <element signature="e#103#137#0" expanded="true" />
-            <element signature="e#201#226#0" expanded="true" />
-            <element signature="e#510#539#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/admin/SideBar.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="46" column="38" selection-start-line="42" selection-start-column="16" selection-end-line="46" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/views/app/Profile.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -950,28 +883,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="48" column="64" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/app/OfferApp.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="632">
           <caret line="104" column="31" selection-start-line="86" selection-start-column="19" selection-end-line="104" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/app/AppLogin.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="232" column="22" selection-start-line="223" selection-start-column="19" selection-end-line="232" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -981,23 +896,6 @@
           <caret line="26" column="84" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="84" />
           <folding>
             <element signature="e#40#56#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="27" column="39" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
-          <folding>
-            <element signature="e#40#54#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1025,8 +923,138 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/sass/_style.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="304" column="16" selection-start-line="304" selection-start-column="16" selection-end-line="304" selection-end-column="16" />
+        <state relative-caret-position="658">
+          <caret line="303" column="21" selection-start-line="303" selection-start-column="21" selection-end-line="303" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/views/admin/DashboardShipper.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="17" column="27" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Wait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/Register.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="267" column="41" selection-start-line="267" selection-start-column="41" selection-end-line="267" selection-end-column="41" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#b-button#1;n#div#2;n#footer#0;n#div#0;n#form#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/admin/SideBar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-303">
+          <caret line="28" column="63" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/app/AppLogin.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="229" selection-end-column="19" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="19" column="45" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_30_200255_create_waits_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="18" column="45" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="51" column="66" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="27" column="9" selection-start-line="25" selection-start-column="7" selection-end-line="27" selection-end-column="9" />
+          <folding>
+            <element signature="e#40#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="712">
+          <caret line="91" column="56" selection-start-line="77" selection-start-column="12" selection-end-line="91" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="191" column="33" selection-start-line="191" selection-start-column="19" selection-end-line="191" selection-end-column="33" />
+          <folding>
+            <element signature="e#103#137#0" expanded="true" />
+            <element signature="e#201#226#0" expanded="true" />
+            <element signature="e#510#539#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WaitController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+          <folding>
+            <element signature="e#40#53#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/store.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/views/admin/DashboardWaiting.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="197" column="60" selection-start-line="197" selection-start-column="60" selection-end-line="197" selection-end-column="60" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#b-table-column#8;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#b-table-column#9;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#svg#0;n#div#0;n#b-table-column#9;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#circle#0;n#svg#0;n#div#0;n#b-table-column#9;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#path#0;n#svg#0;n#div#0;n#b-table-column#9;n#template#0;n#b-table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

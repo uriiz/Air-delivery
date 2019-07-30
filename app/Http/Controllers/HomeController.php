@@ -20,6 +20,16 @@ class HomeController extends Controller
 //        $this->middleware('auth');
     }
 
+
+    public function getShipper()
+    {
+        if(!Auth::id() || Auth::user()->role != 3){
+            return;
+        }
+        $users = User::where('role',2)->orderBy('created_at', 'DESC')->get();
+
+        return $users;
+    }
     public function getUsers()
     {
         if(!Auth::id() || Auth::user()->role != 3){

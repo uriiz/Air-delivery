@@ -29,6 +29,8 @@ import DashboardApp from './views/app/Dashboard'
 import DashboardAddNew from './views/dashboard/DashboardAddNew'
 import DashboardOffers from './views/dashboard/DashboardOffers'
 import DashboardAdmin from './views/admin/Dashboard'
+import DashboardShipper from './views/admin/DashboardShipper'
+import DashboardWaiting from './views/admin/DashboardWaiting'
 import DashboardProfile from './views/dashboard/DashboardProfile'
 import DashboardOffer from './views/dashboard/DashboardOffer'
 import HeaderTop from './components/HeaderTopMenu'
@@ -200,6 +202,18 @@ const router = new VueRouter({
             beforeEnter: authMiddlewareAdmin
         },
 
+        {
+            path: '/admin-dashboard-shipper',
+            name: 'DashboardShipper',
+            component: DashboardShipper,
+            beforeEnter: authMiddlewareAdmin
+        },
+        {
+            path: '/admin-waiting-shipper',
+            name: 'DashboardWaiting',
+            component: DashboardWaiting,
+            beforeEnter: authMiddlewareAdmin
+        },
 
     ],
 });

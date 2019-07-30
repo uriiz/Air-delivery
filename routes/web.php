@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/?login=1', 'HomeController@index')->name('custom-login');
 Route::get('/?register=1', 'HomeController@index')->name('custom-register');
 Route::post('/log-out', 'HomeController@logOut');
-
+Route::post('/register-to-wait', 'WaitController@store');
 Route::get('/app-login', 'HomeController@index');
 
 
@@ -46,8 +46,13 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/get-user', 'HomeController@getUser');
     Route::post('/set-feedback', 'FeedBackController@store');
     Route::post('/admin/get-users', 'HomeController@getUsers');
+    Route::post('/admin/get-shipper', 'HomeController@getShipper');
+    Route::post('/admin/get-waiting', 'WaitController@show');
     Route::post('/admin/delete-user', 'HomeController@deleteUser');
+    Route::post('/register-with-admin', 'WaitController@insertUser');
     Route::get('/admin-dashboard', 'HomeController@index');
+    Route::get('/admin-waiting-shipper', 'HomeController@index');
+    Route::get('/admin-dashboard-shipper', 'HomeController@index');
 
 
 });

@@ -31,7 +31,7 @@ export const store = new Vuex.Store({
         },
         users(state,users){
             state.usersArr = users
-            console.log(state.usersArr)
+
         },
         deleteUser(state,id){
 
