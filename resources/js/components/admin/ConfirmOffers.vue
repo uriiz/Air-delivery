@@ -23,7 +23,7 @@
 
                     <b-table
                             :data="response"
-                            >
+                    >
 
                         <template slot-scope="props">
                             <b-table-column field="id" label="ID" width="40" >
@@ -42,14 +42,21 @@
 
                             <b-table-column v-if="props.row.currency_extra == props.row.currency" label="Total" >
                                 {{ calcTotal(props.row.price_offer_extra,props.row.price_offer) }}
+                            </b-table-column>
 
+                            <b-table-column label="Shippers Company Name" >
+                                {{ props.row.company_name }}
+                            </b-table-column>
+
+                            <b-table-column label="Exporter Name" >
+                                {{ props.row.user_name }}
                             </b-table-column>
 
                             <b-table-column label="Interesting">
                                 <b-button :disabled="loader"
                                           class="tag is-success flex-btn confirm-btn"
                                           @click="confirmOffer(props.row.id)" style="cursor: pointer">
-                                    <span>Interesting</span>
+                                    <span>Confirm</span>
 
                                 </b-button>
                             </b-table-column>
@@ -73,6 +80,7 @@
         methods: {
             confirmOffer(id){
                 this.loader = true;
+                return;
                 window.axios.post(
                     '/confirm-offer',{id:id}
                 ).then((res) => {

@@ -52,7 +52,10 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/register-with-admin', 'WaitController@insertUser');
     Route::get('/admin-dashboard', 'HomeController@index');
     Route::get('/admin-waiting-shipper', 'HomeController@index');
+    Route::get('/admin-confirm', 'HomeController@index');
     Route::get('/admin-dashboard-shipper', 'HomeController@index');
+    Route::post('/confirm-offer', 'OfferController@confirmOffer');
+    Route::post('/confirm-admin', 'ResponseController@show');
 
 
 });

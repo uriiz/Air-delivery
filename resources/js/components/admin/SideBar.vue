@@ -32,6 +32,12 @@
                     </router-link>
                 </li>
 
+                <li>
+                    <router-link :to="{ name: 'DashboardConfirm' }">
+                        <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
+                        <div>הצעות בהמתנה</div>
+                    </router-link>
+                </li>
             </ul>
         </nav>
     </div>

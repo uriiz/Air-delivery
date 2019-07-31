@@ -18,7 +18,9 @@ class CreateResponsesTable extends Migration
             $table->integer('offer_id');
             $table->string('price_offer');
             $table->string('company_id');
+            $table->string('company_name');
             $table->string('user_id');
+            $table->string('user_name');
             $table->string('currency');
             $table->string('price_offer_extra');
             $table->string('currency_extra');

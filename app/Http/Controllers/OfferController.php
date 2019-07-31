@@ -6,6 +6,7 @@ use App\Country;
 use App\Offer;
 use App\Package;
 use App\Response;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,17 @@ class OfferController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function confirmOffer(Request $request)
+    {
+        if(! Auth::id() || Auth::user()->role != 1){
+            return;
+        }
+
+        return Response::where('id',$request->id)->update([
+            'is_customer_response'=>1,
+        ]);
+    }
+
     public function getPriceOffer(Request $request)
     {
         if(! Auth::id() || Auth::user()->role != 1){
@@ -28,7 +40,9 @@ class OfferController extends Controller
         $filterdOffers = [];
         foreach ($offers as $o){
 
-            $respones = Response::where('user_id',Auth::id())->where('offer_id',$o->id)->get();
+            $respones = Response::where('user_id',Auth::id())
+                ->where('is_customer_response',0)
+                ->where('offer_id',$o->id)->get();
 
             if(count($respones) == 0){
                 continue;
@@ -56,6 +70,7 @@ class OfferController extends Controller
 
         $userId = Offer::where('id',$request->offer_id)->first();
         $userId = $userId->user_id;
+        $userName = User::where('id',$userId)->first();
 
         Response::create([
             'offer_id' => $request->offer_id,
@@ -64,7 +79,9 @@ class OfferController extends Controller
             'price_offer_extra' => $request->extra_price,
             'currency_extra' => $request->extra_price_currency,
             'company_id' => Auth::id(),
+            'company_name' => Auth::user()->company_name,
             'user_id' => $userId,
+            'user_name' => $userName->name,
             'is_send_email' => 0,
             'is_send' => 0,
             'is_customer_response' => 0,
@@ -74,9 +91,7 @@ class OfferController extends Controller
 
     public function getCountries()
     {
-
         return Country::select('name')->get();
-
     }
     public function getAppOffers()
     {
@@ -84,7 +99,6 @@ class OfferController extends Controller
             return;
         }
         $offers =  Offer::where('submit_action','published')->orderBy('created_at', 'DESC')->get();
-
         $offersAvilable = [];
         foreach ($offers as $offer){
 

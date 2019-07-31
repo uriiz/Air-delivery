@@ -505,7 +505,7 @@ body {
   top: 0;
   left: 300px;
   width: calc(100% - 300px);
-  z-index: 800;
+  z-index: 11;
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
@@ -522,7 +522,7 @@ body {
   overflow-y: auto;
   height: 100%;
   width: 300px;
-  z-index: 801;
+  z-index: 9;
 }
 
 .main-dashboard {
@@ -959,6 +959,10 @@ header .top_nav .action ul li a {
 
 .flex-btn img {
   margin-left: 4px;
+}
+
+.confirm-btn {
+  height: 2.5rem !important;
 }
 
 .pretty-link {

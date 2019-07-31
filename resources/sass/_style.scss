@@ -418,7 +418,7 @@ body{
   top:0;
   left:300px;
   width:calc(100% - 300px);
-  z-index: 800;
+  z-index: 11;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -431,7 +431,7 @@ body{
   overflow-y: auto;
   height: 100%;
   width: 300px;
-  z-index: 801;
+  z-index: 9;
 }
 .main-dashboard{
   padding-top: 100px;
@@ -818,6 +818,9 @@ header .top_nav .action ul li a {
   img{
     margin-left: 4px;
   }
+}
+.confirm-btn{
+  height:2.5rem !important;
 }
 .pretty-link {
   display: inline-block;
