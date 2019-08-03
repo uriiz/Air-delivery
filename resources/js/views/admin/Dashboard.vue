@@ -5,8 +5,10 @@
 
         <div class="main-dashborad-in">
             <div class="main-table">
-                <div class="main-table-title"><h3>יבואנים</h3></div>
+                <div class="main-table-title"><h3>Importers</h3></div>
                 <div class="main-table-box">
+                    <img v-if="loader" src="/images/loader1.png" class="rotating" alt="">
+
                     <b-table
                             :data="data"
                             detail-key="id"
@@ -51,7 +53,7 @@
                             </b-table-column>
 
                             <b-table-column label="Delete!">
-                                <div class="delete-user" @click="deleteUser(props.row.id)">
+                                <div style="cursor: pointer" class="delete-user" @click="deleteUser(props.row.id)">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" width="30" height="30" xml:space="preserve">
 <g>
@@ -195,6 +197,13 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
         computed:{
             data(){
                 return this.$store.getters.getUsers
+            },
+            loader(){
+                if(this.$store.getters.getUsers.length > 0){
+                    return false;
+                }else {
+                    return true;
+                }
             }
         },
     }

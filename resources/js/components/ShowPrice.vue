@@ -26,9 +26,7 @@
                             >
 
                         <template slot-scope="props">
-                            <b-table-column field="id" label="ID" width="40" >
-                                {{ props.row.id }}
-                            </b-table-column>
+
                             <b-table-column label="Send In" >
                                 {{ props.row.created_at }}
                             </b-table-column>
@@ -40,9 +38,10 @@
                                 {{ props.row.currency_extra }}
                             </b-table-column>
 
-                            <b-table-column v-if="props.row.currency_extra == props.row.currency" label="Total" >
+                            <b-table-column label="Total" >
+                                <div v-if="props.row.currency_extra == props.row.currency" >
                                 {{ calcTotal(props.row.price_offer_extra,props.row.price_offer) }}
-
+                                </div>
                             </b-table-column>
 
                             <b-table-column label="Interesting">

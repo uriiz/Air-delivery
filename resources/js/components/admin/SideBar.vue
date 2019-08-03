@@ -8,7 +8,7 @@
                         <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
                         <div class="noty">
                             <div>
-                                יבואנים
+                                Importers
                             </div>
                             <div>
 
@@ -21,21 +21,21 @@
                 <li>
                     <router-link :to="{ name: 'DashboardShipper' }">
                         <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
-                        <div>משלחים</div>
+                        <div>Shipments</div>
                     </router-link>
                 </li>
 
                 <li>
                     <router-link :to="{ name: 'DashboardWaiting' }">
                         <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
-                        <div>משלחים שמחכים לאישור!</div>
+                        <div>Forwarders waiting for approval</div>
                     </router-link>
                 </li>
 
                 <li>
                     <router-link :to="{ name: 'DashboardConfirm' }">
                         <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
-                        <div>הצעות בהמתנה</div>
+                        <div>Pending offers</div>
                     </router-link>
                 </li>
             </ul>

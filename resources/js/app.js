@@ -51,6 +51,7 @@ import ExtraData from './components/ExtraData'
 import HeaderDashboard from './components/HeaderDasboard'
 import Login from './components/Login'
 import LoginApp from './views/app/Login'
+import DashboardFinalStep from './views/app/DashboardFinalStep'
 import appDashboardEdit from './views/app/Profile'
 import Form from './components/Form'
 import Welcome from './components/Welcome'
@@ -195,6 +196,16 @@ const router = new VueRouter({
             component: appDashboardEdit,
             beforeEnter: authMiddlewareShip
         },
+
+
+        {
+            path: '/app-dashboard/confirmed',
+            name: 'DashboardFinalStep',
+            component: DashboardFinalStep,
+            beforeEnter: authMiddlewareShip
+        },
+
+
 
         {
             path: '/admin-dashboard',

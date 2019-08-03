@@ -27,7 +27,7 @@
                             <div>
                                 New Quotation
                             </div>
-                            <div>
+                            <div v-if="countOffers>0">
                                <div class="count">
                                    {{countOffers}}
                                </div>
@@ -44,6 +44,22 @@
                     </router-link>
                 </li>
 
+                <li>
+                    <router-link :to="{ name: 'DashboardFinalStep' }">
+                        <img src="/images/secure5.png" alt="" class="mCS_img_loaded">
+                        <div class="noty">
+                            <div>
+                                Confirmed Quotation
+                            </div>
+                            <div v-if="countConfirmOffers > 0">
+                                <div class="count">
+                                    {{countConfirmOffers}}
+                                </div>
+                            </div>
+                        </div>
+                    </router-link>
+                </li>
+
             </ul>
         </nav>
     </div>
@@ -56,6 +72,7 @@
 
             this.timeShow();
             this.getOffers();
+            this.getConfirmOffers();
         },
         methods: {
             getOffers(){
@@ -63,6 +80,15 @@
                     '/app/get-orders',
                 ).then((res) => {
                     this.$store.commit('newOffers',res.data);
+                }).catch((res) => {});
+            },
+
+            getConfirmOffers(){
+
+                window.axios.post(
+                    '/app/get-confirm-orders',
+                ).then((res) => {
+                    this.$store.commit('newConfirmOffers',res.data);
                 }).catch((res) => {});
             },
             timeShow(){
@@ -102,12 +128,16 @@
                 currentUserName:$("#details-helper").data('name'),
                 currentUserLogo:$("#details-helper").data('logo'),
                 dateShowTex:'',
+
             }
         },
         computed:{
             countOffers(){
                 return this.$store.getters.getNewOffers.length
-            }
+            },
+            countConfirmOffers(){
+                return this.$store.getters.getNewConfirmOffers.length
+            },
         },
 
     }

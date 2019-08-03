@@ -20,6 +20,62 @@ class OfferController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function getConfirmOffers()
+    {
+        if(! Auth::id() || Auth::user()->role != 2){
+            return;
+        }
+
+        $offers =  Offer::where('submit_action','published')->orderBy('created_at', 'DESC')->get();
+
+        $offersAvilable = [];
+        foreach ($offers as $offer){
+
+            $response = Response::where('offer_id',$offer->id)
+                ->where('company_id',Auth::id())
+                ->where('is_send_email',0)
+                ->where('is_send',1)
+                ->first();
+
+            if(count($response) == 0){
+
+            }else{
+                $offer->response_id = $response->id;
+                array_push($offersAvilable,$offer);
+            }
+        }
+
+        $offers = $offersAvilable;
+
+        return collect($offers)->map(function($filter){
+            return [
+                'id'=>$filter['id'],
+                'response_id'=>$filter['response_id'],
+                'from_lat'=>$filter['from_lat'],
+                'from_lng'=>$filter['from_lng'],
+                'from_name'=>$filter['from_name'],
+                'to_name'=>$filter['to_name'],
+                'details'=> User::where('id',$filter['user_id'])->first(),
+                'from_address_name'=>$filter['from_address_name'],
+                'from_zip_code'=>$filter['from_zip_code'],
+                'to_lat'=>$filter['to_lat'],
+                'to_lng'=>$filter['to_lng'],
+                'to_zip_code'=>$filter['to_zip_code'],
+                'to_address_name'=>$filter['to_address_name'],
+                'from_date'=>Offer::setPrettyTimeNoHour($filter['from_date']),
+                'to_date'=>Offer::setPrettyTimeNoHour($filter['to_date']),
+                'note'=> $filter['note'],
+                'pretty_time'=>  Offer::setPrettyTime($filter['updated_at']),
+                'from_country_name'=> $filter['from_country_name'],
+                'to_country_name'=>   $filter['to_country_name'],
+                'from_company_name'=>   $filter['from_company_name'],
+                'to_company_name'=>   $filter['to_company_name'],
+                'packages'=> Offer::getPackagesByOfferId($filter['id'])
+            ];
+        });
+
+    }
+
     public function confirmOffer(Request $request)
     {
         if(! Auth::id() || Auth::user()->role != 1){
@@ -36,7 +92,7 @@ class OfferController extends Controller
         if(! Auth::id() || Auth::user()->role != 1){
             return;
         }
-        $offers =  Offer::where('user_id',Auth::id())->orderBy('created_at', 'DESC')->get();
+        $offers = Offer::where('user_id',Auth::id())->orderBy('created_at', 'DESC')->get();
         $filterdOffers = [];
         foreach ($offers as $o){
 
@@ -98,11 +154,13 @@ class OfferController extends Controller
         if(Auth::user()->role != 2){
             return;
         }
+
         $offers =  Offer::where('submit_action','published')->orderBy('created_at', 'DESC')->get();
         $offersAvilable = [];
         foreach ($offers as $offer){
 
-            $response = Response::where('offer_id',$offer->id)->where('company_id',Auth::id())->first();
+            $response = Response::where('offer_id',$offer->id)
+                ->where('company_id',Auth::id())->first();
             if(count($response) == 1){
 
             }else{

@@ -50,12 +50,16 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/admin/get-waiting', 'WaitController@show');
     Route::post('/admin/delete-user', 'HomeController@deleteUser');
     Route::post('/register-with-admin', 'WaitController@insertUser');
+    Route::post('/app/get-confirm-orders', 'OfferController@getConfirmOffers');
     Route::get('/admin-dashboard', 'HomeController@index');
     Route::get('/admin-waiting-shipper', 'HomeController@index');
     Route::get('/admin-confirm', 'HomeController@index');
+    Route::get('/app-dashboard/confirmed', 'HomeController@index');
     Route::get('/admin-dashboard-shipper', 'HomeController@index');
     Route::post('/confirm-offer', 'OfferController@confirmOffer');
     Route::post('/confirm-admin', 'ResponseController@show');
+    Route::post('/confirm-offer-final', 'ResponseController@edit');
+    Route::post('/app/delete-offer', 'ResponseController@appDeleteResponse');
 
 
 });

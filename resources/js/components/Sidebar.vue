@@ -27,7 +27,7 @@
                         <div>
                             New Quotation
                         </div>
-                        <div>
+                        <div v-if="countOffers>0">
                             <div class="count">
                                 {{countOffers}}
                             </div>

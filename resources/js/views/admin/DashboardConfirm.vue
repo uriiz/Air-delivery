@@ -5,7 +5,7 @@
 
         <div class="main-dashborad-in">
             <div class="main-table">
-                <div class="main-table-title"><h3>משלחים שממתינים לאישור </h3></div>
+                <div class="main-table-title"><h3>Pending offers </h3></div>
                 <div class="main-table-box">
                     <b-table
                             v-if="data.length > 0"
@@ -74,6 +74,9 @@
                         </template>
 
                     </b-table>
+                    <div v-else>
+                        <p>there is no new offer</p>
+                    </div>
                 </div>
             </div>
         </div>

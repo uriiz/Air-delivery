@@ -5,8 +5,9 @@
 
         <div class="main-dashborad-in">
             <div class="main-table">
-                <div class="main-table-title"><h3>משלחים</h3></div>
+                <div class="main-table-title"><h3>Shipments</h3></div>
                 <div class="main-table-box">
+                    <img v-if="loader" src="/images/loader1.png" class="rotating" alt="">
                     <b-table
                             :data="data"
                             detail-key="id"
@@ -195,6 +196,13 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
         computed:{
             data(){
                 return this.$store.getters.getUsers
+            },
+            loader(){
+                if(this.$store.getters.getUsers.length > 0){
+                    return false;
+                }else {
+                    return true;
+                }
             }
         },
     }

@@ -5,7 +5,7 @@
 
         <div class="main-dashborad-in">
             <div class="main-table">
-                <div class="main-table-title"><h3>משלחים שממתינים לאישור </h3></div>
+                <div class="main-table-title"><h3>Forwarders waiting for approval </h3></div>
                 <div class="main-table-box">
                     <b-table
                             :data="data"

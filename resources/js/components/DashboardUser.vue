@@ -27,6 +27,7 @@
             <div class="main-table-box">
                 <div class="loader1" v-if="loader">
                     <img src="/images/loader1.png" class="rotating" alt="">
+                    <p>There is no new Quotation... </p>
                 </div>
                 <b-table
                         v-if="!loader && data.length > 0"

@@ -7,12 +7,16 @@ export const store = new Vuex.Store({
 
     state:{
         newOffersArr:[],
+        newConfirmOffersArr:[],
         newOffersUserArr:[],
         usersArr:[],
     },
     getters:{
         getNewOffers(state){
             return state.newOffersArr
+        },
+        getNewConfirmOffers(state){
+            return state.newConfirmOffersArr
         },
         getNewOffersUser(state){
             return state.newOffersUserArr
@@ -26,12 +30,14 @@ export const store = new Vuex.Store({
         newOffers(state,offers){
             state.newOffersArr = offers
         },
+        newConfirmOffers(state,offers){
+            state.newConfirmOffersArr = offers
+        },
         newOffersUser(state,offers){
             state.newOffersUserArr = offers
         },
         users(state,users){
             state.usersArr = users
-
         },
         deleteUser(state,id){
 
@@ -40,7 +46,14 @@ export const store = new Vuex.Store({
                     state.usersArr.splice(i,1)
                 }
             }
-        }
+        },
+        deleteOffer(state,id){
+            for(let i = 0;i<state.newConfirmOffersArr.length;i++){
+                if(state.newConfirmOffersArr[i].response_id == id){
+                    state.newConfirmOffersArr.splice(i,1)
+                }
+            }
+        },
     }
 
 })

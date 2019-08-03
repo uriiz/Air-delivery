@@ -19,16 +19,11 @@
                     </div>
                 </div>
                 <div class="prices-quotation">
-
-
                     <b-table
                             :data="response"
                     >
-
                         <template slot-scope="props">
-                            <b-table-column field="id" label="ID" width="40" >
-                                {{ props.row.id }}
-                            </b-table-column>
+
                             <b-table-column label="Send In" >
                                 {{ props.row.created_at }}
                             </b-table-column>
@@ -40,8 +35,10 @@
                                 {{ props.row.currency_extra }}
                             </b-table-column>
 
-                            <b-table-column v-if="props.row.currency_extra == props.row.currency" label="Total" >
-                                {{ calcTotal(props.row.price_offer_extra,props.row.price_offer) }}
+                            <b-table-column label="Total" >
+                                <div v-if="props.row.currency_extra == props.row.currency">
+                                    {{ calcTotal(props.row.price_offer_extra,props.row.price_offer) }}
+                                </div>
                             </b-table-column>
 
                             <b-table-column label="Shippers Company Name" >
@@ -80,9 +77,9 @@
         methods: {
             confirmOffer(id){
                 this.loader = true;
-                return;
+
                 window.axios.post(
-                    '/confirm-offer',{id:id}
+                    '/confirm-offer-final',{id:id}
                 ).then((res) => {
                     if(res.data == 1){
                         this.$notification.open({
