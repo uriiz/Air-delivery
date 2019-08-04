@@ -464,7 +464,7 @@
                         }
                     ).then((res) => {
                         if(res.data != 0) {
-                           // window.location.href = "/dashboard/my-offers";
+                            window.location.href = "/dashboard/my-offers";
                         }else{
                             Swal.fire({
                                 type: 'error',

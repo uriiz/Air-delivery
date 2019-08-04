@@ -3152,7 +3152,8 @@ var today = new Date();
           'from_country_code': this.fromCountryCode,
           'pack_type': this.packType
         }).then(function (res) {
-          if (res.data != 0) {// window.location.href = "/dashboard/my-offers";
+          if (res.data != 0) {
+            window.location.href = "/dashboard/my-offers";
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
               type: 'error',
