@@ -13,6 +13,10 @@ body{
 .welcome-name{
   display: inline-flex;
   margin: 7px;
+  align-items: center;
+  a{
+    margin-left: 10px;
+  }
 }
 .navbar, .navbar-menu, .navbar-start, .navbar-end{
   align-items: center !important;

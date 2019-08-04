@@ -47,6 +47,7 @@
                     </a>
 
                 </div>
+
                 <b-table
                         v-if="!loader && data.length > 0"
                         :data="data"
@@ -57,7 +58,6 @@
                         :openedDetailed="openedRows"
                         detailed
                 >
-
                     <template slot-scope="props">
                         <b-table-column field="id" label="Quotation ID">
                             <div @click="openRow(props.row)">
@@ -65,8 +65,18 @@
                             </div>
                         </b-table-column>
 
-                        <b-table-column field="pretty_time" label="Created" sortable>
-                            {{ props.row.pretty_time }}
+                        <b-table-column label="Price" >
+                           <div>
+                               <strong>Cost:</strong>
+                               {{ props.row.response.price_offer }}
+                               {{ props.row.response.currency }}
+                           </div>
+                            <div>
+                                <strong>Extra Cost:</strong>
+                                {{ props.row.response.price_offer_extra }}
+                                {{ props.row.response.currency_extra }}
+                            </div>
+
                         </b-table-column>
 
 

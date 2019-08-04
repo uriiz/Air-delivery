@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="wrap-input-flex">
-                            <label style="display:block;font-weight: 500" >send me email notifications?</label>
+                            <label style="display:block;font-weight: 500" >send me notifications email's ?</label>
                             <b-switch v-model="sendEmail"
                                       true-value="Yes"
                                       false-value="No">

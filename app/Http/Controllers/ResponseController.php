@@ -100,9 +100,12 @@ class ResponseController extends Controller
         $res = $response->update([
             'is_send'=>1
         ]);
-        $user = User::where('id',$response->company_id)->whereNotNull('confirm_mail')->first();
+
         try {
-            dispatch(new SendFinalEmail($user));
+            $user = User::where('id',$response->company_id)->whereNotNull('confirm_mail')->first();
+            if(count($user) == 1) {
+                dispatch(new SendFinalEmail($user));
+            }
         }catch (\Exception $e){
         }
         return (string) $res;

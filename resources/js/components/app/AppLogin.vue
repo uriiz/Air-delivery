@@ -202,7 +202,7 @@
                         'address':'',
                         'zip_code':'',
                         'confirm_term':1,
-                        'confirm_mail':false,
+                        'confirm_mail':true,
                         'phone':this.phone,
                     }
                 ).then((res) => {

@@ -70,10 +70,6 @@ class RegisterController extends Controller
            return;
         }
         $now = Carbon::now();
-        if(!$data['confirm_mail']){
-            $now = null;
-        }
-
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

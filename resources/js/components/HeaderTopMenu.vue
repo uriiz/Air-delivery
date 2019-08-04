@@ -31,54 +31,23 @@
             </div>
             <div v-else>
                 <section>
+                    <div>
+
+                    </div>
                     <div class="welcome-name show-in-desktop">
                         Logged as &nbsp; <b> {{currentUserName}} </b>
-                    </div>
-                    <b-dropdown
-                            v-model="navigation"
-                            position="is-bottom-left"
-                            aria-role="menu">
-                        <a
-                                class="navbar-item"
-                                slot="trigger"
-                                role="button">
-                            <span>Menu</span>
-                            <b-icon icon="menu-down"></b-icon>
+                        <a v-if="role == 1" href="/dashboard/my-offers"  class="button is-primary orange">
+                            <span>Dashboard</span>
                         </a>
 
-                        <b-dropdown-item class="show-in-mobile" custom aria-role="menuitem">
-                            Logged as <b>Rafael Beraldo</b>
-                        </b-dropdown-item>
-                        <hr class="dropdown-divider show-in-mobile">
-                        <b-dropdown-item has-link aria-role="menuitem">
-                            <a href="https://google.com" target="_blank">
-                                <b-icon icon="link"></b-icon>
-                                Google (link)
-                            </a>
-                        </b-dropdown-item>
-                        <b-dropdown-item value="home" aria-role="menuitem">
-                            <b-icon icon="home"></b-icon>
-                            Home
-                        </b-dropdown-item>
-                        <b-dropdown-item value="products" aria-role="menuitem">
-                            <b-icon icon="cart"></b-icon>
-                            Products
-                        </b-dropdown-item>
-                        <b-dropdown-item value="blog" disabled aria-role="menuitem">
-                            <b-icon icon="book-open"></b-icon>
-                            Blog
-                        </b-dropdown-item>
-                        <hr class="dropdown-divider" aria-role="menuitem">
-                        <b-dropdown-item value="settings">
-                            <b-icon icon="settings"></b-icon>
-                            Settings
-                        </b-dropdown-item>
-                        <b-dropdown-item value="logout" @click="logOut" aria-role="menuitem">
-                            <b-icon icon="logout"></b-icon>
-                            Logout
-                        </b-dropdown-item>
-                    </b-dropdown>
+                        <a v-if="role == 2" href="/app-dashboard" class="button is-primary orange">
+                            <span>Dashboard</span>
+                        </a>
 
+                        <a v-if="role == 3" href="/admin-dashboard" class="button is-primary orange">
+                            <span>Dashboard</span>
+                        </a>
+                    </div>
                 </section>
             </div>
         </div>
@@ -152,6 +121,7 @@
             return {
                 currentUserId:$("#details-helper").data('id'),
                 currentUserName:$("#details-helper").data('name'),
+                role:$("#details-helper").data('r'),
                 navigation: 'home'
             }
         },

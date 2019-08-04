@@ -44,6 +44,7 @@ class OfferController extends Controller
 
             }else{
                 $offer->response_id = $response->id;
+                $offer->response = $response;
                 array_push($offersAvilable,$offer);
             }
         }
@@ -54,6 +55,7 @@ class OfferController extends Controller
             return [
                 'id'=>$filter['id'],
                 'response_id'=>$filter['response_id'],
+                'response'=>$filter['response'],
                 'from_lat'=>$filter['from_lat'],
                 'from_lng'=>$filter['from_lng'],
                 'from_name'=>$filter['from_name'],
@@ -158,7 +160,10 @@ class OfferController extends Controller
         ]);
 
         try {
-            dispatch(new SendPriceOfferEmail($response,$userName));
+            if($userName->confirm_mail){
+                dispatch(new SendPriceOfferEmail($response,$userName));
+            }
+
         }catch (\Exception $e){
         }
     }
@@ -224,7 +229,6 @@ class OfferController extends Controller
         }
         $offer = Offer::newOffer($request);
         $shippers = User::where('role',2)->whereNotNull('confirm_mail')->get();
-
         foreach ($shippers as $s){
             if($request->submit_action){
                 try {

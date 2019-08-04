@@ -4157,37 +4157,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4229,6 +4198,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       currentUserId: $("#details-helper").data('id'),
       currentUserName: $("#details-helper").data('name'),
+      role: $("#details-helper").data('r'),
       navigation: 'home'
     };
   }
@@ -4534,6 +4504,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -4554,7 +4532,8 @@ __webpack_require__.r(__webpack_exports__);
         'job_title': this.jobTitle,
         'company_name': this.companyName,
         'zip_code': this.zipCode,
-        'phone': this.phone
+        'phone': this.phone,
+        'is_email': this.sendEmail
       }).then(function (res) {
         if (res.data == 1) {
           $('.user-profile h2 span').html(_this.FullName);
@@ -4610,6 +4589,7 @@ __webpack_require__.r(__webpack_exports__);
       fromSelectedAddress: '',
       zipCode: '',
       email: '',
+      sendEmail: 'Yes',
       phone: '',
       loaderUpdate: '',
       jobTitle: '',
@@ -5843,7 +5823,7 @@ __webpack_require__.r(__webpack_exports__);
         'address': '',
         'zip_code': '',
         'confirm_term': 1,
-        'confirm_mail': false,
+        'confirm_mail': true,
         'phone': this.phone
       }).then(function (res) {
         _this.loader = false;
@@ -7750,6 +7730,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_app_ConfirmedOffer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/app/ConfirmedOffer */ "./resources/js/components/app/ConfirmedOffer.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -62313,181 +62303,49 @@ var render = function() {
                   ])
                 ])
               : _c("div", [
-                  _c(
-                    "section",
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "welcome-name show-in-desktop" },
-                        [
-                          _vm._v("\n                    Logged as   "),
-                          _c("b", [
-                            _vm._v(" " + _vm._s(_vm.currentUserName) + " ")
-                          ])
-                        ]
-                      ),
+                  _c("section", [
+                    _c("div"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "welcome-name show-in-desktop" }, [
+                      _vm._v("\n                    Logged as   "),
+                      _c("b", [
+                        _vm._v(" " + _vm._s(_vm.currentUserName) + " ")
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "b-dropdown",
-                        {
-                          attrs: {
-                            position: "is-bottom-left",
-                            "aria-role": "menu"
-                          },
-                          model: {
-                            value: _vm.navigation,
-                            callback: function($$v) {
-                              _vm.navigation = $$v
-                            },
-                            expression: "navigation"
-                          }
-                        },
-                        [
-                          _c(
+                      _vm.role == 1
+                        ? _c(
                             "a",
                             {
-                              staticClass: "navbar-item",
-                              attrs: { slot: "trigger", role: "button" },
-                              slot: "trigger"
+                              staticClass: "button is-primary orange",
+                              attrs: { href: "/dashboard/my-offers" }
                             },
-                            [
-                              _c("span", [_vm._v("Menu")]),
-                              _vm._v(" "),
-                              _c("b-icon", { attrs: { icon: "menu-down" } })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            {
-                              staticClass: "show-in-mobile",
-                              attrs: { custom: "", "aria-role": "menuitem" }
-                            },
-                            [
-                              _vm._v("\n                        Logged as "),
-                              _c("b", [_vm._v("Rafael Beraldo")])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("hr", {
-                            staticClass: "dropdown-divider show-in-mobile"
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            {
-                              attrs: { "has-link": "", "aria-role": "menuitem" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href: "https://google.com",
-                                    target: "_blank"
-                                  }
-                                },
-                                [
-                                  _c("b-icon", { attrs: { icon: "link" } }),
-                                  _vm._v(
-                                    "\n                            Google (link)\n                        "
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            {
-                              attrs: { value: "home", "aria-role": "menuitem" }
-                            },
-                            [
-                              _c("b-icon", { attrs: { icon: "home" } }),
-                              _vm._v(
-                                "\n                        Home\n                    "
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            {
-                              attrs: {
-                                value: "products",
-                                "aria-role": "menuitem"
-                              }
-                            },
-                            [
-                              _c("b-icon", { attrs: { icon: "cart" } }),
-                              _vm._v(
-                                "\n                        Products\n                    "
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            {
-                              attrs: {
-                                value: "blog",
-                                disabled: "",
-                                "aria-role": "menuitem"
-                              }
-                            },
-                            [
-                              _c("b-icon", { attrs: { icon: "book-open" } }),
-                              _vm._v(
-                                "\n                        Blog\n                    "
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("hr", {
-                            staticClass: "dropdown-divider",
-                            attrs: { "aria-role": "menuitem" }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            { attrs: { value: "settings" } },
-                            [
-                              _c("b-icon", { attrs: { icon: "settings" } }),
-                              _vm._v(
-                                "\n                        Settings\n                    "
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            {
-                              attrs: {
-                                value: "logout",
-                                "aria-role": "menuitem"
-                              },
-                              on: { click: _vm.logOut }
-                            },
-                            [
-                              _c("b-icon", { attrs: { icon: "logout" } }),
-                              _vm._v(
-                                "\n                        Logout\n                    "
-                              )
-                            ],
-                            1
+                            [_c("span", [_vm._v("Dashboard")])]
                           )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.role == 2
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "button is-primary orange",
+                              attrs: { href: "/app-dashboard" }
+                            },
+                            [_c("span", [_vm._v("Dashboard")])]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.role == 3
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "button is-primary orange",
+                              attrs: { href: "/admin-dashboard" }
+                            },
+                            [_c("span", [_vm._v("Dashboard")])]
+                          )
+                        : _vm._e()
+                    ])
+                  ])
                 ])
           ]
         )
@@ -62975,6 +62833,45 @@ var render = function() {
                             })
                           ],
                           1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "wrap-input-flex" },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticStyle: {
+                              display: "block",
+                              "font-weight": "500"
+                            }
+                          },
+                          [_vm._v("send me notifications email's ?")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-switch",
+                          {
+                            attrs: { "true-value": "Yes", "false-value": "No" },
+                            model: {
+                              value: _vm.sendEmail,
+                              callback: function($$v) {
+                                _vm.sendEmail = $$v
+                              },
+                              expression: "sendEmail"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.sendEmail) +
+                                "\n                        "
+                            )
+                          ]
                         )
                       ],
                       1
@@ -65401,7 +65298,7 @@ var render = function() {
                             "font-weight": "500"
                           }
                         },
-                        [_vm._v("send me email notifications?")]
+                        [_vm._v("send me notifications email's ?")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -68491,19 +68388,33 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "b-table-column",
-                                {
-                                  attrs: {
-                                    field: "pretty_time",
-                                    label: "Created",
-                                    sortable: ""
-                                  }
-                                },
+                                { attrs: { label: "Price" } },
                                 [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(props.row.pretty_time) +
-                                      "\n                        "
-                                  )
+                                  _c("div", [
+                                    _c("strong", [_vm._v("Cost:")]),
+                                    _vm._v(
+                                      "\n                               " +
+                                        _vm._s(props.row.response.price_offer) +
+                                        "\n                               " +
+                                        _vm._s(props.row.response.currency) +
+                                        "\n                           "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _c("strong", [_vm._v("Extra Cost:")]),
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          props.row.response.price_offer_extra
+                                        ) +
+                                        "\n                                " +
+                                        _vm._s(
+                                          props.row.response.currency_extra
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ])
                                 ]
                               ),
                               _vm._v(" "),
@@ -68765,7 +68676,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      4181593241
+                      1572121717
                     )
                   })
                 : _vm._e()

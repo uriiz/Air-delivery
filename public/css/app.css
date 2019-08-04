@@ -18,6 +18,12 @@ body {
   display: -webkit-inline-box;
   display: inline-flex;
   margin: 7px;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.welcome-name a {
+  margin-left: 10px;
 }
 
 .navbar,

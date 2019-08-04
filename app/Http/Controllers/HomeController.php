@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Offer;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -99,6 +100,12 @@ class HomeController extends Controller
             $companyPhone = $request->company_phone;
         }
 
+        if($request->is_email == 'No'){
+            $isSendEmail = null;
+        }else{
+            $isSendEmail = Carbon::now();
+        }
+
         return User::where('id',Auth::id())->update([
             'name'=> $name,
             'phone'=> $phone,
@@ -106,6 +113,7 @@ class HomeController extends Controller
             'zip_code' => $request->zip_code,
             'job_title' => $request->job_title,
             'company_phone' => $companyPhone,
+            'confirm_mail' => $isSendEmail,
         ]);
     }
     public function updateUserImage(Request $request)

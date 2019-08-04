@@ -30,7 +30,6 @@
                     <p>There is no new Quotation... </p>
                 </div>
                 <b-table
-                        v-if="!loader && data.length > 0"
                         :data="data"
                         detail-key="id"
                         ref="table"
@@ -38,6 +37,7 @@
                         :per-page="perPage"
                         :openedDetailed="openedRows"
                         detailed
+                        v-if="!loader && data.length > 0"
                 >
 
                     <template slot-scope="props">

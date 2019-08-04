@@ -109,6 +109,14 @@
                                 </b-input>
                             </b-field>
                         </div>
+                        <div class="wrap-input-flex">
+                            <label style="display:block;font-weight: 500" >send me notifications email's ?</label>
+                            <b-switch v-model="sendEmail"
+                                      true-value="Yes"
+                                      false-value="No">
+                                {{ sendEmail }}
+                            </b-switch>
+                        </div>
                     </div>
 
                     <b-button
@@ -213,6 +221,7 @@
                         'company_name':this.companyName,
                         'zip_code':this.zipCode,
                         'phone':this.phone,
+                        'is_email':this.sendEmail,
                     }
                 ).then((res) => {
 
@@ -285,6 +294,7 @@
                 fromSelectedAddress :'',
                 zipCode :'',
                 email :'',
+                sendEmail :'Yes',
                 phone:'',
                 loaderUpdate:'',
                 jobTitle:'',
