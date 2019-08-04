@@ -3115,6 +3115,8 @@ var today = new Date();
       return true;
     },
     submit: function submit(type) {
+      var _this = this;
+
       if (this.validate()) {
         if (type == 'submit') {
           this.loaderSub = true;
@@ -3150,8 +3152,7 @@ var today = new Date();
           'from_country_code': this.fromCountryCode,
           'pack_type': this.packType
         }).then(function (res) {
-          if (res.data != 0) {
-            window.location.href = "/dashboard/my-offers";
+          if (res.data != 0) {// window.location.href = "/dashboard/my-offers";
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
               type: 'error',
@@ -3160,6 +3161,9 @@ var today = new Date();
               footer: ''
             });
           }
+
+          _this.loaderSub = false;
+          _this.loaderDraft = false;
         })["catch"](function (res) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
             type: 'error',
@@ -3167,6 +3171,8 @@ var today = new Date();
             text: 'something went wrong ):',
             footer: ''
           });
+          _this.loaderSub = false;
+          _this.loaderDraft = false;
         });
       } else {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
@@ -3181,7 +3187,7 @@ var today = new Date();
       }
     },
     deleteRow: function deleteRow(id) {
-      var _this = this;
+      var _this2 = this;
 
       if (this.data.length == 1) {
         return;
@@ -3204,7 +3210,7 @@ var today = new Date();
         reverseButtons: true
       }).then(function (result) {
         if (result.value) {
-          _this.data = _this.data.filter(function (x) {
+          _this2.data = _this2.data.filter(function (x) {
             return x.id !== id;
           });
         } else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.DismissReason.cancel) {
@@ -3249,18 +3255,18 @@ var today = new Date();
       }
     },
     loadUserInfo: function loadUserInfo() {
-      var _this2 = this;
+      var _this3 = this;
 
       window.axios.post('/get-user').then(function (res) {
         if (res.data) {
-          _this2.fromFullName = res.data.name;
-          _this2.fromCompanyName = res.data.company_name;
-          _this2.fromSelectedAddress = '';
-          _this2.fromZipCode = res.data.zip_code;
-          _this2.FullName = res.data.name;
-          _this2.CompanyName = res.data.company_name;
-          _this2.SelectedAddress = '';
-          _this2.ZipCode = res.data.zip_code;
+          _this3.fromFullName = res.data.name;
+          _this3.fromCompanyName = res.data.company_name;
+          _this3.fromSelectedAddress = '';
+          _this3.fromZipCode = res.data.zip_code;
+          _this3.FullName = res.data.name;
+          _this3.CompanyName = res.data.company_name;
+          _this3.SelectedAddress = '';
+          _this3.ZipCode = res.data.zip_code;
         }
       })["catch"](function (res) {});
     },

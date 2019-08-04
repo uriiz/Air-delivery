@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendFinalEmail;
+use App\Mail\SendFinal;
 use App\Offer;
 use App\Package;
 use App\Response;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -93,10 +96,16 @@ class ResponseController extends Controller
             return;
         }
 
-
-        return Response::where('id',$request->id)->update([
+        $response = Response::where('id',$request->id)->first();
+        $res = $response->update([
             'is_send'=>1
         ]);
+        $user = User::where('id',$response->company_id)->whereNotNull('confirm_mail')->first();
+        try {
+            dispatch(new SendFinalEmail($user));
+        }catch (\Exception $e){
+        }
+        return (string) $res;
     }
 
     /**

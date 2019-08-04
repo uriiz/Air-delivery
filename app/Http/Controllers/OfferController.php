@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Jobs\SendConfirmEmail;
+use App\Jobs\SendOfferEmail;
+use App\Jobs\SendPriceOfferEmail;
 use App\Offer;
 use App\Package;
 use App\Response;
@@ -82,9 +85,20 @@ class OfferController extends Controller
             return;
         }
 
-        return Response::where('id',$request->id)->update([
+        $res = Response::where('id',$request->id)->update([
             'is_customer_response'=>1,
         ]);
+
+        $admins = User::where('role',3)->get();
+        foreach ($admins as $s){
+
+                try {
+                    dispatch(new SendConfirmEmail($s));
+                }catch (\Exception $e){
+                }
+        }
+
+        return $res;
     }
 
     public function getPriceOffer(Request $request)
@@ -128,7 +142,7 @@ class OfferController extends Controller
         $userId = $userId->user_id;
         $userName = User::where('id',$userId)->first();
 
-        Response::create([
+        $response = Response::create([
             'offer_id' => $request->offer_id,
             'price_offer' => $request->price,
             'currency' => $request->price_currency,
@@ -143,6 +157,10 @@ class OfferController extends Controller
             'is_customer_response' => 0,
         ]);
 
+        try {
+            dispatch(new SendPriceOfferEmail($response,$userName));
+        }catch (\Exception $e){
+        }
     }
 
     public function getCountries()
@@ -205,10 +223,16 @@ class OfferController extends Controller
           return 0;
         }
         $offer = Offer::newOffer($request);
-        if($request->submit_action){
+        $shippers = User::where('role',2)->whereNotNull('confirm_mail')->get();
 
+        foreach ($shippers as $s){
+            if($request->submit_action){
+                try {
+                    dispatch(new SendOfferEmail($s,$offer));
+                }catch (\Exception $e){
+                }
+            }
         }
-
         return $offer;
     }
     public function deleteOffer(Request $request)
