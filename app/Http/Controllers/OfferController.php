@@ -40,7 +40,7 @@ class OfferController extends Controller
                 ->where('is_send',1)
                 ->first();
 
-            if(count($response) == 0){
+            if(count((array)$response) == 0){
 
             }else{
                 $offer->response_id = $response->id;
@@ -116,7 +116,7 @@ class OfferController extends Controller
                 ->where('is_customer_response',0)
                 ->where('offer_id',$o->id)->get();
 
-            if(count($respones) == 0){
+            if(count( $respones) == 0){
                 continue;
             }
 
@@ -184,7 +184,7 @@ class OfferController extends Controller
 
             $response = Response::where('offer_id',$offer->id)
                 ->where('company_id',Auth::id())->first();
-            if(count($response) == 1){
+            if(count((array)$response) > 0){
 
             }else{
                 array_push($offersAvilable,$offer);
