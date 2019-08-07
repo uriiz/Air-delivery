@@ -41,11 +41,12 @@
             <div class="main-table-box">
                 <div class="loader1" v-if="loader">
                     <img src="/images/loader1.png" class="rotating" alt="">
+                </div>
+                <div v-if="!loader && data.length == 0">
                     <p>There is no new Confirmed Quotation... </p>
                     <a class="pretty-link" href="/app-dashboard">
                         New Quotation
                     </a>
-
                 </div>
 
                 <b-table
@@ -218,6 +219,7 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                     '/get-countries',
                 ).then((res) => {
                     this.countries = res.data;
+                    this.loader = false
                 }).catch((res) => {});
             },
 
@@ -250,30 +252,22 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                     let packArr = [];
                     let ids = [];
                     let arrFilterIds = [];
-
                     for(let j = 0; j < filters.length; j++) {
-
                         for (let i = 0; i < filters[j].packages.length; i++) {
                             if (filters[j].packages[i].package_type == this.packageType) {
                                 packArr.push(filters[j])
                             }
                         }
-
                     }
 
-
                     for(let x =0;x<packArr.length;x++){
-
                         if(ids.includes(packArr[x].id)){
-
                         }else{
                             arrFilterIds.push(packArr[x])
                         }
                         ids.push(packArr[x].id)
                     }
-
                     return arrFilterIds;
-
                 }
                 return filters;
             },
@@ -290,16 +284,17 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                 toCountryName:'-1',
                 countries:[],
                 packageType:'-1',
+                loader:true,
             }
         },
         computed:{
-            loader(){
-                if(this.$store.getters.getNewConfirmOffers.length > 0){
-                    return false
-                }else{
-                    return true
-                }
-            },
+            // loader(){
+            //     if(this.$store.getters.getNewConfirmOffers.length > 0){
+            //         return false
+            //     }else{
+            //         return true
+            //     }
+            // },
 
             data(){
 

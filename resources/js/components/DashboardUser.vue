@@ -27,6 +27,8 @@
             <div class="main-table-box">
                 <div class="loader1" v-if="loader">
                     <img src="/images/loader1.png" class="rotating" alt="">
+                </div>
+                <div v-if="!loader && data.length == 0">
                     <p>There is no new Quotation... </p>
                 </div>
                 <b-table
@@ -135,6 +137,7 @@
                     '/get-countries',
                 ).then((res) => {
                     this.countries = res.data;
+                    this.loader = false
                 }).catch((res) => {});
             },
 
@@ -208,16 +211,17 @@
                 toCountryName:'-1',
                 countries:[],
                 packageType:'-1',
+                loader:true,
             }
         },
         computed:{
-            loader(){
-                if(this.$store.getters.getNewOffersUser.length > 0){
-                    return false
-                }else{
-                    return true
-                }
-            },
+            // loader(){
+            //     if(this.$store.getters.getNewOffersUser.length > 0){
+            //         return false
+            //     }else{
+            //         return true
+            //     }
+            // },
 
             data(){
 

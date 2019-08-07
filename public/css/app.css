@@ -1112,21 +1112,21 @@ div.darkTable {
 
 @-webkit-keyframes glow {
   from {
-    background: #ed1459;
+    background: #23d160;
   }
 
   to {
-    background: #eaae1f;
+    background: #23d160;
   }
 }
 
 @keyframes glow {
   from {
-    background: #ed1459;
+    background: #23d160;
   }
 
   to {
-    background: #eaae1f;
+    background: #23d160;
   }
 }
 

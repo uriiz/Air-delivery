@@ -5,17 +5,19 @@
 
         <div class="main-dashborad-in">
             <div class="main-table">
-                <div class="main-table-title"><h3>Shipments</h3></div>
+                <div class="main-table-title"><h3>Feeds</h3></div>
                 <div class="main-table-box">
                     <img v-if="loader" src="/images/loader1.png" class="rotating" alt="">
+
                     <b-table
                             :data="data"
+                            v-if="!loader"
                             detail-key="id"
                             ref="table"
                             :paginated="isPaginated"
                             :per-page="perPage"
                             :openedDetailed="openedRows"
-                            v-if="!loader"
+                            detailed
                             >
 
                         <template slot-scope="props">
@@ -31,28 +33,12 @@
                                 {{ props.row.email }}
                             </b-table-column>
 
-                            <b-table-column field="logo" label="Logo">
-                                <img style="width:30px" :src="props.row.logo" alt="">
-                            </b-table-column>
-
-                            <b-table-column field="company_name" label="Company Name">
-                                {{ props.row.company_name }}
-                            </b-table-column>
-
-                            <b-table-column field="created_at" label="Registerd">
+                            <b-table-column field="created_at" label="Created">
                                 {{ props.row.created_at }}
                             </b-table-column>
 
-                            <b-table-column field="confirm_term" label="Confirm Term">
-                                {{ props.row.confirm_term }}
-                            </b-table-column>
-
-                            <b-table-column field="phone" label="Phone">
-                                {{ props.row.phone }}
-                            </b-table-column>
-
                             <b-table-column label="Delete!">
-                                <div class="delete-user" @click="deleteUser(props.row.id)">
+                                <div style="cursor: pointer" class="delete-user" @click="deleteUser(props.row.id)">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" width="30" height="30" xml:space="preserve">
 <g>
@@ -86,60 +72,8 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                             </b-table-column>
                         </template>
                         <template slot="detail" slot-scope="props">
+                            <div v-html="props.row.content" class="content">
 
-                            <div class="order-admin-details" v-for="(o,index) in props.row.offers">
-
-                                <div class="sep-custom" style="background:#ff7800;color:#fff ">{{index+1}}</div>
-                                <div>
-                                    <p>
-                                        <strong>מספר מזהה:</strong>
-                                        {{o.id}}
-                                    </p>
-                                    <p>
-                                        <strong>נוצרה:</strong>
-                                        {{o.created_at}}
-                                    </p>
-
-                                    <p>
-                                        <strong>מחברה:</strong>
-                                        {{o.from_company_name}}
-                                    </p>
-
-                                    <p>
-                                        <strong>לחברה:</strong>
-                                        {{o.to_company_name}}
-                                    </p>
-
-                                    <p>
-                                        <strong>הערות:</strong>
-                                        {{o.note}}
-                                    </p>
-
-                                    <p>
-                                        <strong>סטטוס ההצעה:</strong>
-                                        {{o.submit_action}}
-                                    </p>
-
-                                    <p>
-                                        <strong>מתאריך:</strong>
-                                        {{o.from_date}}
-                                    </p>
-
-                                    <p>
-                                        <strong>עד תאריך:</strong>
-                                        {{o.to_date}}
-                                    </p>
-
-                                    <p>
-                                        <strong>מאיפה:</strong>
-                                        {{o.from_address_name}}
-                                    </p>
-
-                                    <p>
-                                        <strong>לאן:</strong>
-                                        {{o.to_address_name}}
-                                    </p>
-                                </div>
                             </div>
                         </template>
 
@@ -168,7 +102,7 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                 }).then((result) => {
                     if(result.value == 1){
                         window.axios.post(
-                            '/admin/delete-user',{id:id}
+                            '/admin/delete-feed',{id:id}
                         ).then((res) => {
                             this.$store.commit('deleteUser',id);
                         }).catch((res) => {});
@@ -177,9 +111,10 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
             },
             getUsers(){
                 window.axios.post(
-                    '/admin/get-shipper',
+                    '/admin/get-feeds',
                 ).then((res) => {
                     this.$store.commit('users',res.data);
+                    console.log(res.data)
                     this.loader = false
                 }).catch((res) => {});
             },
@@ -198,13 +133,7 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
             data(){
                 return this.$store.getters.getUsers
             },
-            // loader(){
-            //     if(this.$store.getters.getUsers.length > 0){
-            //         return false;
-            //     }else {
-            //         return true;
-            //     }
-            // }
+
         },
     }
 

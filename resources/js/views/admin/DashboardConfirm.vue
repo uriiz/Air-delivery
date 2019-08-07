@@ -7,8 +7,9 @@
             <div class="main-table">
                 <div class="main-table-title"><h3>Pending offers </h3></div>
                 <div class="main-table-box">
+                    <img v-if="loader" src="/images/loader1.png" class="rotating" alt="">
                     <b-table
-                            v-if="data.length > 0"
+                            v-if="data.length > 0 && !loader"
                             :data="data"
                             detail-key="id"
                             ref="table"
@@ -105,8 +106,8 @@
                 window.axios.post(
                     '/confirm-admin',
                 ).then((res) => {
-                    console.log(res.data)
                     this.data = res.data
+                    this.loader = false
                 }).catch((res) => {
 
                 });
@@ -141,6 +142,7 @@
                 perPage: 40,
                 openedRows:[],
                 data:[],
+                loader:true,
             }
         },
         computed:{

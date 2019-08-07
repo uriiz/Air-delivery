@@ -56,7 +56,10 @@ class FeedBackController extends Controller
      */
     public function show(FeedBack $feedBack)
     {
-        //
+        if(!Auth::id() || Auth::user()->role != 3){
+            return 'not login';
+        }
+        return FeedBack::all();
     }
 
     /**
@@ -79,7 +82,11 @@ class FeedBackController extends Controller
      */
     public function update(Request $request, FeedBack $feedBack)
     {
-        //
+        if(!Auth::id() || Auth::user()->role != 3){
+            return 'not login';
+        }
+
+        return FeedBack::where('id',$request->id)->delete();
     }
 
     /**

@@ -7,6 +7,7 @@
             <div class="main-table">
                 <div class="main-table-title"><h3>Forwarders waiting for approval </h3></div>
                 <div class="main-table-box">
+                    <img v-if="loader" src="/images/loader1.png" class="rotating" alt="">
                     <b-table
                             :data="data"
                             detail-key="id"
@@ -14,7 +15,7 @@
                             :paginated="isPaginated"
                             :per-page="perPage"
                             :openedDetailed="openedRows"
-
+                            v-if="!loader"
                             >
 
                         <template slot-scope="props">
@@ -238,8 +239,8 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                 window.axios.post(
                     '/admin/get-waiting',
                 ).then((res) => {
-
                     this.$store.commit('users',res.data);
+                    this.loader = false
                 }).catch((res) => {});
             },
         },
@@ -250,6 +251,7 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                 isPaginated: true,
                 perPage: 40,
                 openedRows:[],
+                loader:true,
             }
         },
         computed:{

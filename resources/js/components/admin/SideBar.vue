@@ -5,7 +5,7 @@
             <ul>
                 <li>
                     <router-link :to="{ name: 'DashboardAdmin' }">
-                        <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
+                        <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
                         <div class="noty">
                             <div>
                                 Importers
@@ -20,22 +20,29 @@
 
                 <li>
                     <router-link :to="{ name: 'DashboardShipper' }">
-                        <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
+                        <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
                         <div>Shipments</div>
                     </router-link>
                 </li>
 
                 <li>
                     <router-link :to="{ name: 'DashboardWaiting' }">
-                        <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
+                        <img src="/images/icon_2.png" alt="" class="mCS_img_loaded">
                         <div>Forwarders waiting for approval</div>
                     </router-link>
                 </li>
 
                 <li>
                     <router-link :to="{ name: 'DashboardConfirm' }">
-                        <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
+                        <img src="/images/icon_7.png" alt="" class="mCS_img_loaded">
                         <div>Pending offers</div>
+                    </router-link>
+                </li>
+
+                <li>
+                    <router-link :to="{ name: 'DashboardFeeds' }">
+                        <img src="/images/icon_9.png" alt="" class="mCS_img_loaded">
+                        <div>Feeds back</div>
                     </router-link>
                 </li>
             </ul>

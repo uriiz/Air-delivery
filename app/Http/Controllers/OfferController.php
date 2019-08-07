@@ -236,6 +236,7 @@ class OfferController extends Controller
                 }catch (\Exception $e){
                 }
             }
+
         }
         return $offer;
     }

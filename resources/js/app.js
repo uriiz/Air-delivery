@@ -31,6 +31,7 @@ import DashboardOffers from './views/dashboard/DashboardOffers'
 import DashboardAdmin from './views/admin/Dashboard'
 import DashboardShipper from './views/admin/DashboardShipper'
 import DashboardWaiting from './views/admin/DashboardWaiting'
+import DashboardFeeds from './views/admin/DashboardFeeds'
 import DashboardConfirm from './views/admin/DashboardConfirm'
 import DashboardProfile from './views/dashboard/DashboardProfile'
 import DashboardOffer from './views/dashboard/DashboardOffer'
@@ -231,6 +232,13 @@ const router = new VueRouter({
             path: '/admin-confirm',
             name: 'DashboardConfirm',
             component: DashboardConfirm,
+            beforeEnter: authMiddlewareAdmin
+        },
+
+        {
+            path: '/admin-feeds',
+            name: 'DashboardFeeds',
+            component: DashboardFeeds,
             beforeEnter: authMiddlewareAdmin
         },
 

@@ -27,6 +27,7 @@ Route::get('/app-login', 'HomeController@index');
 Route::group(['middleware' => 'auth'],function() {
     Route::get('/dashboard', 'HomeController@index');
     Route::get('/app-dashboard', 'HomeController@index');
+    Route::get('/admin-feeds', 'HomeController@index');
     Route::get('/dashboard/add-new', 'HomeController@index');
     Route::get('/dashboard/my-offers', 'HomeController@index');
     Route::get('/dashboard/my-profile', 'HomeController@index');
@@ -59,6 +60,8 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/confirm-offer', 'OfferController@confirmOffer');
     Route::post('/confirm-admin', 'ResponseController@show');
     Route::post('/confirm-offer-final', 'ResponseController@edit');
+    Route::post('/admin/get-feeds', 'FeedBackController@show');
+    Route::post('/admin/delete-feed', 'FeedBackController@update');
     Route::post('/app/delete-offer', 'ResponseController@appDeleteResponse');
 
 

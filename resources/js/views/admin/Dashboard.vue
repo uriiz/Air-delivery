@@ -8,11 +8,11 @@
                 <div class="main-table-title"><h3>Importers</h3></div>
                 <div class="main-table-box">
                     <img v-if="loader" src="/images/loader1.png" class="rotating" alt="">
-
                     <b-table
                             :data="data"
                             detail-key="id"
                             ref="table"
+                            v-if="!loader"
                             :paginated="isPaginated"
                             :per-page="perPage"
                             :openedDetailed="openedRows"
@@ -172,6 +172,7 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                             '/admin/delete-user',{id:id}
                         ).then((res) => {
                             this.$store.commit('deleteUser',id);
+
                         }).catch((res) => {});
                     }
                 })
@@ -180,8 +181,8 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                 window.axios.post(
                     '/admin/get-users',
                 ).then((res) => {
-
                     this.$store.commit('users',res.data);
+                    this.loader = false
                 }).catch((res) => {});
             },
         },
@@ -192,19 +193,20 @@ C345.748,393.47,341.891,396.939,337.362,396.939"/>
                 isPaginated: true,
                 perPage: 40,
                 openedRows:[],
+                loader:true,
             }
         },
         computed:{
             data(){
                 return this.$store.getters.getUsers
             },
-            loader(){
-                if(this.$store.getters.getUsers.length > 0){
-                    return false;
-                }else {
-                    return true;
-                }
-            }
+            // loader(){
+            //     if(this.$store.getters.getUsers.length > 0){
+            //         return false;
+            //     }else {
+            //         return true;
+            //     }
+            // }
         },
     }
 
