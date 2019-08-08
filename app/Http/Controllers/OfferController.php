@@ -25,15 +25,14 @@ class OfferController extends Controller
 
     public function getConfirmOffers()
     {
+
         if(! Auth::id() || Auth::user()->role != 2){
             return;
         }
 
         $offers =  Offer::where('submit_action','published')->orderBy('created_at', 'DESC')->get();
-
         $offersAvilable = [];
         foreach ($offers as $offer){
-
             $response = Response::where('offer_id',$offer->id)
                 ->where('company_id',Auth::id())
                 ->where('is_send_email',0)
@@ -93,7 +92,6 @@ class OfferController extends Controller
 
         $admins = User::where('role',3)->get();
         foreach ($admins as $s){
-
                 try {
                     dispatch(new SendConfirmEmail($s));
                 }catch (\Exception $e){
@@ -174,14 +172,15 @@ class OfferController extends Controller
     }
     public function getAppOffers()
     {
+
         if(Auth::user()->role != 2){
             return;
         }
 
-        $offers =  Offer::where('submit_action','published')->orderBy('created_at', 'DESC')->get();
+        $offers = Offer::where('submit_action','published')
+            ->orderBy('created_at','DESC')->get();
         $offersAvilable = [];
         foreach ($offers as $offer){
-
             $response = Response::where('offer_id',$offer->id)
                 ->where('company_id',Auth::id())->first();
             if(count((array)$response) > 0){
@@ -223,7 +222,6 @@ class OfferController extends Controller
      */
     public function create(Request $request)
     {
-
         if(!Auth::user() || Auth::user()->role != 1){
           return 0;
         }

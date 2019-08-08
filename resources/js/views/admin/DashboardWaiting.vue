@@ -7,6 +7,7 @@
                 <div class="main-table-title"><h3>Forwarders waiting for approval</h3></div>
                 <div class="main-table-box">
                     <img v-if="loader" src="/images/loader1.png" class="rotating" alt="">
+                    <b-loading :is-full-page="false" :active.sync="loaderEvent" :can-cancel="false"></b-loading>
                     <b-table
                             :data="data"
                             detail-key="id"
@@ -130,6 +131,7 @@
             },
         methods: {
             confirmCompany(id){
+                this.loaderEvent = true;
                 window.axios.post(
                     '/register-with-admin',
                     {
@@ -144,6 +146,7 @@
                         showCancelButton: false,
                         confirmButtonText: 'Ok',
                     }).then((result) => {
+                        this.loaderEvent = false;
                         this.$store.commit('deleteUser',id);
                     })
                       }else{
@@ -153,6 +156,7 @@
                             text: 'כבר יש כתובת דוא"ל כזאת',
                             footer: ''
                         })
+                        this.loaderEvent = false;
                     }
                 }).catch((res) => {
                     Swal.fire({
@@ -161,6 +165,7 @@
                         text: 'כבר יש כתובת דוא"ל כזאת',
                         footer: ''
                     })
+                    this.loaderEvent = false;
                 });
             },
             deleteUser(id){
@@ -197,6 +202,7 @@
                 perPage: 40,
                 openedRows:[],
                 loader:true,
+                loaderEvent:false,
             }
         },
         computed:{

@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/get-user', 'HomeController@getUser');
     Route::post('/set-feedback', 'FeedBackController@store');
     Route::post('/admin/get-users', 'HomeController@getUsers');
+    Route::post('/app/delete-offer-custom', 'IgnoreController@store');
     Route::post('/admin/get-shipper', 'HomeController@getShipper');
     Route::post('/admin/get-waiting', 'WaitController@show');
     Route::post('/admin/delete-user', 'HomeController@deleteUser');

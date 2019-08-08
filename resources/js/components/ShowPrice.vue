@@ -2,10 +2,7 @@
     <form action="">
         <div class="modal-card" style="width: auto">
 
-            <b-loading :is-full-page="false" :active.sync="loader" :can-cancel="false">
-
-            </b-loading>
-
+            <b-loading :is-full-page="false" :active.sync="loader" :can-cancel="false"></b-loading>
             <header class="modal-card-head">
                 <p class="modal-card-title">Quotation #{{id}}</p>
             </header>
@@ -101,8 +98,6 @@
             calcTotal(a,b){
                 return (Number(a)+Number(b)).toFixed(2)
             }
-
-
         },
         props: [
             'response',

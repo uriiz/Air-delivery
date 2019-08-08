@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendJoinEmail;
+use App\Jobs\SendWelcomeEmail;
 use App\User;
 use App\Wait;
 use Carbon\Carbon;
@@ -66,17 +68,20 @@ class WaitController extends Controller
         ]);
 
         if($newUser->email){
-            /******here send mail******/
+
+            try {
+                dispatch(new SendWelcomeEmail($newUser));
+            }catch (\Exception $e){
+            }
             return Wait::where('id',$request->id)->delete();
         }
-        return $newUser;
-
+        return ;
     }
 
     public function store(Request $request)
     {
 
-        return Wait::create([
+        $wait = Wait::create([
             'name' => $request->name,
             'email' => $request->email,
             'company_name' => $request->company_name,
@@ -86,6 +91,14 @@ class WaitController extends Controller
             'confirm_term' => Carbon::now(),
             'password' => $request->password,
         ]);
+        $admins = User::where('role',3)->get();
+        foreach ($admins as $s){
+            try {
+                dispatch(new SendJoinEmail($s));
+            }catch (\Exception $e){
+            }
+        }
+        return $wait;
     }
 
     /**

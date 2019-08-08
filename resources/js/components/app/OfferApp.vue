@@ -79,6 +79,12 @@
                             {{ props.row.to_country_name }}
                         </b-table-column>
 
+                        <b-table-column label="Delete!" >
+                            <div style="cursor: pointer" class="delete-user" @click="deleteOffer(props.row.id)">
+                                <delete-svg></delete-svg>
+                            </div>
+                        </b-table-column>
+
                         <b-table-column field="to_date" label="Set Your Offer" >
                            <span @click="setOffer(props.row.id)" class="tag is-success action">
                                Set Your Quotation !
@@ -101,12 +107,9 @@
                                 :packages="props.row.packages"
                                 :rowId="props.row.id"
                         >
-
                         </table-extra-data-row>
                     </template>
-
                 </b-table>
-
             </div>
         </div>
     </div>
@@ -114,13 +117,29 @@
 
 <script>
     import SetOffer from './SetOffer'
-
+    import Swal from 'sweetalert2'
     export default {
         mounted() {
-
             this.getCountries()
         },
         methods: {
+            deleteOffer(id){
+                Swal.fire({
+                    title: 'sure?',
+                    text: "There will be no turning back ):",
+                    type: 'warning',
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok',
+                }).then((result) => {
+                    if(result.value == 1){
+                        window.axios.post(
+                            '/app/delete-offer-custom',{id:id}
+                        ).then((res) => {
+                            this.$store.commit('deleteUser',id);
+                        }).catch((res) => {});
+                    }
+                })
+            },
             setOffer(id){
                 this.$modal.open({
                     parent: this,

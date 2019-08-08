@@ -5194,9 +5194,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   methods: {
@@ -6253,6 +6250,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SetOffer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SetOffer */ "./resources/js/components/app/SetOffer.vue");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
 //
 //
 //
@@ -6368,11 +6370,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getCountries();
   },
   methods: {
+    deleteOffer: function deleteOffer(id) {
+      var _this = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: 'sure?',
+        text: "There will be no turning back ):",
+        type: 'warning',
+        showCancelButton: false,
+        confirmButtonText: 'Ok'
+      }).then(function (result) {
+        if (result.value == 1) {
+          window.axios.post('/app/delete-offer-custom', {
+            id: id
+          }).then(function (res) {
+            _this.$store.commit('deleteUser', id);
+          })["catch"](function (res) {});
+        }
+      });
+    },
     setOffer: function setOffer(id) {
       this.$modal.open({
         parent: this,
@@ -6385,41 +6407,41 @@ __webpack_require__.r(__webpack_exports__);
     },
     filterData: function filterData() {},
     openRow: function openRow(row) {
-      var _this = this;
+      var _this2 = this;
 
       if (this.openedRows[0] !== row.id) {
         this.openedRows = [];
       }
 
       this.$nextTick(function () {
-        _this.$refs.table.toggleDetails(row);
+        _this2.$refs.table.toggleDetails(row);
       });
     },
     getCountries: function getCountries() {
-      var _this2 = this;
+      var _this3 = this;
 
       window.axios.post('/get-countries').then(function (res) {
-        _this2.countries = res.data;
+        _this3.countries = res.data;
       })["catch"](function (res) {});
     },
     filterCounries: function filterCounries() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.fromCountryName != -1 || this.toCountryName != -1) {
         return this.$store.getters.getNewOffers.filter(function (offer) {
-          if (_this3.fromCountryName != -1 && _this3.toCountryName == -1) {
-            return offer.from_country_name == _this3.fromCountryName;
+          if (_this4.fromCountryName != -1 && _this4.toCountryName == -1) {
+            return offer.from_country_name == _this4.fromCountryName;
           }
 
-          if (_this3.fromCountryName == -1 && _this3.toCountryName != -1) {
-            return offer.to_country_name == _this3.toCountryName;
+          if (_this4.fromCountryName == -1 && _this4.toCountryName != -1) {
+            return offer.to_country_name == _this4.toCountryName;
           }
 
-          if (_this3.fromCountryName != -1 && _this3.toCountryName != -1) {
-            return offer.to_country_name == _this3.toCountryName && offer.from_country_name == _this3.fromCountryName;
+          if (_this4.fromCountryName != -1 && _this4.toCountryName != -1) {
+            return offer.to_country_name == _this4.toCountryName && offer.from_country_name == _this4.fromCountryName;
           }
 
-          return _this3.offers;
+          return _this4.offers;
         });
       } else {
         return this.$store.getters.getNewOffers;
@@ -7625,6 +7647,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -7634,6 +7657,7 @@ __webpack_require__.r(__webpack_exports__);
     confirmCompany: function confirmCompany(id) {
       var _this = this;
 
+      this.loaderEvent = true;
       window.axios.post('/register-with-admin', {
         'id': id
       }).then(function (res) {
@@ -7645,6 +7669,8 @@ __webpack_require__.r(__webpack_exports__);
             showCancelButton: false,
             confirmButtonText: 'Ok'
           }).then(function (result) {
+            _this.loaderEvent = false;
+
             _this.$store.commit('deleteUser', id);
           });
         } else {
@@ -7654,6 +7680,7 @@ __webpack_require__.r(__webpack_exports__);
             text: 'כבר יש כתובת דוא"ל כזאת',
             footer: ''
           });
+          _this.loaderEvent = false;
         }
       })["catch"](function (res) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
@@ -7662,6 +7689,7 @@ __webpack_require__.r(__webpack_exports__);
           text: 'כבר יש כתובת דוא"ל כזאת',
           footer: ''
         });
+        _this.loaderEvent = false;
       });
     },
     deleteUser: function deleteUser(id) {
@@ -7700,7 +7728,8 @@ __webpack_require__.r(__webpack_exports__);
       isPaginated: true,
       perPage: 40,
       openedRows: [],
-      loader: true
+      loader: true,
+      loaderEvent: false
     };
   },
   computed: {
@@ -65924,6 +65953,27 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "b-table-column",
+                            { attrs: { label: "Delete!" } },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "delete-user",
+                                  staticStyle: { cursor: "pointer" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteOffer(props.row.id)
+                                    }
+                                  }
+                                },
+                                [_c("delete-svg")],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-table-column",
                             {
                               attrs: {
                                 field: "to_date",
@@ -65979,7 +66029,7 @@ var render = function() {
                   ],
                   null,
                   false,
-                  3950243119
+                  1832335406
                 )
               })
             : _vm._e()
@@ -67987,6 +68037,19 @@ var render = function() {
                     attrs: { src: "/images/loader1.png", alt: "" }
                   })
                 : _vm._e(),
+              _vm._v(" "),
+              _c("b-loading", {
+                attrs: {
+                  "is-full-page": false,
+                  active: _vm.loaderEvent,
+                  "can-cancel": false
+                },
+                on: {
+                  "update:active": function($event) {
+                    _vm.loaderEvent = $event
+                  }
+                }
+              }),
               _vm._v(" "),
               !_vm.loader
                 ? _c("b-table", {
