@@ -1134,6 +1134,10 @@ div.darkTable {
   margin-right: 10px;
 }
 
+a.router-link-exact-active.router-link-active {
+  color: #96bb01 !important;
+}
+
 .wrap-price {
   display: -webkit-box;
   display: flex;

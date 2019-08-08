@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Ignore;
 use App\Jobs\SendConfirmEmail;
 use App\Jobs\SendOfferEmail;
 use App\Jobs\SendPriceOfferEmail;
@@ -186,7 +187,10 @@ class OfferController extends Controller
             if(count((array)$response) > 0){
 
             }else{
-                array_push($offersAvilable,$offer);
+                $ignore = Ignore::where('user_id',Auth::id())->where('offer_id',$offer->id)->first();
+                if(count( (array) $ignore) < 1){
+                    array_push($offersAvilable,$offer);
+                }
             }
         }
 

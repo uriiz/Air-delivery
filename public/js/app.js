@@ -6367,8 +6367,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6390,7 +6388,7 @@ __webpack_require__.r(__webpack_exports__);
           window.axios.post('/app/delete-offer-custom', {
             id: id
           }).then(function (res) {
-            _this.$store.commit('deleteUser', id);
+            _this.$store.commit('deleteAppOffer', id);
           })["catch"](function (res) {});
         }
       });
@@ -90315,6 +90313,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
       for (var i = 0; i < state.newConfirmOffersArr.length; i++) {
         if (state.newConfirmOffersArr[i].response_id == id) {
           state.newConfirmOffersArr.splice(i, 1);
+        }
+      }
+    },
+    deleteAppOffer: function deleteAppOffer(state, id) {
+      for (var i = 0; i < state.newOffersArr.length; i++) {
+        if (state.newOffersArr[i].id == id) {
+          state.newOffersArr.splice(i, 1);
         }
       }
     }

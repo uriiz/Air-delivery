@@ -54,6 +54,15 @@ export const store = new Vuex.Store({
                 }
             }
         },
+
+        deleteAppOffer(state,id){
+
+            for(let i = 0;i<state.newOffersArr.length;i++){
+                if(state.newOffersArr[i].id == id){
+                    state.newOffersArr.splice(i,1)
+                }
+            }
+        },
     }
 
 })

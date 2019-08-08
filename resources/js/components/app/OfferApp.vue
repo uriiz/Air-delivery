@@ -2,9 +2,7 @@
     <div class="main-dashborad-in">
         <div class="main-table">
             <div class="filter-inputs">
-
                 <div class="wrap-input">
-
                     <select @change="filterData" v-model="fromCountryName" class="input">
                         <option selected value="-1">From Country</option>
                         <option v-for="(c,index) in countries" :value="c.name">
@@ -135,7 +133,7 @@
                         window.axios.post(
                             '/app/delete-offer-custom',{id:id}
                         ).then((res) => {
-                            this.$store.commit('deleteUser',id);
+                            this.$store.commit('deleteAppOffer',id);
                         }).catch((res) => {});
                     }
                 })
@@ -250,7 +248,6 @@
             },
 
             data(){
-
                 let filters =  this.filterCounries();
                 filters = this.filterPack(filters);
                 return filters;
