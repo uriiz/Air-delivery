@@ -186,7 +186,6 @@
                                 Save
                                 <img v-if="loaderUpdate" style="width:25px" src="/images/loader.gif" alt="">
                             </a>
-
                         </footer>
                     </b-collapse>
                 </div>

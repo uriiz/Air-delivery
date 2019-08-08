@@ -8,21 +8,18 @@
 
 <script>
     export default {
-            mounted() {
+        mounted() {
 
-            },
+        },
         methods: {
-
         },
         data() {
             return {
                 currentUserId:$("#details-helper").data('id'),
                 currentUserName:$("#details-helper").data('name'),
-
             }
         },
         computed:{
-
         },
     }
 

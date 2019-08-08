@@ -42,6 +42,7 @@ import AdminSideBar from './components/admin/SideBar'
 import OfferApp from './components/app/OfferApp'
 import SetOffer from './components/app/SetOffer'
 import FormSingle from './components/FormSingle'
+import DeleteSvg from './components/svg/Delete'
 import ExtraDataPrice from './components/ExtraDataPrice'
 import Sidebar from './components/Sidebar'
 import SidebarApp from './components/app/Sidebar'
@@ -57,6 +58,7 @@ import appDashboardEdit from './views/app/Profile'
 import Form from './components/Form'
 import Welcome from './components/Welcome'
 import MyAccount from './components/MyAccount'
+import ConfirmSvg from './components/svg/Confirm'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 Vue.component('vue2-dropzone', vue2Dropzone);
@@ -79,6 +81,8 @@ Vue.component('header-login', Login);
 Vue.component('dashboard-user', DashboardUser);
 Vue.component('welcome', Welcome);
 Vue.component('admin-sidebar', AdminSideBar);
+Vue.component('delete-svg', DeleteSvg);
+Vue.component('confirm-svg', ConfirmSvg);
 Vue.component('multi-select', Multiselect);
 
 var user = $('#details-helper').data('id');

@@ -12,7 +12,6 @@
 
         },
         methods: {
-
             getOffers(){
                 window.axios.post(
                     '/app/get-orders',
@@ -20,7 +19,6 @@
                     this.$store.commit('newOffers',res.data);
                 }).catch((res) => {});
             },
-
         },
         data() {
             return {

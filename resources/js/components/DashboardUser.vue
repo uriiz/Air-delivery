@@ -2,9 +2,7 @@
     <div class="main-dashborad-in">
         <div class="main-table">
             <div class="filter-inputs">
-
                 <div class="wrap-input">
-
                     <select @change="filterData" v-model="fromCountryName" class="input">
                         <option selected value="-1">From Country</option>
                         <option v-for="(c,index) in countries" :value="c.name">
@@ -12,7 +10,6 @@
                         </option>
                     </select>
                 </div>
-
                 <div class="wrap-input">
                     <select @change="filterData" v-model="toCountryName" class="input">
                         <option selected value="-1">To Country</option>
@@ -21,7 +18,6 @@
                         </option>
                     </select>
                 </div>
-
             </div>
             <div class="main-table-title"><h3>New Quotation</h3></div>
             <div class="main-table-box">
@@ -41,7 +37,6 @@
                         detailed
                         v-if="!loader && data.length > 0"
                 >
-
                     <template slot-scope="props">
                         <b-table-column field="id" label="Quotation ID">
                             <div @click="openRow(props.row)">
@@ -93,19 +88,15 @@
                                 :response="props.row.response"
                                 :rowId="props.row.id"
                         >
-
                         </extra-data-price>
                     </template>
-
                 </b-table>
 
             </div>
         </div>
     </div>
 </template>
-
 <script>
-
     import ShowPrice from './ShowPrice'
     export default {
         mounted() {
@@ -154,12 +145,10 @@
                         if(this.fromCountryName != -1 &&  this.toCountryName != -1){
                             return offer.to_country_name == this.toCountryName
                                 && offer.from_country_name == this.fromCountryName
-
                         }
                         return this.offers
                     });
                 }else{
-
                     return this.$store.getters.getNewOffersUser
                 }
             },
@@ -167,34 +156,24 @@
             filterPack(filters){
                 if(this.packageType != -1)
                 {
-
                     let packArr = [];
                     let ids = [];
                     let arrFilterIds = [];
-
                     for(let j = 0; j < filters.length; j++) {
-
                         for (let i = 0; i < filters[j].packages.length; i++) {
                             if (filters[j].packages[i].package_type == this.packageType) {
                                 packArr.push(filters[j])
                             }
                         }
-
                     }
-
-
                     for(let x =0;x<packArr.length;x++){
-
                         if(ids.includes(packArr[x].id)){
-
                         }else{
                             arrFilterIds.push(packArr[x])
                         }
                         ids.push(packArr[x].id)
                     }
-
                     return arrFilterIds;
-
                 }
                 return filters;
             },
@@ -215,16 +194,7 @@
             }
         },
         computed:{
-            // loader(){
-            //     if(this.$store.getters.getNewOffersUser.length > 0){
-            //         return false
-            //     }else{
-            //         return true
-            //     }
-            // },
-
             data(){
-
                 let filters =  this.filterCounries();
                 filters = this.filterPack(filters);
                 return filters;

@@ -8,7 +8,6 @@
         <div style="padding-bottom: 50px"></div>
     </div>
 </template>
-
 <script>
     export default {
 
