@@ -1,7 +1,7 @@
 <template>
     <header>
     <div class="head-dash top_nav">
-        <div class="mobile-trigger">
+        <div class="mobile-trigger" @click="openMenu">
             <div class="hamburger hamburger--slider js-hamburger">
                 <div class="hamburger-box">
                     <div class="hamburger-inner"></div>
@@ -33,7 +33,12 @@
     import FeedBack from './FeedBack'
     export default {
         methods: {
+            openMenu(){
 
+                    $('.dashboard-sidebar').toggleClass('show');
+                    $('.hamburger').toggleClass('is-active');
+
+            },
             feedBackTrigger(){
                 this.$modal.open({
                     parent: this,

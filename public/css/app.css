@@ -1248,8 +1248,23 @@ a.router-link-exact-active.router-link-active {
     padding: 60px 0 0 0;
   }
 
+  .user-profile h2 {
+    margin-top: 20px;
+  }
+
+  .dashboard-sidebar nav ul li a {
+    padding: 10px;
+  }
+
   .dashboard-sidebar {
     left: -250px;
+    padding-top: 20px;
+    -webkit-transition: all 250ms ease;
+    transition: all 250ms ease;
+  }
+
+  .dashboard-sidebar.show {
+    left: 0;
   }
 
   .head-dash {
@@ -1325,6 +1340,95 @@ a.router-link-exact-active.router-link-active {
   .head-dash {
     padding: 0 9px;
   }
+
+  .main-dashboard {
+    padding: 10px;
+  }
+
+  .table {
+    background-color: transparent !important;
+  }
+
+  .main-table-box {
+    background-color: transparent;
+  }
+
+  .b-table .table.has-mobile-cards tr:not([class*=is-]) {
+    background-color: #fff !important;
+  }
+
+  .b-table .table.has-mobile-cards tr:not(:last-child) {
+    margin-bottom: 30px !important;
+  }
+
+  .main-table-box {
+    border: none;
+  }
+
+  .main-form {
+    padding: 0 10px;
+  }
+
+  .form-top {
+    margin: 20px 0;
+  }
+
+  .range-tab {
+    max-width: 130px;
+  }
+
+  .add-package {
+    margin: 10px 0;
+    font-weight: bold;
+    background: #111b23 !important;
+    color: #8fb301 !important;
+    padding: 10px;
+  }
+
+  .add-package .add-package-circle-bg {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+            justify-content: center;
+  }
+
+  .main-form section .field {
+    width: 100%;
+  }
+
+  .submit-form {
+    padding-bottom: 20px;
+  }
+
+  .wrap-profile-card-field {
+    display: block;
+  }
+
+  .main-table-box.my-account {
+    max-width: 100%;
+  }
+
+  .my-account label {
+    margin-top: 10px !important;
+    margin-left: 5px !important;
+  }
+
+  .wrap-input-flex {
+    margin: 0;
+  }
+
+  .inputs-account .wrap-input-flex:last-child {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .card-profile {
+    width: 100%;
+    max-width: 300px !important;
+    margin: 20px auto;
+  }
 }
 
 /*!
@@ -1354,10 +1458,6 @@ a.router-link-exact-active.router-link-active {
   border: 0;
   margin: 0;
   overflow: visible;
-}
-
-.hamburger:hover {
-  opacity: 0.7;
 }
 
 .hamburger.is-active:hover {
@@ -1423,6 +1523,12 @@ a.router-link-exact-active.router-link-active {
 .mobile-trigger {
   line-height: 1;
   padding: 10px 0;
+}
+
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+  background-color: #8eb33e;
 }
 
 /*

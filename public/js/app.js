@@ -4043,6 +4043,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
+    openMenu: function openMenu() {
+      $('.dashboard-sidebar').toggleClass('show');
+      $('.hamburger').toggleClass('is-active');
+    },
     feedBackTrigger: function feedBackTrigger() {
       this.$modal.open({
         parent: this,
@@ -62185,7 +62189,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("header", [
     _c("div", { staticClass: "head-dash top_nav" }, [
-      _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "mobile-trigger", on: { click: _vm.openMenu } },
+        [_vm._m(0)]
+      ),
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
@@ -62218,13 +62226,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mobile-trigger" }, [
-      _c("div", { staticClass: "hamburger hamburger--slider js-hamburger" }, [
+    return _c(
+      "div",
+      { staticClass: "hamburger hamburger--slider js-hamburger" },
+      [
         _c("div", { staticClass: "hamburger-box" }, [
           _c("div", { staticClass: "hamburger-inner" })
         ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this
