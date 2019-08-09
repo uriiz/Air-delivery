@@ -1287,6 +1287,43 @@ a.router-link-exact-active.router-link-active {
   .mobile-trigger {
     display: block;
   }
+
+  .detail-container {
+    padding: 0 !important;
+  }
+
+  .brand_fidbek .fidbek a {
+    font-size: 12px;
+  }
+
+  .chevron-cell {
+    padding: 0 !important;
+  }
+
+  .chevron-cell:before {
+    padding: 0 !important;
+  }
+
+  .chevron-cell .mdi:before,
+  .chevron-cell .mdi-set {
+    color: #fff;
+  }
+
+  .chevron-cell a {
+    width: 100%;
+    display: block;
+    background-color: #111b23;
+    position: relative;
+    padding: 10px;
+  }
+
+  .chevron-cell a:after {
+    content: "Show Details";
+    position: absolute;
+    left: 10px;
+    color: #8fb301;
+    text-decoration: underline;
+  }
 }
 
 @media screen and (max-width: 740px) {
