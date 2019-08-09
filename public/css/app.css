@@ -1188,6 +1188,10 @@ a.router-link-exact-active.router-link-active {
           justify-content: center;
 }
 
+.mobile-trigger {
+  display: none;
+}
+
 /***************responsive***************/
 
 @media screen and (max-width: 1700px) {
@@ -1279,6 +1283,10 @@ a.router-link-exact-active.router-link-active {
   .wrap-ul-map {
     max-width: 100%;
   }
+
+  .mobile-trigger {
+    display: block;
+  }
 }
 
 @media screen and (max-width: 740px) {
@@ -1309,6 +1317,10 @@ a.router-link-exact-active.router-link-active {
   .main-table-title h3 {
     font-size: 25px;
     line-height: 1.1;
+  }
+
+  .modal .animation-content {
+    width: 95% !important;
   }
 
   div.darkTable {
