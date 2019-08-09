@@ -1045,8 +1045,75 @@ a.router-link-exact-active.router-link-active{
     }
 }
 
-@media screen and (max-width: 1200px) {
-    body {
-       display: none;
-    }
+@media screen and (max-width: 1270px) {
+   .main-dashboard{
+     padding: 20px;
+   }
+  .main-dashborad-in{
+    padding: 60px 0 0 0;
+  }
+  .dashboard-sidebar{
+    left: -250px;
+  }
+  .head-dash{
+    left: 0;
+    width: 100%;
+  }
+  .filter-inputs{
+    margin: 20px 0 0 0;
+  }
+  .wrap-ul-map{
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 740px) {
+  .quicks-links{
+    display: none;
+  }
+  .main-table-box{
+    padding: 0;
+  }
+
+  .filter-inputs{
+    display: block;
+  }
+  .filter-inputs{
+    margin: 0;
+  }
+  .brand_fidbek .brand:after{
+    content: none;
+  }
+  .main-table-title{
+    margin-bottom: 10px;
+  }
+  .main-table-title h3{
+    font-size: 25px;
+    line-height: 1.1;
+  }
+  .form-title{
+
+  }
+  div.darkTable{
+      margin: 20px 0;
+  }
+  .maps-section{
+   overflow: hidden;
+  }
+  .vue-map-container{
+    max-width: 100%;
+    width: 100% !important;
+    height: 200px !important;
+  }
+  .form-title{
+    margin: 0 !important;
+  }
+  .detail-container{
+    padding: 10px !important;
+  }
+  .form-title .title{
+    font-size: 15px !important;
+  }
+  .head-dash{
+    padding: 0 9px;
+  }
 }
