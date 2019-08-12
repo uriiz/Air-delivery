@@ -1,10 +1,13 @@
 <template>
-    <div>
+    <div class="container">
     <nav class="navbar" role="navigation" aria-label="main navigation">
 
         <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                Freight-Me
+            <a class="navbar-item"  href="/">
+                <span style="color:#000; !important;">
+                    Freight-Me
+                </span>
+
             </a>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

@@ -61,7 +61,9 @@ import MyAccount from './components/MyAccount'
 import ConfirmSvg from './components/svg/Confirm'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import VueCarousel from '@chenfengyuan/vue-carousel';
 Vue.component('vue2-dropzone', vue2Dropzone);
+Vue.component(VueCarousel.name, VueCarousel);
 Vue.component('header-top', HeaderTop);
 Vue.component('my-account', MyAccount);
 Vue.component('my-offers', myOffers);

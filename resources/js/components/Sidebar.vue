@@ -25,7 +25,7 @@
                         <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
                         <div class="noty">
                         <div>
-                            New Quotation
+                            Quotation Received
                         </div>
                         <div v-if="countOffers>0">
                             <div class="count">
@@ -44,7 +44,7 @@
                 <li>
                     <router-link :to="{ name: 'myOffer' }">
                         <img src="/images/secure5.png" alt="" class="mCS_img_loaded">
-                        <div>My Offers</div>
+                        <div>My Quotation</div>
                     </router-link>
                 </li>
                 <li>

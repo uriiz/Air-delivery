@@ -179,7 +179,7 @@ class OfferController extends Controller
         }
 
         $offers = Offer::where('submit_action','published')
-            ->orderBy('created_at','DESC')->get();
+            ->orderBy('created_at','DESC')->take(600)->get();
         $offersAvilable = [];
         foreach ($offers as $offer){
             $response = Response::where('offer_id',$offer->id)

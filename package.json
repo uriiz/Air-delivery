@@ -21,10 +21,11 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
-        "vue": "^2.5.17",
+        "vue": "^2.6.10",
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@chenfengyuan/vue-carousel": "^1.0.2",
         "buefy": "^0.7.8",
         "sweetalert2": "^8.13.1",
         "vue-multiselect": "^1.1.5",

@@ -1,15 +1,21 @@
 <template>
-    <div class="main-form main-form-welcome">
-       <div class="welcome-title">
-           <h1>Freight Me</h1>
-
-       </div>
-        <p>
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-        </p>
-        <div class="btns-wrap">
-            <b-button type="is-primary orange">Contact Us</b-button>
-            <b-button type="is-primary link">Primary</b-button>
+    <div class="">
+        <div class="top-landing">
+            <div class="title-container">
+                <p class="animate-top">
+                    A new way to manage <br>your <span style="color:#00CC6F">Shipment</span>
+                </p>
+                <form class="lp-form-trigger animate-top is-slow-1">
+                    <input type="email" class="input lp-mail" placeholder="Enter your work email">
+                    <div class="signup-button-wrapper">
+                        <button type="submit">Get Started</button>
+                    </div>
+                </form>
+            </div>
+            <div class="slider-land">
+                <carousel :interval="3000" direction="left"
+                        :data="['<img src=\'/images/shot7.png\'>', '<img src=\'/images/shot8.png\'>', '<img src=\'/images/shot9.png\'>', '<img src=\'/images/shot10.png\'>']"></carousel>
+            </div>
         </div>
     </div>
 </template>
