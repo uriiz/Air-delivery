@@ -13,9 +13,25 @@
                 </form>
             </div>
             <div class="slider-land">
-                <carousel :interval="3000" direction="left"
-                        :data="['<img src=\'/images/shot7.png\'>', '<img src=\'/images/shot8.png\'>', '<img src=\'/images/shot9.png\'>', '<img src=\'/images/shot10.png\'>']"></carousel>
+                <div class="example-slide" style="background-image: url(/images/shot53.png)"></div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        mounted() {
+        },
+        data() {
+            return {
+                data: [
+                    '',
+                    '<div class="example-slide" style="background-image: url(/images/shot30.png)"></div>',
+                    '<div class="example-slide" style="background-image: url(/images/shot12.png)"></div>',
+
+                ],
+            }
+        },
+    }
+</script>

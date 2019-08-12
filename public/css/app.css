@@ -285,13 +285,21 @@ img.airplain-par {
           justify-content: space-between;
 }
 
-.slider-land img {
-  height: 400px;
-  width: 100%;
+.example-slide {
+  width: 600px;
+  background-position: center;
+  height: 500px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .slider-land {
-  max-width: 60%;
+  max-width: 50%;
+}
+
+.slider-land img {
+  height: 400px;
+  width: 100%;
 }
 
 .title-container {

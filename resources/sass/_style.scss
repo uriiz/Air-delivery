@@ -235,14 +235,22 @@ img.airplain-par{
   align-items: center;
   justify-content: space-between;
 }
+.example-slide{
+  width:600px;
+  background-position: center;
+  height: 500px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 .slider-land{
+  max-width: 50%;
  img{
    height: 400px;
    width: 100%;
  }
 }
 .slider-land{
-  max-width: 60%;
+
 }
 .title-container{
   max-width: 500px;

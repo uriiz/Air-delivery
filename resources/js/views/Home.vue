@@ -22,7 +22,7 @@
                 fast adoption
             </p>
         </div>
-        <div class="sec-part-img" style="background-image: url(/images/shot12.png)">
+        <div class="sec-part-img" style="background-image: url(/images/shot54.png)">
 
         </div>
         </div>
@@ -69,7 +69,7 @@
                     $('.last-part svg').addClass('animate-top');
                 }
                 if($('.last-footer').is(":in-viewport")){
-                    
+
                     $('.last-part svg').addClass('animate-top');
                     $('.last-part .lp-form-trigger').addClass('animate-top');
                 }
