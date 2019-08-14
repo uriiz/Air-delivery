@@ -1,5 +1,7 @@
 <template>
 <div class="lp" style="background: #fff">
+    <img src="/images/banner_overlay_2.png" class="banner-overlay-right" alt="">
+    <img src="/images/banner_overlay_1.png" class="banner-overlay-left" alt="">
     <header-top></header-top>
     <div class="container">
         <welcome></welcome>
@@ -21,14 +23,38 @@
                 Easy onboarding, <br>
                 fast adoption
             </p>
+            <span class="likep">
+                Getting your team on board is as simple as sending an email.
+                Getting them hooked is as simple as letting them use it.
+            </span>
         </div>
-        <div class="sec-part-img" style="background-image: url(/images/shot54.png)">
+        <div class="sec-part-img">
 
+            <vue-circle
+                    :progress=95
+                    :size="250"
+                    :reverse="false"
+                    line-cap="round"
+                    :fill="fill"
+                    empty-fill="rgba(0, 0, 0, .1)"
+                    :animation-start-value="0.0"
+                    :start-angle="0"
+                    insert-mode="append"
+                    :thickness="12"
+                    :show-percent="true"
+                    @vue-circle-progress="progress"
+                    @vue-circle-end="progress_end">
+                <p style="font-size: 20px">Satisfied customers</p>
+            </vue-circle>
         </div>
         </div>
     </div>
-    <div class="third-part" style="background-image: url(https://www.titan-soft.com/en/wp-content/uploads/2019/06/stock-photo-designers-man-drawing-website-ux-app-development-user-experience-concept-696064291-1.jpg)">
-
+    <div class="third-part" >
+        <video autoplay muted loop id="main-video">
+            <source src="http://haifa-port.s89.upress.link/wp-content/uploads/2019/05/MAERSK-HAMBURG-Short.mp4" type="video/mp4">
+            <source src="http://haifa-port.s89.upress.link/wp-content/uploads/2019/05/MAERSK-HAMBURG-Short.mp4" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
     </div>
     <div class="last-part">
         <div class="container">
@@ -67,13 +93,28 @@
                     $('.lp-form-trigger').addClass('animate-top');
                     $('.likp-p').addClass('animate-top');
                     $('.last-part svg').addClass('animate-top');
+                    $('.sec-part-img').addClass('show');
+                    this.progressP = 95
                 }
                 if($('.last-footer').is(":in-viewport")){
-
                     $('.last-part svg').addClass('animate-top');
                     $('.last-part .lp-form-trigger').addClass('animate-top');
                 }
 
+            }
+        },
+        data() {
+            return {
+                fill : { gradient: ["#7957d5", "#96bb01", "#1d2d3a"] },
+                progressP:0,
+            }
+        },
+        methods:{
+            progress(event,progress,stepValue){
+                console.log(stepValue);
+            },
+            progress_end(event){
+                console.log("Circle progress end");
             }
         }
     }

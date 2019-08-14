@@ -4,6 +4,7 @@ require('./particiles');
 require('./functions');
 window.Vue = require('vue');
 import VueRouter from 'vue-router'
+import VueCircle from 'vue2-circle-progress'
 import Multiselect from 'vue-multiselect'
 Vue.use(VueRouter);
 
@@ -66,6 +67,7 @@ Vue.component('vue2-dropzone', vue2Dropzone);
 Vue.component(VueCarousel.name, VueCarousel);
 Vue.component('header-top', HeaderTop);
 Vue.component('my-account', MyAccount);
+Vue.component('vue-circle', VueCircle);
 Vue.component('my-offers', myOffers);
 Vue.component('app-edit', EditApp);
 Vue.component('app-loginc', AppLoginC);

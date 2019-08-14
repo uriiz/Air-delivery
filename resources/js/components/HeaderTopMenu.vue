@@ -38,7 +38,7 @@
 
                     </div>
                     <div class="welcome-name show-in-desktop">
-                        Logged as &nbsp; <b> {{currentUserName}} </b>
+                        <b> {{currentUserName}} </b>
                         <a v-if="role == 1" href="/dashboard/my-offers"  class="button is-primary orange">
                             <span>Dashboard</span>
                         </a>
@@ -57,24 +57,7 @@
 
 
     </nav>
-        <div class="banner-top">
-            <video autoplay muted loop id="main-video">
-                <source src="http://haifa-port.s89.upress.link/wp-content/uploads/2019/05/MAERSK-HAMBURG-Short.mp4" type="video/mp4">
-                <source src="http://haifa-port.s89.upress.link/wp-content/uploads/2019/05/MAERSK-HAMBURG-Short.mp4" type="video/ogg">
-                Your browser does not support the video tag.
-            </video>
-            <!--<div id="particles-js"></div>-->
-            <!--<div class="banner-top-right">-->
-                <!--<div class="airplain-par-text">-->
-                    <!--<p>lorem impsum dolor</p>-->
-                    <!--<p> <strong>content</strong> a long established</p>-->
-                    <!--<p> opposed <strong> to using</strong></p>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="banner-top-left">-->
-                <!--<img class="airplain-par" src="/images/plain2.png" alt="">-->
-            <!--</div>-->
-        </div>
+
     </div>
 </template>
 <script>
