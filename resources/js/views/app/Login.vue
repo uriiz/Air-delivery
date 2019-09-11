@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="lp">
         <header-top></header-top>
         <div class="container">
             <app-loginc></app-loginc>
-            <welcome></welcome>
+          
         </div>
         <div style="padding-bottom: 50px"></div>
     </div>

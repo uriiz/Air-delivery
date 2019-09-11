@@ -8,7 +8,7 @@
                         <img src="/images/icon_8.png" alt="" class="mCS_img_loaded">
                         <div class="noty">
                             <div>
-                                Importers
+                                Customers
                             </div>
                             <div>
 
@@ -21,7 +21,7 @@
                 <li>
                     <router-link :to="{ name: 'DashboardShipper' }">
                         <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
-                        <div>Shipments</div>
+                        <div>Forwarders</div>
                     </router-link>
                 </li>
 

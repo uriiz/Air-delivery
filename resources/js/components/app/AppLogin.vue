@@ -5,7 +5,7 @@
 
             <div class="in-form-app" style="text-align:left">
                 <div style="text-align: left" class="welcome-title">
-                    <h1>Register As Company</h1>
+                    <h1>Register As Forwarder</h1>
                 </div>
                 <section>
 
@@ -81,12 +81,31 @@
                                 required>
                         </b-input>
                     </b-field>
+                    <div class="field">
+                        <label class="label">Full Address *</label>
+                        <div class="control has-icons-left is-clearfix" :class="{ 'has-icons-right': hasErrorToLat }">
+                            <GmapAutocomplete
+                                    id="map2"
+                                    autocomplete="off"
+                                    required
+                                    ref="address"
+                                    class="input"
+                                    :class="{ 'is-danger': hasErrorToLat }"
+                                    placeholder="Full Address"
+                                    @place_changed="AddressData"
+                            >
+                            </GmapAutocomplete>
+                            <p v-if="hasErrorToLat" class="help is-danger">this field is required</p>
+                            <span v-if="hasErrorToLat" class="icon is-right has-text-danger"><i class="mdi mdi-alert-circle mdi-24px"></i></span>
+                            <span class="icon is-left"><i class="mdi mdi-earth mdi-24px"></i></span>
+                        </div>
+                    </div>
                 </section>
                 <div class="btns-wrap">
                     <div style="margin-bottom:16px" class="">
                         <b-checkbox
                                 @input="checkPress"
-                                v-model="terms">I agree to post my personal information  that I have now submitted to companies in order to receive quotations</b-checkbox>
+                                v-model="terms">I agree to post my personal information that I have now submitted to companies in order to receive quotations</b-checkbox>
                         <div v-if="hasErrorTerm">
                             <p class="help is-danger">please confirm the terms</p>
                         </div>
@@ -110,7 +129,28 @@
     import Swal from 'sweetalert2'
     export default {
         methods: {
+            AddressData: function (addressData) {
 
+                this.lat = addressData.geometry.location.lat();
+                this.lng = addressData.geometry.location.lng();
+                this.address = addressData.formatted_address;
+
+                let contryName = '';
+                let contryCode = '';
+                let cityName = '';
+                for (let i = 0; i < addressData.address_components.length ; i++){
+
+                    if(addressData.address_components[i].types.includes("country")){
+                        contryName = addressData.address_components[i].long_name;
+                    }
+
+                    if(addressData.address_components[i].types.includes("locality")){
+                        cityName = addressData.address_components[i].long_name;
+                    }
+
+                }
+                this.country = contryName;
+            },
             validatePhone(inputtxt){
                     return true;
                     if(!inputtxt){
@@ -123,7 +163,6 @@
                     }
                     else
                     {
-
                         return false;
                     }
 
@@ -135,6 +174,13 @@
 
             checkPress(){
                 let err = false
+
+                if(!this.lat){
+                    this.hasErrorToLat = true
+                    err = true
+                }else{
+                    this.hasErrorToLat = false
+                }
 
                 if(!this.name){
                     this.hasErrorName = true
@@ -197,9 +243,10 @@
                         'company_phone':this.companyPhone,
                         'role':2,
                         'job_title':'',
-                        'lat':'',
-                        'lng':'',
-                        'address':'',
+                        'lat':this.lat,
+                        'lng':this.lng,
+                        'address':this.address,
+                        'country':this.country,
                         'zip_code':'',
                         'confirm_term':1,
                         'confirm_mail':true,
@@ -232,7 +279,7 @@
         },
         data() {
             return {
-
+                hasErrorToLat:false,
                 email:'',
                 name:'',
                 password:'',
@@ -250,6 +297,9 @@
                 errorLogin:'',
                 phone:'',
                 loader:false,
+                lat:'',
+                lng:'',
+                country:'',
 
             }
         },

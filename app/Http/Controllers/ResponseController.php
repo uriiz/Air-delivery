@@ -97,6 +97,8 @@ class ResponseController extends Controller
         }
 
         $response = Response::where('id',$request->id)->first();
+
+        Offer::where('id',$response->offer_id)->update(['submit_action'=>'complete']);
         $res = $response->update([
             'is_send'=>1
         ]);

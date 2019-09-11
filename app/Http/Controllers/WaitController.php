@@ -49,15 +49,22 @@ class WaitController extends Controller
 
         $user = Wait::where('id',$request->id)->first();
 
+        if(!$user->country){
+            return response()->json([
+                'actions' => false,
+            ], 500);
+        }
+
         $newUser = User::create([
             'name' => $user->name,
             'email' => $user->email,
             'job_title' => '',
             'company_name' => $user->company_name,
             'company_phone' => $user->company_phone,
-            'lat' => '',
-            'lng' => '',
-            'address' => '',
+            'lat' => $user->lat,
+            'lng' => $user->lng,
+            'address' => $user->address,
+            'country' => $user->country,
             'role' => 2,
             'zip_code' => '',
             'phone' => $user->phone,
@@ -87,6 +94,10 @@ class WaitController extends Controller
             'company_name' => $request->company_name,
             'company_phone' => $request->company_phone,
             'role' => 2,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+            'address' => $request->address,
+            'country' => $request->country,
             'phone' => $request->phone,
             'confirm_term' => Carbon::now(),
             'password' => $request->password,

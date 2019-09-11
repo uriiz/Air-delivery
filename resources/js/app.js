@@ -27,6 +27,7 @@ import Hello from './views/Hello'
 import Home from './views/Home'
 import Dashboard from './views/Dashboard'
 import DashboardApp from './views/app/Dashboard'
+import ForLogin from './views/app/Login'
 import DashboardAddNew from './views/dashboard/DashboardAddNew'
 import DashboardOffers from './views/dashboard/DashboardOffers'
 import DashboardAdmin from './views/admin/Dashboard'
@@ -137,11 +138,17 @@ const loginStatus = (to, from, next) => {
 
 const router = new VueRouter({
     mode: 'history',
+
     routes: [
         {
             path: '/',
             name: 'home',
             component: Home
+        },
+        {
+            path: '/app-login',
+            name: 'ForLogin',
+            component: ForLogin
         },
         {
             path: '/hello',

@@ -25,7 +25,7 @@
                         <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
                         <div class="noty">
                             <div>
-                                New Quotation
+                                New Quotations
                             </div>
                             <div v-if="countOffers>0">
                                <div class="count">
@@ -79,6 +79,7 @@
                 window.axios.post(
                     '/app/get-orders',
                 ).then((res) => {
+                    console.log(res.data)
                     this.$store.commit('newOffers',res.data);
                 }).catch((res) => {});
             },

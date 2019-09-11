@@ -23,7 +23,23 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function updateQuotStatus(Request $request)
+    {
+        if(! Auth::id() || Auth::user()->role != 1){
+            return response()->json([
+                'actions' => false,
+            ], 500);
+        }
+        try {
+           Offer::where('id',$request->id)->update(['submit_action'=>'published']);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'actions' => false,
+            ], 500);
+        }
 
+    }
     public function getConfirmOffers()
     {
 
@@ -31,7 +47,7 @@ class OfferController extends Controller
             return;
         }
 
-        $offers =  Offer::where('submit_action','published')->orderBy('created_at', 'DESC')->get();
+        $offers =  Offer::where('submit_action','!=','published')->orderBy('created_at', 'DESC')->get();
         $offersAvilable = [];
         foreach ($offers as $offer){
             $response = Response::where('offer_id',$offer->id)
@@ -139,7 +155,15 @@ class OfferController extends Controller
             return 'price issue';
         }
 
+
         $userId = Offer::where('id',$request->offer_id)->first();
+
+        if($userId->submit_action != 'published'){
+            return response()->json([
+                'actions' => false,
+            ], 500);
+        }
+
         $userId = $userId->user_id;
         $userName = User::where('id',$userId)->first();
 
@@ -179,9 +203,14 @@ class OfferController extends Controller
         }
 
         $offers = Offer::where('submit_action','published')
-            ->orderBy('created_at','DESC')->take(600)->get();
+            ->where('to_country_name',Auth::user()->country)
+            ->orWhere('from_country_name',Auth::user()->country)
+            ->orderBy('created_at','desc')->take(600)->get();
         $offersAvilable = [];
         foreach ($offers as $offer){
+            if($offer->submit_action == 'expired'){
+                continue;
+            }
             $response = Response::where('offer_id',$offer->id)
                 ->where('company_id',Auth::id())->first();
             if(count((array)$response) > 0){
@@ -198,6 +227,7 @@ class OfferController extends Controller
         return collect($offers)->map(function($filter){
            return [
                'id'=>$filter['id'],
+               'commodity'=>$filter['commodity'],
                'from_lat'=>$filter['from_lat'],
                'from_lng'=>$filter['from_lng'],
                'from_address_name'=>$filter['from_address_name'],
@@ -209,11 +239,14 @@ class OfferController extends Controller
                'from_date'=>Offer::setPrettyTimeNoHour($filter['from_date']),
                'to_date'=>Offer::setPrettyTimeNoHour($filter['to_date']),
                'note'=> $filter['note'],
-               'pretty_time'=>  Offer::setPrettyTime($filter['updated_at']),
+               'pretty_time'=>  Offer::setPrettyTimeNoHour($filter['updated_at']),
                'from_country_name'=> $filter['from_country_name'],
-               'to_country_name'=>   $filter['to_country_name'],
+               'from_city_name'=> $filter['from_city_name'],
+               'to_city_name'=> $filter['to_city_name'],
+               'to_country_name'=> $filter['to_country_name'],
                'from_company_name'=>   '****',
                'to_company_name'=>   '****',
+               'submit_action'=> $filter['submit_action'],
                'packages'=> Offer::getPackagesByOfferId($filter['id'])
            ];
         });
@@ -271,6 +304,7 @@ class OfferController extends Controller
      */
     public function getOfferDetails(Request $request)
     {
+
         if(!Auth::user() || Auth::user()->role != 1){
             return;
         }
@@ -299,9 +333,9 @@ class OfferController extends Controller
             return;
         }
 
-        $offers =  Offer::where('user_id',Auth::id())->orderBy('created_at', 'DESC')->get();
+        $offers =  Offer::where('user_id',Auth::id())->orderBy('from_date', 'DESC')->get();
         foreach ($offers as $o){
-            $o->pretty_time = Offer::setPrettyTime($o->created_at);
+            $o->pretty_time = Offer::setPrettyTimeNoHour($o->created_at);
             $o->from_date = Offer::setPrettyTimeNoHour($o->from_date);
             $o->to_date = Offer::setPrettyTimeNoHour($o->to_date);
             $o->packages = Offer::getPackagesByOfferId($o->id);

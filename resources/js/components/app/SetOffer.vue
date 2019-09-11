@@ -65,6 +65,7 @@
 </template>
 
 <script>
+    import Swal from 'sweetalert2'
     export default {
         mounted() {
 
@@ -84,10 +85,17 @@
                         'offer_id':this.id,
                     }
                 ).then((res) => {
-
                     this.loader = false
                     location.reload();
-                }).catch((res) => {});
+                }).catch((res) => {
+                    this.loader = false
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'something went wrong',
+                        footer: ''
+                    })
+                });
             },
         },
         data() {

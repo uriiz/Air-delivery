@@ -23,7 +23,6 @@ class CreatePackagesTable extends Migration
             $table->string('package_height');
             $table->string('package_length');
             $table->string('package_weight');
-            $table->string('package_type');
             $table->timestamps();
         });
     }

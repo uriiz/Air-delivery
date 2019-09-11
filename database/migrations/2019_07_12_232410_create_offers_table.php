@@ -23,9 +23,12 @@ class CreateOffersTable extends Migration
             $table->string('from_lng');
             $table->string('from_address_name');
             $table->string('from_address_id');
+            $table->string('commodity');
             $table->string('from_zip_code')->nullable();
             $table->string('to_name');
             $table->string('to_company_name')->nullable();
+            $table->string('to_city_name')->nullable();
+            $table->string('from_city_name')->nullable();
             $table->string('to_lat');
             $table->string('to_lng');
             $table->string('to_address_name');

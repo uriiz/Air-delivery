@@ -17,5 +17,9 @@ class Wait extends Model
         'confirm_term',
         'password',
         'id',
+        'country',
+        'lat',
+        'lng',
+        'address',
     ];
 }

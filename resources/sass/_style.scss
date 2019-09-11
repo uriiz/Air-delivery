@@ -4,7 +4,13 @@ main.py-4{
 body{
   background-color: #f1f3f6 !important;
 }
-
+.row-status-complete{
+  opacity: .6;
+  pointer-events: none;
+}
+.quicks-links{
+ opacity: 0;
+}
 .dropdown-menu{
   padding: 0 !important;
 }

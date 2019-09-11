@@ -15,13 +15,14 @@
                     <select v-model="searchDraft" class="input">
                         <option selected value="-1">Status</option>
                         <option value="published">Published</option>
-                        <option value="draft">Draft</option>
+                        <option value="complete">Complete</option>
+                        <option value="expired">Expired</option>
                     </select>
                 </div>
 
             </div>
             <div class="main-table-title">
-                <h3>Orders History</h3>
+                <h3>Quotations History</h3>
             </div>
             <div class="main-table-box">
 
@@ -66,24 +67,26 @@
                             {{ props.row.to_name }}
                         </b-table-column>
 
-                        <b-table-column field="from_date" label="From Date" sortable>
+                        <b-table-column field="from_date" label="Pick Up Date" sortable>
                             {{ props.row.from_date }}
-                        </b-table-column>
-
-                        <b-table-column field="to_date" label="To Date" sortable>
-                            {{ props.row.to_date }}
                         </b-table-column>
 
                         <b-table-column label="Status">
 
                             <div v-if="props.row.submit_action == 'published'">
-                                <span class="tag is-success">
-                                    Submitted
+                                <span class="tag is-warning">
+                                    Published
                                 </span>
                             </div>
-                            <div v-else>
-                                <span class="tag is-warning">
-                                    Draft
+                            <div v-if="props.row.submit_action == 'complete'">
+                                <span class="tag is-success">
+                                    Complete
+                                </span>
+                            </div>
+
+                            <div v-if="props.row.submit_action == 'expired'">
+                                <span class="tag is-danger">
+                                    Expired
                                 </span>
                             </div>
 
@@ -98,6 +101,7 @@
                                 :from_name="props.row.from_name"
                                 :from_zip_code="props.row.from_zip_code"
                                 :notes="props.row.note"
+                                :commodity="props.row.commodity"
                                 :to_address_name="props.row.to_address_name"
                                 :to_company_name="props.row.to_company_name"
                                 :to_lat="props.row.to_lat"
@@ -107,19 +111,15 @@
                                 :submit_action="props.row.submit_action"
                                 :packages="props.row.packages"
                                 :rowId="props.row.id"
+                                :type="type"
                         >
-
                         </table-extra-data-row>
                     </template>
-
                 </b-table>
-
             </div>
         </div>
-
     </div>
 </template>
-
 
 <script>
     const today = new Date()
@@ -166,6 +166,7 @@
                 offers:[],
                 showIfEmpty:false,
                 fromNameSearch:'',
+                type: 'customer',
                 toNameSearch:'',
                 searchDraft:'-1',
                 fromCreateSearch:new Date(today.getFullYear(), today.getMonth(), today.getDate() ),

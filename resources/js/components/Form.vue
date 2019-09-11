@@ -8,12 +8,19 @@
            </div>
             <div>
                 <div class="field">
-                    <b-switch v-model="isFromMe"
-                              @input="switchFromTo"
-                              true-value="from me"
-                              false-value="to me">
-                        {{ isFromMe }}
-                    </b-switch>
+
+                    <b-radio v-model="isFromMe"
+                             name="name"
+                             @input="switchFromTo"
+                             native-value="from_me">
+                        From me
+                    </b-radio>
+                    <b-radio v-model="isFromMe"
+                             name="name"
+                             @input="switchFromTo"
+                             native-value="to_me">
+                        To me
+                    </b-radio>
                 </div>
             </div>
         </div>
@@ -130,7 +137,6 @@
                         <p v-if="hasErrorToLat" class="help is-danger">this field is required</p>
                         <span v-if="hasErrorToLat" class="icon is-right has-text-danger"><i class="mdi mdi-alert-circle mdi-24px"></i></span>
                         <span class="icon is-left"><i class="mdi mdi-earth mdi-24px"></i></span>
-
                     </div>
                 </div>
 
@@ -157,6 +163,7 @@
             </div>
         </div>
         <div>
+
             <b-table
                     :data="data"
                     >
@@ -196,7 +203,7 @@
                         </div>
                     </b-table-column>
 
-                    <b-table-column centered width="150"  field="package_height" label="Height (cm)">
+                    <b-table-column centered width="150" field="package_height" label="Height (cm)">
                         <div class="range-tab">
                             <b-numberinput v-model="props.row.package_height" min="0">
                             </b-numberinput>
@@ -216,18 +223,11 @@
                             </b-numberinput>
                         </div>
                     </b-table-column>
-                    <b-table-column width="200" field="package_type" label="Type">
-                        <select class="input" v-model="props.row.package_type">
-                            <option value="General Cargo">General Cargo</option>
-                            <option value="Cooling">Cooling</option>
-                            <option value="Radioactive">Radioactive</option>
-                            <option value="Food">Food</option>
-                            <option value="Medicines">Medicines</option>
-                        </select>
-                    </b-table-column>
+
                 </template>
 
             </b-table>
+
 
             <div class="add-package" @click="addRow">
                 <div class="add-package-circle">
@@ -235,16 +235,38 @@
                         +
                     </div>
                 </div>
-                <div>
+                <div style="font-weight: bold">
                     Add Package
                 </div>
             </div>
+
+            <div class="form-title">
+                <div class="title">
+                    <img style="width:30px" src="/images/com.svg">
+                    <div> Commodity:</div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+
+            <section>
+                <div class="field">
+                    <select class="input" v-model="commodity">
+                        <option value="General Cargo">General Cargo</option>
+                        <option value="Cooling">Cooling</option>
+                        <option value="Radioactive">Radioactive</option>
+                        <option value="Food">Food</option>
+                        <option value="Medicines">Medicines</option>
+                    </select>
+                </div>
+            </section>
         </div>
 
         <div class="form-title">
             <div class="title">
                 <img style="width: 30px" src="/images/calendar.svg">
-                <div> Pick Up Dates:</div>
+                <div> Pick Up Date:</div>
             </div>
             <div>
 
@@ -261,16 +283,7 @@
                         icon="calendar-today">
                 </b-datepicker>
             </b-field>
-            <b-field label="Deliver Date">
-                <b-datepicker
-                        :min-date=fromDate
-                        v-model="toDate"
-                        @input="filterDateTo"
-                        :mobile-native="false"
-                        placeholder="Click to select..."
-                        icon="calendar-today">
-                </b-datepicker>
-            </b-field>
+
         </section>
 
         <div class="form-title">
@@ -294,19 +307,11 @@
                 <div>Submit Offer</div>
                 <img v-if="loaderSub" style="width:25px" src="/images/loader.gif" alt="">
             </b-button>
-            <b-button :disabled="loaderDraft" @click="submit('draft')" type="is-warning">
-                <div>Save Draft</div>
-                <img v-if="loaderDraft" style="width:25px" src="/images/loader.gif" alt="">
-            </b-button>
         </div>
 
         <div class="submit-form" v-else>
             <b-button disabled type="is-success">
                 Submit Offer
-
-            </b-button>
-            <b-button disabled type="is-warning">Save Draft
-
             </b-button>
         </div>
 
@@ -328,6 +333,7 @@
             return {
                 currentUserId:$("#details-helper").data('id'),
                 fromLat:0,
+                commodity:'General Cargo',
                 loadDraft:0,
                 fromLng:0,
                 loadSubmit:false,
@@ -337,11 +343,13 @@
                 fromCountryCode:'',
                 toCountryName:'',
                 toCountryCode:'',
+                toCityName:'',
+                fromCityName:'',
                 fromAddressName:'',
                 toAddressName:'',
                 fromAddressId:'',
                 toAddressId:'',
-                isFromMe:'from me',
+                isFromMe:'from_me',
                 date: new Date(),
                 minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() ),
                 maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
@@ -426,18 +434,17 @@
 
                 if(this.validate()){
                     if(type == 'submit'){
-
                         this.loaderSub = true;
                         this.submitAction = true
                     }else{
                         this.submitAction = false
                         this.loaderDraft = true;
                     }
-
                     window.axios.post(
                         '/save-offer',
                         {
                             'submit_action':this.submitAction,
+                            'commodity':this.commodity,
                             'from_name':this.fromFullName,
                             'from_company_name':this.fromCompanyName,
                             'from_lat':this.fromLat,
@@ -452,6 +459,8 @@
                             'to_address_name':this.toAddressName,
                             'to_address_id':this.toAddressId,
                             'to_zip_code':this.toZipCode,
+                            'from_city_name':this.fromCityName,
+                            'to_city_name':this.toCityName,
                             'pack':this.data,
                             'from_date':this.fromDate,
                             'to_date':this.toDate,
@@ -460,7 +469,7 @@
                             'to_country_code':this.toCountryCode,
                             'from_country_name':this.fromCountryName,
                             'from_country_code':this.fromCountryCode,
-                            'pack_type':this.packType,
+
                         }
                     ).then((res) => {
                         if(res.data != 0) {
@@ -538,9 +547,6 @@
                     'package_height':1,
                     'package_length':1,
                     'package_weight':1,
-                    'package_type':'General Cargo',
-
-
                 });
             },
             filterDateFrom(){
@@ -551,7 +557,7 @@
             },
             switchFromTo(){
 
-                if(this.isFromMe == 'from me'){
+                if(this.isFromMe == 'from_me'){
 
                     this.fromFullName = this.FullName;
                     this.fromCompanyName = this.CompanyName;
@@ -610,6 +616,7 @@
                 this.fromAddressId = addressData.place_id;
                 let contryName = '';
                 let contryCode = '';
+                let cityName = '';
                 for (let i = 0; i < addressData.address_components.length ; i++){
 
                     if(addressData.address_components[i].types.includes("country")){
@@ -617,10 +624,14 @@
                         contryCode = addressData.address_components[i].short_name;
                     }
 
+                    if(addressData.address_components[i].types.includes("locality")){
+                        cityName = addressData.address_components[i].long_name;
+                    }
+
                 }
                 this.fromCountryName = contryName;
                 this.fromCountryCode = contryCode;
-
+                this.fromCityName = cityName;
 
             },
             getToAddressData: function (addressData) {
@@ -632,6 +643,7 @@
                 this.toAddressId = addressData.place_id;
                 let contryName = '';
                 let contryCode = '';
+                let cityName = '';
                 for (let i = 0; i < addressData.address_components.length ; i++){
 
                     if(addressData.address_components[i].types.includes("country")){
@@ -639,9 +651,14 @@
                         contryCode = addressData.address_components[i].short_name;
                     }
 
+                    if(addressData.address_components[i].types.includes("locality")){
+                        cityName = addressData.address_components[i].long_name;
+                    }
+
                 }
                 this.toCountryName = contryName;
                 this.toCountryCode = contryCode;
+                this.toCityName = cityName;
 
             },
 

@@ -20,6 +20,10 @@ class CreateWaitsTable extends Migration
             $table->string('company_name');
             $table->string('company_phone')->nullable();
             $table->string('password');
+            $table->string('country');
+            $table->string('lat');
+            $table->string('lng');
+            $table->string('address');
             $table->integer('role');
             $table->string('phone')->nullable();
             $table->string('confirm_term');

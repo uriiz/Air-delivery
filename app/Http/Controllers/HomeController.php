@@ -106,15 +106,32 @@ class HomeController extends Controller
             $isSendEmail = Carbon::now();
         }
 
-        return User::where('id',Auth::id())->update([
-            'name'=> $name,
-            'phone'=> $phone,
-            'company_name' => $request->company_name,
-            'zip_code' => $request->zip_code,
-            'job_title' => $request->job_title,
-            'company_phone' => $companyPhone,
-            'confirm_mail' => $isSendEmail,
-        ]);
+        if(!$request->lat) {
+            return User::where('id', Auth::id())->update([
+                'name' => $name,
+                'phone' => $phone,
+                'company_name' => $request->company_name,
+                'zip_code' => $request->zip_code,
+                'job_title' => $request->job_title,
+                'company_phone' => $companyPhone,
+                'confirm_mail' => $isSendEmail,
+            ]);
+        }else{
+            return User::where('id', Auth::id())->update([
+                'name' => $name,
+                'phone' => $phone,
+                'company_name' => $request->company_name,
+                'zip_code' => $request->zip_code,
+                'job_title' => $request->job_title,
+                'company_phone' => $companyPhone,
+                'confirm_mail' => $isSendEmail,
+                'lat' => $request->lat,
+                'lng' => $request->lng,
+                'address' => $request->address,
+                'country' => $request->country,
+            ]);
+        }
+
     }
     public function updateUserImage(Request $request)
     {

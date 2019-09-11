@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/admin/get-feeds', 'FeedBackController@show');
     Route::post('/admin/delete-feed', 'FeedBackController@update');
     Route::post('/app/delete-offer', 'ResponseController@appDeleteResponse');
+    Route::post('/update-quot-status', 'OfferController@updateQuotStatus');
 
 
 });

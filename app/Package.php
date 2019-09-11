@@ -17,6 +17,5 @@ class Package extends Model
         'package_height',
         'package_length',
         'package_weight',
-        'package_type',
     ];
 }

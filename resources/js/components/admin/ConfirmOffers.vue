@@ -77,7 +77,6 @@
         methods: {
             confirmOffer(id){
                 this.loader = true;
-
                 window.axios.post(
                     '/confirm-offer-final',{id:id}
                 ).then((res) => {

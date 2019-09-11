@@ -81,8 +81,6 @@
                                     </b-input>
                                 </b-field>
                             </div>
-
-
                             <div class="wrap-input-flex">
                                 <b-field
                                         label="Email">
@@ -96,6 +94,25 @@
                                     >
                                     </b-input>
                                 </b-field>
+                            </div>
+                            <div class="wrap-input-flex">
+                            <div class="field">
+                                <label class="label">Full Address *</label>
+                                <div class="control has-icons-left is-clearfix">
+                                    <GmapAutocomplete
+                                            id="map2"
+                                            autocomplete="off"
+                                            required
+                                            ref="address"
+                                            class="input"
+                                            placeholder="Full Address"
+                                            @place_changed="AddressData"
+                                            :value="address"
+                                    >
+                                    </GmapAutocomplete>
+                                    <span class="icon is-left"><i class="mdi mdi-earth mdi-24px"></i></span>
+                                </div>
+                            </div>
                             </div>
                         </div>
                         <div class="wrap-input-flex">
@@ -132,7 +149,6 @@
                             >
                             </vue2-dropzone>
                         </div>
-
 
                     </div>
 
@@ -189,22 +205,47 @@
             this.loadUserInfo()
         },
         methods: {
+            AddressData: function (addressData) {
 
+                this.lat = addressData.geometry.location.lat();
+                this.lng = addressData.geometry.location.lng();
+                this.address = addressData.formatted_address;
+
+                let contryName = '';
+                let contryCode = '';
+                let cityName = '';
+                for (let i = 0; i < addressData.address_components.length ; i++){
+
+                    if(addressData.address_components[i].types.includes("country")){
+                        contryName = addressData.address_components[i].long_name;
+                    }
+
+                    if(addressData.address_components[i].types.includes("locality")){
+                        cityName = addressData.address_components[i].long_name;
+                    }
+
+                }
+                this.country = contryName;
+            },
 
             updateUser(){
-                if(!this.FullName || this.phone < 8 ){
+
+                if(!this.FullName ){
                     return;
                 }
                 this.loaderUpdate = true
                 window.axios.post(
                     '/update-user',
                     {
-
                         'name':this.FullName,
                         'is_email':this.sendEmail,
                         'company_name':this.companyName,
                         'company_phone':this.companyPhone,
                         'phone':this.phone,
+                        'lat':this.lat,
+                        'lng':this.lng,
+                        'address':this.address,
+                        'country':this.country,
                     }
                 ).then((res) => {
 
@@ -256,6 +297,7 @@
                         this.email = res.data.email;
                         this.image = res.data.logo;
                         this.loader = false;
+                        this.address = res.data.address;
                         console.log(res.data)
 
                     }
@@ -278,6 +320,10 @@
                 email :'',
                 sendEmail :'Yes',
                 phone:'',
+                lat:'',
+                lng:'',
+                address:'',
+                country:'',
                 loaderUpdate:'',
                 jobTitle:'',
                 hasErrorFullName:false,

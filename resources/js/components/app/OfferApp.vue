@@ -1,38 +1,8 @@
 <template>
     <div class="main-dashborad-in">
         <div class="main-table">
-            <div class="filter-inputs">
-                <div class="wrap-input">
-                    <select @change="filterData" v-model="fromCountryName" class="input">
-                        <option selected value="-1">From Country</option>
-                        <option v-for="(c,index) in countries" :value="c.name">
-                            {{c.name}}
-                        </option>
-                    </select>
-                </div>
 
-                <div class="wrap-input">
-                    <select @change="filterData" v-model="toCountryName" class="input">
-                        <option selected value="-1">To Country</option>
-                        <option v-for="(c,index) in countries" :value="c.name">
-                            {{c.name}}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="wrap-input">
-                    <select @change="filterData" v-model="packageType" class="input">
-                        <option selected value="-1">Package Type</option>
-                        <option value="General Cargo">General Cargo</option>
-                        <option value="Cooling">Cooling</option>
-                        <option value="Radioactive">Radioactive</option>
-                        <option value="Food">Food</option>
-                        <option value="Medicines">Medicines</option>
-                    </select>
-                </div>
-
-            </div>
-            <div class="main-table-title"><h3>New Quotation</h3></div>
+            <div class="main-table-title"><h3>New Quotations</h3></div>
             <div class="main-table-box">
                 <div class="loader1" v-if="loader">
                     <img src="/images/loader1.png" class="rotating" alt="">
@@ -47,6 +17,7 @@
                         :per-page="perPage"
                         :openedDetailed="openedRows"
                         detailed
+                        :row-class="onRowClass"
                 >
 
                     <template slot-scope="props">
@@ -60,26 +31,34 @@
                             {{ props.row.pretty_time }}
                         </b-table-column>
 
-
-                        <b-table-column field="from_date" label="From Date" sortable>
+                        <b-table-column field="from_date" label="Pick Up Date" sortable>
                             {{ props.row.from_date }}
                         </b-table-column>
 
-                        <b-table-column field="to_date" label="To Date" sortable>
-                            {{ props.row.to_date }}
-                        </b-table-column>
-
-                        <b-table-column field="to_date" label="From" >
+                        <b-table-column field="from_country_name" label="From" sortable>
                             {{ props.row.from_country_name }}
                         </b-table-column>
 
-                        <b-table-column field="to_date" label="To" >
+                        <b-table-column field="to_country_name" label="To" sortable>
                             {{ props.row.to_country_name }}
                         </b-table-column>
 
-                        <b-table-column label="Delete!" >
-                            <div style="cursor: pointer" class="delete-user" @click="deleteOffer(props.row.id)">
-                                <delete-svg></delete-svg>
+                        <b-table-column label="Status" >
+                            <div v-if="props.row.submit_action == 'published'">
+                                <span class="tag is-warning">
+                                    Published
+                                </span>
+                            </div>
+                            <div v-if="props.row.submit_action == 'complete'">
+                                <span class="tag is-success">
+                                    Complete
+                                </span>
+                            </div>
+
+                            <div v-if="props.row.submit_action == 'expired'">
+                                <span class="tag is-danger">
+                                    Expired
+                                </span>
                             </div>
                         </b-table-column>
 
@@ -88,22 +67,29 @@
                                Set Your Quotation !
                            </span>
                         </b-table-column>
+
+                        <b-table-column label="Delete!" >
+                            <div style="cursor: pointer" class="delete-user" @click="deleteOffer(props.row.id)">
+                                <delete-svg></delete-svg>
+                            </div>
+                        </b-table-column>
                     </template>
                     <template slot="detail" slot-scope="props">
                         <table-extra-data-row
-                                :from_address_name="props.row.from_address_name"
+                                :from_address_name="checkIfCity(props.row.from_city_name) + ',' +props.row.from_country_name "
                                 :from_company_name="props.row.from_company_name"
                                 :to_company_name="props.row.to_company_name"
                                 :from_lat="props.row.from_lat"
                                 :from_lng="props.row.from_lng"
                                 :from_zip_code="props.row.from_zip_code"
                                 :notes="props.row.note"
-                                :to_address_name="props.row.to_address_name"
-                                :to_lat="props.row.to_lat"
+                                :commodity="props.row.commodity"
+                                :to_address_name="checkIfCity(props.row.to_city_name) + ',' +props.row.to_country_name"
                                 :to_lng="props.row.to_lng"
                                 :to_zip_code="props.row.to_zip_code"
                                 :packages="props.row.packages"
                                 :rowId="props.row.id"
+                                :type="type"
                         >
                         </table-extra-data-row>
                     </template>
@@ -121,6 +107,13 @@
             this.getCountries()
         },
         methods: {
+            checkIfCity(city){
+
+                if(!city){
+                    return ''
+                }
+                return city;
+            },
             deleteOffer(id){
                 Swal.fire({
                     title: 'sure?',
@@ -188,7 +181,9 @@
                     return this.$store.getters.getNewOffers
                 }
             },
-
+            onRowClass: function (row, index) {
+               return 'row-status-'+row.submit_action ;
+            },
             filterPack(filters){
                 if(this.packageType != -1)
                 {
@@ -230,6 +225,7 @@
                 currentUserName:$("#details-helper").data('name'),
                 offers:[],
                 isPaginated: true,
+                type: 'forwarder',
                 perPage: 12,
                 openedRows:[],
                 fromCountryName:'-1',

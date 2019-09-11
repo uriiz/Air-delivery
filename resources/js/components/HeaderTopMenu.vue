@@ -24,8 +24,13 @@
                 <div class="navbar-item">
                     <div class="buttons">
                         <a class="button is-primary" @click.prevent="register()">
-                            <strong>Sign up</strong>
+                            <strong>Sign up as Customer</strong>
                         </a>
+
+                        <router-link class="button is-primary" :to="{ name: 'ForLogin' }">
+                        <strong>Sign up as Forwarder</strong>
+                        </router-link>
+
                         <a class="button is-light" @click="cardModal()">
                             Log in
                         </a>
