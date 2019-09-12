@@ -20,7 +20,8 @@
         </div>
         <div class="brand_fidbek">
             <div class="fidbek">
-                <a @click.prevent="feedBackTrigger" href="#">Feedback</a>
+
+                <b-button type="is-success" outlined @click="feedBackTrigger">Feedback</b-button>
             </div>
             <div class="brand">
                 Freight-Me

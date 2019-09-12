@@ -17,7 +17,6 @@
                     </router-link>
                 </li>
 
-
                 <li>
                     <router-link :to="{ name: 'DashboardShipper' }">
                         <img src="/images/icon_5.png" alt="" class="mCS_img_loaded">
@@ -47,6 +46,10 @@
                 </li>
             </ul>
         </nav>
+        <div class="update-btn" style="text-align: center">
+            <b-button type="is-success" outlined @click="updateQutStatus">Update Quotations Status</b-button>
+        </div>
+
     </div>
 </template>
 
@@ -59,6 +62,14 @@
             this.getOffers();
         },
         methods: {
+
+            updateQutStatus(){
+                window.axios.post(
+                    '/admin/update-qut-status',
+                ).then((res) => {
+
+                }).catch((res) => {});
+            },
             getOffers(){
                 window.axios.post(
                     '/app/get-orders',

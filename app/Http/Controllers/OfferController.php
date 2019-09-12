@@ -23,6 +23,18 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function updateQuotStatusAdmin()
+    {
+
+        if(! Auth::id() || Auth::user()->role != 3){
+            return response()->json([
+                'actions' => false,
+            ], 500);
+        }
+        return Offer::whereDate('from_date','<',Carbon::now()->addDays(1))->update(['submit_action'=>'expired']);
+    }
+
     public function updateQuotStatus(Request $request)
     {
         if(! Auth::id() || Auth::user()->role != 1){

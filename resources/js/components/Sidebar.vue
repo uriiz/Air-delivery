@@ -12,11 +12,12 @@
                     {{currentUserName}}
                 </span>
             </h2>
-            <p>Your last login, 13.07.2019, 01:33</p>
+
             <a class="dash-log-out" href="#"  @click.prevent="logOut">
                 <b-icon icon="logout"></b-icon>
                 <div>Logout</div>
             </a>
+
         </div>
         <nav>
             <ul>

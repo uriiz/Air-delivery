@@ -4793,6 +4793,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
@@ -6073,6 +6074,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.timeShow();
@@ -6359,12 +6361,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.timeShow();
     this.getOffers();
   },
   methods: {
+    updateQutStatus: function updateQutStatus() {
+      window.axios.post('/admin/update-qut-status').then(function (res) {})["catch"](function (res) {});
+    },
     getOffers: function getOffers() {
       var _this = this;
 
@@ -8797,33 +8805,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_app_ConfirmedOffer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/app/ConfirmedOffer */ "./resources/js/components/app/ConfirmedOffer.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -61665,7 +61646,7 @@ var render = function() {
                 }
               },
               [
-                _c("div", [_vm._v("Submit Offer")]),
+                _c("div", [_vm._v("Quotation Offer")]),
                 _vm._v(" "),
                 _vm.loaderSub
                   ? _c("img", {
@@ -62780,21 +62761,21 @@ var render = function() {
       _vm._m(1),
       _vm._v(" "),
       _c("div", { staticClass: "brand_fidbek" }, [
-        _c("div", { staticClass: "fidbek" }, [
-          _c(
-            "a",
-            {
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.feedBackTrigger($event)
-                }
-              }
-            },
-            [_vm._v("Feedback")]
-          )
-        ]),
+        _c(
+          "div",
+          { staticClass: "fidbek" },
+          [
+            _c(
+              "b-button",
+              {
+                attrs: { type: "is-success", outlined: "" },
+                on: { click: _vm.feedBackTrigger }
+              },
+              [_vm._v("Feedback")]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "brand" }, [
           _vm._v("\n            Freight-Me\n        ")
@@ -64829,8 +64810,6 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("p", [_vm._v("Your last login, 13.07.2019, 01:33")]),
-      _vm._v(" "),
       _c(
         "a",
         {
@@ -65440,7 +65419,23 @@ var render = function() {
           1
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "update-btn", staticStyle: { "text-align": "center" } },
+      [
+        _c(
+          "b-button",
+          {
+            attrs: { type: "is-success", outlined: "" },
+            on: { click: _vm.updateQutStatus }
+          },
+          [_vm._v("Update Quotations Status")]
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -66507,7 +66502,7 @@ var render = function() {
                         return [
                           _c(
                             "b-table-column",
-                            { attrs: { field: "id", label: "Order ID" } },
+                            { attrs: { field: "id", label: "Quotation ID" } },
                             [
                               _c(
                                 "div",
@@ -66726,7 +66721,7 @@ var render = function() {
                   ],
                   null,
                   false,
-                  393337938
+                  1903348286
                 )
               })
             : _vm._e()
@@ -69478,168 +69473,6 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "main-dashborad-in" }, [
         _c("div", { staticClass: "main-table" }, [
-          _c("div", { staticClass: "filter-inputs" }, [
-            _c("div", { staticClass: "wrap-input" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.fromCountryName,
-                      expression: "fromCountryName"
-                    }
-                  ],
-                  staticClass: "input",
-                  on: {
-                    change: [
-                      function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.fromCountryName = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                      _vm.filterData
-                    ]
-                  }
-                },
-                [
-                  _c("option", { attrs: { selected: "", value: "-1" } }, [
-                    _vm._v("From Country")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.countries, function(c, index) {
-                    return _c("option", { domProps: { value: c.name } }, [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(c.name) +
-                          "\n                    "
-                      )
-                    ])
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "wrap-input" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.toCountryName,
-                      expression: "toCountryName"
-                    }
-                  ],
-                  staticClass: "input",
-                  on: {
-                    change: [
-                      function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.toCountryName = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                      _vm.filterData
-                    ]
-                  }
-                },
-                [
-                  _c("option", { attrs: { selected: "", value: "-1" } }, [
-                    _vm._v("To Country")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.countries, function(c, index) {
-                    return _c("option", { domProps: { value: c.name } }, [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(c.name) +
-                          "\n                    "
-                      )
-                    ])
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "wrap-input" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.packageType,
-                      expression: "packageType"
-                    }
-                  ],
-                  staticClass: "input",
-                  on: {
-                    change: [
-                      function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.packageType = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                      _vm.filterData
-                    ]
-                  }
-                },
-                [
-                  _c("option", { attrs: { selected: "", value: "-1" } }, [
-                    _vm._v("Package Type")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "General Cargo" } }, [
-                    _vm._v("General Cargo")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Cooling" } }, [
-                    _vm._v("Cooling")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Radioactive" } }, [
-                    _vm._v("Radioactive")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Food" } }, [_vm._v("Food")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "Medicines" } }, [
-                    _vm._v("Medicines")
-                  ])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
           _c(

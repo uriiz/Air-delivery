@@ -4,34 +4,7 @@
         <sidebar-app></sidebar-app>
     <div class="main-dashborad-in">
         <div class="main-table">
-            <div class="filter-inputs">
-                <div class="wrap-input">
-                    <select @change="filterData" v-model="fromCountryName" class="input">
-                        <option selected value="-1">From Country</option>
-                        <option v-for="(c,index) in countries" :value="c.name">
-                            {{c.name}}
-                        </option>
-                    </select>
-                </div>
-                <div class="wrap-input">
-                    <select @change="filterData" v-model="toCountryName" class="input">
-                        <option selected value="-1">To Country</option>
-                        <option v-for="(c,index) in countries" :value="c.name">
-                            {{c.name}}
-                        </option>
-                    </select>
-                </div>
-                <div class="wrap-input">
-                    <select @change="filterData" v-model="packageType" class="input">
-                        <option selected value="-1">Package Type</option>
-                        <option value="General Cargo">General Cargo</option>
-                        <option value="Cooling">Cooling</option>
-                        <option value="Radioactive">Radioactive</option>
-                        <option value="Food">Food</option>
-                        <option value="Medicines">Medicines</option>
-                    </select>
-                </div>
-            </div>
+
             <div class="main-table-title"><h3>Contacts</h3></div>
             <div class="main-table-box">
                 <div class="loader1" v-if="loader">

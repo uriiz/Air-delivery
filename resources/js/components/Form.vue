@@ -303,8 +303,8 @@
         </section>
 
         <div class="submit-form" v-if="currentUserId">
-            <b-button :disabled="loaderSub" @click="submit('submit')" type="is-success">
-                <div>Submit Offer</div>
+            <b-button  :disabled="loaderSub" @click="submit('submit')" type="is-success">
+                <div>Quotation Offer</div>
                 <img v-if="loaderSub" style="width:25px" src="/images/loader.gif" alt="">
             </b-button>
         </div>
