@@ -48,7 +48,7 @@
                         >
 
                     <template slot-scope="props">
-                        <b-table-column field="id" label="Order ID">
+                        <b-table-column field="id" label="Quotation ID">
                             <div @click="openRow(props.row)">
                                 #{{ props.row.id }}
                             </div>

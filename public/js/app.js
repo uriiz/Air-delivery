@@ -63855,7 +63855,7 @@ var render = function() {
                         return [
                           _c(
                             "b-table-column",
-                            { attrs: { field: "id", label: "Order ID" } },
+                            { attrs: { field: "id", label: "Quotation ID" } },
                             [
                               _c(
                                 "div",
@@ -64013,7 +64013,7 @@ var render = function() {
                   ],
                   null,
                   false,
-                  54080835
+                  2807854063
                 )
               })
             : _vm._e()
