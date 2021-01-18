@@ -74,7 +74,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd('empty domain');
+
         return view('home');
     }
     public function updateUser(Request $request)
