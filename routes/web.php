@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('/app-dashboard', 'HomeController@index');
     Route::get('/admin-feeds', 'HomeController@index');
     Route::get('/dashboard/add-new', 'HomeController@index');
+    Route::get('/dashboard/shipment-status', 'HomeController@index');
     Route::get('/dashboard/my-offers', 'HomeController@index');
     Route::get('/dashboard/my-profile', 'HomeController@index');
     Route::post('/save-offer', 'OfferController@create');

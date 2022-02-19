@@ -34,6 +34,7 @@ import DashboardAdmin from './views/admin/Dashboard'
 import DashboardShipper from './views/admin/DashboardShipper'
 import DashboardWaiting from './views/admin/DashboardWaiting'
 import DashboardFeeds from './views/admin/DashboardFeeds'
+import DashboardStatus from './views/dashboard/MyShipment'
 import DashboardConfirm from './views/admin/DashboardConfirm'
 import DashboardProfile from './views/dashboard/DashboardProfile'
 import DashboardOffer from './views/dashboard/DashboardOffer'
@@ -46,6 +47,7 @@ import SetOffer from './components/app/SetOffer'
 import FormSingle from './components/FormSingle'
 import DeleteSvg from './components/svg/Delete'
 import ExtraDataPrice from './components/ExtraDataPrice'
+
 import Sidebar from './components/Sidebar'
 import SidebarApp from './components/app/Sidebar'
 import EditApp from './components/app/Edit'
@@ -117,6 +119,8 @@ const authMiddlewareShip = (to, from, next) => {
 }
 
 const authMiddlewareAdmin = (to, from, next) => {
+
+
     if (!user) {
         next = '/';
         window.location = "/";
@@ -255,6 +259,13 @@ const router = new VueRouter({
             name: 'DashboardFeeds',
             component: DashboardFeeds,
             beforeEnter: authMiddlewareAdmin
+        },
+
+        {
+            path: '/dashboard/shipment-status',
+            name: 'ShipmentStatus',
+            component: DashboardStatus,
+            beforeEnter: authMiddleware
         },
 
     ],
