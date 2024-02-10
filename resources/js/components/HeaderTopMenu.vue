@@ -3,11 +3,13 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
 
         <div class="navbar-brand">
-            <a class="navbar-item"  href="/">
-                <span style="color:#000; !important;">
+            <a class="navbar-item" style="display: block;"  href="/">
+                <span style="color:#000; !important;font-weight: bold;">
                     Freight-Me
                 </span>
-
+                <span style="color:#000; !important;font-size:19px;color:#ccc;    display: block;">
+                    Titan software
+                </span>
             </a>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

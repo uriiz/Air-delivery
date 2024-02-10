@@ -1,11 +1,43 @@
 <template>
 <div class="lp" style="background: #fff">
+
+    <div class="popup" v-if="isImageModalActive">
+        <div class="close" @click="closeModalC">
+            x
+        </div>
+        <div class="popup-in">
+            <img src="/images/ship.png" class="" alt="">
+        </div>
+    </div>
+   
     <img src="/images/banner_overlay_2.png" class="banner-overlay-right" alt="">
     <img src="/images/banner_overlay_1.png" class="banner-overlay-left" alt="">
     <header-top></header-top>
     <div class="container">
         <welcome></welcome>
     </div>
+    
+    <nav>
+
+        <ul>
+
+<li><a href="#" @click.prevent="openModalC">Home page</a></li>
+
+<li><a href=https://themeloona.com>Container Locate</a></li>
+
+
+
+<li><a href="#"  @click.prevent="openModalC">Upload my MAWB PDF and send to my agent as XML</a></li>
+
+<li><a href="#"  @click.prevent="openModalC">Open New Customs/Freight file</a></li>
+
+<li><a href="#"  @click.prevent="openModalC">Upload DOC's To My File</a></li>
+
+<li><a href="#" @click.prevent="openModalC">Download My invoice's</a></li>
+
+</ul>
+
+</nav>
     <div class="customers">
         <img src="https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/wework.png" alt="">
         <img src="https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/discovery.png" alt="">
@@ -51,8 +83,8 @@
     </div>
     <div class="third-part" >
         <video autoplay muted loop id="main-video">
-            <source src="http://haifa-port.s89.upress.link/wp-content/uploads/2019/05/MAERSK-HAMBURG-Short.mp4" type="video/mp4">
-            <source src="http://haifa-port.s89.upress.link/wp-content/uploads/2019/05/MAERSK-HAMBURG-Short.mp4" type="video/ogg">
+            <source src="/images/airplain.mp4" type="video/mp4">
+            <source src="/images/airplain.mp4" type="video/ogg">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -86,6 +118,9 @@
 <script>
     export default {
         mounted() {
+
+            
+
             window.onscroll = fadingEf;
             function fadingEf() {
                 if($('.topic').is(":in-viewport")){
@@ -107,6 +142,7 @@
             return {
                 fill : { gradient: ["#7957d5", "#96bb01", "#1d2d3a"] },
                 progressP:0,
+                isImageModalActive:false,
             }
         },
         methods:{
@@ -115,7 +151,64 @@
             },
             progress_end(event){
                 console.log("Circle progress end");
+            },
+            openModalC(){
+                this.isImageModalActive = true
+            },
+            closeModalC(){
+                this.isImageModalActive = false
             }
         }
     }
 </script>
+
+<style>
+nav {
+    padding: 30px 0;
+background-color: #333;
+display: flex;
+justify-content: center;
+color: #fff;
+
+}
+
+
+
+nav ul {
+
+list-style: none;
+
+padding: 0;
+
+margin: 0;
+
+}
+
+
+
+nav ul li {
+
+display: inline-block;
+
+padding: 10px;
+
+}
+
+
+
+nav ul li a {
+
+color: #fff;
+
+text-decoration: none;
+
+}
+
+
+
+nav ul li a:hover {
+
+color: #ccc;
+
+}
+</style>

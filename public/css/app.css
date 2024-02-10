@@ -1478,7 +1478,6 @@ a.router-link-exact-active.router-link-active {
 }
 
 .customers {
-  margin: 40px 0;
   background-color: #f9f9f9;
   padding: 50px 10px;
   display: -webkit-box;
@@ -1974,6 +1973,32 @@ a.router-link-exact-active.router-link-active {
   .lp .last-footer {
     padding-left: 14px;
   }
+}
+
+.popup {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.popup .close {
+  position: fixed;
+  top: 20;
+  right: 0;
+  color: #fff;
+  top: 20px;
+  right: 100px;
+  font-weight: bold;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 /*!
