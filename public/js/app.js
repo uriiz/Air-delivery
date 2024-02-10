@@ -4905,6 +4905,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7890,6 +7892,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -63458,11 +63468,10 @@ var staticRenderFns = [
           attrs: { href: "/" }
         },
         [
-          _c(
-            "span",
-            { staticStyle: { color: "#000", "font-weight": "bold" } },
-            [_vm._v("\n                Freight-Me\n            ")]
-          ),
+          _c("img", {
+            staticStyle: { "max-height": "3.75rem" },
+            attrs: { src: "/images/log.png" }
+          }),
           _vm._v(" "),
           _c(
             "span",
@@ -68207,11 +68216,31 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(2),
+      _c("div", { staticClass: "third-part", staticStyle: { margin: "0" } }, [
+        _c(
+          "video",
+          {
+            attrs: { autoplay: "", muted: "", loop: "", id: "main-video2" },
+            domProps: { muted: true }
+          },
+          [
+            _c("source", {
+              attrs: { src: "/images/vid.mp4", type: "video/mp4" }
+            }),
+            _vm._v(" "),
+            _c("source", {
+              attrs: { src: "/images/vid.mp4", type: "video/ogg" }
+            }),
+            _vm._v(
+              "\r\n            Your browser does not support the video tag.\r\n        "
+            )
+          ]
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "sec-part" }, [
-          _vm._m(3),
+          _vm._m(2),
           _vm._v(" "),
           _c(
             "div",
@@ -68415,11 +68444,11 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(4)
+          _vm._m(3)
         ])
       ]),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(4)
     ],
     1
   )
@@ -68441,52 +68470,6 @@ var staticRenderFns = [
       _c("a", { attrs: { href: "https://themeloona.com" } }, [
         _vm._v("Container Locate")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "customers" }, [
-      _c("img", {
-        attrs: {
-          src:
-            "https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/wework.png",
-          alt: ""
-        }
-      }),
-      _vm._v(" "),
-      _c("img", {
-        attrs: {
-          src:
-            "https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/discovery.png",
-          alt: ""
-        }
-      }),
-      _vm._v(" "),
-      _c("img", {
-        attrs: {
-          src:
-            "https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/carlsberg.png",
-          alt: ""
-        }
-      }),
-      _vm._v(" "),
-      _c("img", {
-        attrs: {
-          src:
-            "https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/wix.png",
-          alt: ""
-        }
-      }),
-      _vm._v(" "),
-      _c("img", {
-        attrs: {
-          src:
-            "https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/philips.png",
-          alt: ""
-        }
-      })
     ])
   },
   function() {

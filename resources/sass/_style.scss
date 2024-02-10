@@ -221,6 +221,20 @@ img.airplain-par{
   -ms-transform: translateX(50%) translateY(-50%);
 }
 
+#main-video2{
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(50%) translateY(-50%);
+}
+
 .form-title {
   display: flex;
   justify-content: space-between;

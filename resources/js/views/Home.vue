@@ -38,12 +38,20 @@
 </ul>
 
 </nav>
-    <div class="customers">
+    <!-- <div class="customers">
         <img src="https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/wework.png" alt="">
         <img src="https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/discovery.png" alt="">
         <img src="https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/carlsberg.png" alt="">
         <img src="https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/wix.png" alt="">
         <img src="https://res.cloudinary.com/dapulse/image/upload/f_auto/remote_mondaycom_static/img/customers/philips.png" alt="">
+    </div> -->
+
+    <div class="third-part" style="margin: 0;" >
+        <video autoplay muted loop id="main-video2">
+            <source src="/images/vid.mp4" type="video/mp4">
+            <source src="/images/vid.mp4" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
     </div>
     <div class="container">
 

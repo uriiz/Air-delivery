@@ -4,9 +4,11 @@
 
         <div class="navbar-brand">
             <a class="navbar-item" style="display: block;"  href="/">
-                <span style="color:#000; !important;font-weight: bold;">
+                <!-- <span style="color:#000; !important;font-weight: bold;">
                     Freight-Me
-                </span>
+                </span> -->
+
+                <img src="/images/log.png" style="max-height: 3.75rem;"/>
                 <span style="color:#000; !important;font-size:19px;color:#ccc;    display: block;">
                     Titan software
                 </span>
